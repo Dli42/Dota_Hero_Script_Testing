@@ -38,6 +38,26 @@ function RammusPuncturingTaunt(keys)
     
 end
 
+ABILITY_powerball_knockback = thisEntity:FindAbilityByName("rammus_powerball_knockback")
+function RammusPowerballKnockback()
+
+local allEnemies = FindUnitsInRadius( DOTA_GC_TEAM_GOOD_GUYS | DOTA_GC_TEAM_BAD_GUYS | DOTA_GC_TEAM_NOTEAM, 
+									thisEntity:GetOrigin(), 
+									nil, 
+									150, 
+									DOTA_UNIT_TARGET_TEAM_ENEMY, 
+									DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_MECHANICAL | DOTA_UNIT_TARGET_CREEP | DOTA_UNIT_TARGET_OTHER, 
+									0, 
+									0, 
+									false )
+		if #allEnemies > 0 then
+			ABILITY_powerball_knockback:CastAbility()
+			RemoveModifierByName("modifier_rammus_powerball_movespeed_buff")
+			RemoveModifierByName("rammus_powerball_thinker")
+		end
+
+end
+
 --[[Adds 3% movespeed to base, called every .127 seconds for a max of +165%]]
 function RammusPowerballMovespeedBuff(keys)
 

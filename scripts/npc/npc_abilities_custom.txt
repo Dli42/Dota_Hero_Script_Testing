@@ -117,16 +117,7 @@
                 "Duration" "%duration"
                 "ThinkInterval" "%tick_rate"
                 "OnCreated"
-                {
-                    "AttachEffect"
-                    {
-                         "Target" "CASTER"
-                         "EffectName" "particles/units/heroes/hero_alchemist/alchemist_acid_spray_debuff.vpcf"
-                         "EffectAttachType" "follow_overhead"
-                         "EffectLifeDurationScale" "1"
-                         "EffectColorA" "255 255 0"
-                    }
-                    
+                {                    
                     "RunScript"
                     {
                         "ScriptFile"	"custom_scripted_abilities.lua"
@@ -138,12 +129,36 @@
                 
                 "OnIntervalThink"
                 {
+					"FireEffect"
+                    {
+                        "Target" 					"CASTER"
+                        "EffectName" 				"particles/units/heroes/hero_alchemist/alchemist_acid_spray_debuff.vpcf"
+                        "EffectAttachType" 			"follow_origin"
+						"EffectRadius"				"100"
+						"EffectDurationScale"		"1"
+						"EffectLifeDurationScale" 	"1"
+                        "EffectLifeDurationScale" 	"1"
+                        "EffectColorA" 				"255 0 0"
+                    }
+				
                     "RunScript"
                     {
                         "ScriptFile"	"custom_scripted_abilities.lua"
                         "Function"		"RammusPowerballMovespeedBuff"
                         "Target"		"CASTER"
                     }
+					
+					"ApplyModifier"
+					{
+						"ModifierName"	"modifier_rammus_powerball_target"
+						"Target"
+						{
+							"Center" "CASTER"
+							"Radius" "%crush_radius"
+							"Teams" "DOTA_UNIT_TARGET_TEAM_ENEMY"
+							"Types" "DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_CREEP | DOTA_UNIT_TARGET_MECHANICAL | DOTA_UNIT_TARGET_OTHER"
+						}
+					}
                 }
                 
                 "OnDestroy"
@@ -163,6 +178,11 @@
 			{			
                 "Duration" "%duration"
 			}
+			
+			"modifier_rammus_powerball_target"
+			{
+				
+			}
         
 		}
         
@@ -178,7 +198,7 @@
             "02"
 			{
 				"var_type"					"FIELD_FLOAT"
-				"tick_rate"					"0.1" //7 second duration, 55 ticks
+				"tick_rate"					"0.127" //7 second duration, 55 ticks
 			}
 		}
 	}    
@@ -435,6 +455,12 @@
                 
                 "OnIntervalThink"
                 {
+					"FireSound"
+					{
+						"EffectName"	"Ability.SandKing_Epicenter"
+						"Target"		"CASTER"
+					}
+				
                     "AttachEffect"
                     {
                          "Target" "CASTER"
