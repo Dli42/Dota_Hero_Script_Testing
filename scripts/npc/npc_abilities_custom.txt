@@ -3,6 +3,74 @@
 {
 	"Version"		"1"
 
+	//=================================================================================================================
+	// Rammus Spiked Shell
+	//=================================================================================================================
+	"rammus_spiked_shell"
+	{
+		// General
+		//-------------------------------------------------------------------------------------------------------------
+		"BaseClass"				        "ability_datadriven"
+        "AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_PASSIVE | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
+        "AbilityTextureName"			""
+
+		
+        "OnSpellStart"
+		{            
+			"CreateThinker"
+			{
+				"ModifierName" "rammus_spiked_shell_thinker"
+                "Target" "CASTER"
+			}
+            
+		}
+        
+        "Modifiers"
+		{
+            "rammus_spiked_shell_thinker"
+            {
+                "ThinkInterval" "%tick_rate"
+                "OnCreated"
+                {                    
+                    "RunScript"
+                    {
+                        "ScriptFile"	"custom_scripted_abilities.lua"
+                        "Function"		"RammusSpikedShellInit"
+                        "Target"		"CASTER"
+                    }
+                    
+                }
+                
+                "OnIntervalThink"
+                {
+                    "RunScript"
+                    {
+                        "ScriptFile"	"custom_scripted_abilities.lua"
+                        "Function"		"RammusSpikedShellBuff"
+                        "Target"		"CASTER"
+                    }
+                }
+            }
+        
+		}
+        
+		// Special
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"					"FIELD_FLOAT"
+				"percentage"				"25"
+			}
+            "02"
+			{
+				"var_type"					"FIELD_FLOAT"
+				"tick_rate"					"0.1"
+			}
+		}
+	}  
+	
     //=================================================================================================================
 	// Rammus Powerball
 	//=================================================================================================================
