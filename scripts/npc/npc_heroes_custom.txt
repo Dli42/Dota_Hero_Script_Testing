@@ -8,12 +8,12 @@
 	//=================================================================================================================
 	"npc_dota_hero_templar_axe_template"
 	{
-		//"AbilityLayout"				"5"
+		"AbilityLayout"				"5"
 	
 		"override_hero"			"npc_dota_hero_axe"	
 		"Ability1"              "rammus_spiked_shell"		
         "Ability2"              "rammus_powerball"
-        "Ability3"              "rammus_powerball_knockback"
+        "Ability3"              "rammus_defensive_ball_curl"
 		"Ability4"				"rammus_puncturing_taunt"
 	}
 }
