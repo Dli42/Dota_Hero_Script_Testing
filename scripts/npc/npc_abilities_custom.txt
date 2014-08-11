@@ -206,6 +206,106 @@
 			}
 		}
 	}
+	
+	//=================================================================================================================
+	// Rammus Defensive Ball Curl
+	//=================================================================================================================
+	"rammus_defensive_ball_curl"
+	{
+		// General
+		//-------------------------------------------------------------------------------------------------------------
+		"BaseClass"				        "ability_datadriven"
+        "AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET"
+        "AbilityTextureName"			""
+
+		// Casting
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityCastPoint"				"0.0 0.0 0.0 0.0 0.0"
+
+		// Time		
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityCooldown"				"14.0 14.0 14.0 14.0 14.0"
+
+		// Cost
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityManaCost"				"40"
+		
+        "OnSpellStart"
+		{
+            "RunScript"
+            {
+                "ScriptFile"	"custom_scripted_abilities.lua"
+                "Function"		"RammusDefensiveBallCurl"
+                "Target"		"CASTER"
+            }
+        
+			"ApplyModifier"
+			{
+				"Target"			"CASTER"
+				"ModifierName"		"modifier_rammus_defensive_ball_curl_buff"
+			}
+            
+		}
+        
+        "Modifiers"
+		{
+			"modifier_rammus_defensive_ball_curl_buff"
+			{				
+				"Duration"		"%duration"
+                
+                "Properties"
+				{
+					"MODIFIER_PROPERTY_PHYSICAL_ARMOR_BONUS" "%armor_bonus"
+					"MODIFIER_PROPERTY_MAGICAL_RESISTANCE_BONUS" "%magic_resist_bonus"
+				}
+			}
+			
+			"OnAttacked"
+			{
+				"Damage"
+				{
+					"Type"			"DAMAGE_TYPE_MAGICAL"
+					"Damage"		"%damage_returned"
+					"Target" 		"ATTACKER"
+				}
+				
+				"RunScript"
+				{
+					"ScriptFile"	"custom_scripted_abilities.lua"
+					"Function"		"RammusDefensiveBallCurlReturnDamage"
+					"Target"		"ATTACKER"
+				}
+			}
+		}
+        
+        
+		// Special
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"					"FIELD_INTEGER"
+				"armor_bonus"				"40 60 80 100 120"
+			}
+			"02"
+			{
+				"var_type"					"FIELD_INTEGER"
+				"magic_resist_bonus"		"40 60 80 100 120"
+			}
+			"03"
+			{
+				"var_type"					"FIELD_FLOAT"
+				"duration"					"6 6 6 6 6"
+			}
+			"4"
+			{
+				var_type"					"FIELD_INTEGER"
+				"damage_returned"			"15 25 35 45 55"	//+20% armor
+				
+			}
+		}
+	}
 
     //=================================================================================================================
 	// Rammus Powerball Knockback

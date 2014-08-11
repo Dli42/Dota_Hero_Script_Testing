@@ -32,5 +32,22 @@ function RammusPowerballResetMovespeed(keys)
 
     local caster = keys.caster  
     caster:SetBaseMoveSpeed(originalMoveSpeed)
+	
+end
+
+function RammusDefensiveBallCurlReturnDamage(keys)
+
+	local caster = keys.caster
+	local target = keys.target
+	
+	local damageTable = {
+		victim = target,
+		attacker = caster,
+		damage = caster:GetPhysicalArmorValue()*.3,
+		damage_type = DAMAGE_TYPE_MAGICAL}
+						
+	
+	target:ApplyDamage(damageTable)
+	
 end
 
