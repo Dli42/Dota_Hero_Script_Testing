@@ -15,5 +15,6 @@
         "Ability2"              "rammus_powerball"
         "Ability3"              "rammus_defensive_ball_curl"
 		"Ability4"				"rammus_puncturing_taunt"
+		"Ability5"				"rammus_tremors"
 	}
 }

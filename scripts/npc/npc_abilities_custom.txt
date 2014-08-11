@@ -366,7 +366,7 @@
 				"var_type"					"FIELD_FLOAT"
 				"duration"					"6 6 6 6 6"
 			}
-			"4"
+			"04"
 			{
 				var_type"					"FIELD_INTEGER"
 				"damage_returned"			"15 25 35 45 55"	//+20% armor
@@ -374,6 +374,123 @@
 			}
 		}
 	}
+	
+	//=================================================================================================================
+	// Rammus Tremors
+	//=================================================================================================================
+	"rammus_tremors"
+	{
+		// General
+		//-------------------------------------------------------------------------------------------------------------
+		"BaseClass"				        "ability_datadriven"
+		"AbilityType"					"DOTA_ABILITY_TYPE_ULTIMATE"
+        "AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET"
+		"AbilityUnitDamageType"			"DAMAGE_TYPE_MAGICAL"
+        "AbilityTextureName"			""
+
+		// Casting
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityCastPoint"				"0.0 0.0 0.0"
+
+		// Time		
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityCooldown"				"60.0 60.0 60.0"
+		"AbilityDuration"				"8.0 8.0 8.0"
+		"AbilityChannelTime"			"0.0 0.0 0.0"
+
+		// Cost
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityManaCost"				"100 100 100"        
+        
+		"OnSpellStart"
+		{            
+			"CreateThinker"
+			{
+				"ModifierName" "rammus_powerball_thinker"
+                "Target" "CASTER"
+			}
+            
+		}
+        
+        "Modifiers"
+		{
+            "rammus_tremors_thinker"
+            {
+                "Duration" "%duration"
+                "ThinkInterval" "%tick_rate"
+                //"OnCreated"
+                //{
+                //    "AttachEffect"
+                //    {
+                //         "Target" "CASTER"
+                //         "EffectName" "particles/units/heroes/hero_sandking/sandking_epicenter.vpcf"
+                //         "EffectAttachType" "follow_origin"
+                //         "ControlPoints"
+				//		{
+				//			"00" "0 0 0"
+				//			"01" "%tremors_radius %tremors_radius %tremors_radius"
+				//		}
+                //    }                    
+                //}
+                
+                "OnIntervalThink"
+                {
+                    "AttachEffect"
+                    {
+                         "Target" "CASTER"
+                         "EffectName" "particles/units/heroes/hero_sandking/sandking_epicenter.vpcf"
+                         "EffectAttachType" "follow_origin"
+                         "ControlPoints"
+						{
+							"00" "0 0 0"
+							"01" "%tremors_radius %tremors_radius %tremors_radius"
+						}
+                    }
+					
+					"Damage"
+					{
+						"Type" "DAMAGE_TYPE_MAGICAL"
+						"Damage" "%tremors_damage"
+						"Target"
+						{
+							"Center" "CASTER"
+							"Radius" "%tremors_radius"
+							"Teams" "DOTA_UNIT_TARGET_TEAM_ENEMY"
+							"Types" "DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_CREEP | DOTA_UNIT_TARGET_MECHANICAL | DOTA_UNIT_TARGET_OTHER | DOTA_UNIT_TARGET_BUILDING"
+						}
+					}
+                }
+            }        
+		}		
+		
+		// Special
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"			"FIELD_INTEGER"
+				"tremors_radius"	"300"
+			}
+			"02"
+			{
+				"var_type"			"FIELD_INTEGER"
+				"tremors_pulses"	"8 8 8"
+			}
+			"03"
+			{
+				"var_type"			"FIELD_INTEGER"
+				"tremors_damage"	"65 30 195"
+			}
+			"04"
+			{
+				"var_type"			"FIELD_FLOAT"
+				"tick_rate"			"1" //8 second duration, 8 ticks
+			}
+			
+		}
+	}
+	
 
     //=================================================================================================================
 	// Rammus Powerball Knockback
