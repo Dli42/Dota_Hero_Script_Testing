@@ -1,0 +1,124 @@
+//Custom ability Template
+
+//=================================================================================================================
+	// Custom Ability
+	//=================================================================================================================
+	"ability_name"	//what the ability will be referred to in the code 
+	{
+		// General
+		//-------------------------------------------------------------------------------------------------------------
+		"BaseClass"				        "ability_datadriven"				//base class, use ability_datadriven for a new custom ability, use an existing ability to modify it's parameters
+        "AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET"	//refer to https://developer.valvesoftware.com/wiki/Dota_2_Workshop_Tools/Scripting/Abilities_Data_Driven#A_Simple_Example for a list of behaviours
+        "AbilityTextureName"			"axe_battle_hunger"					//the ability icon that shows in the hud
+
+		// Casting
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityCastPoint"				"0.0 0.0 0.0 0.0"
+
+		// Time		
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityCooldown"				"12.0 12.0 12.0 12.0"
+
+		// Cost
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityManaCost"				"50"
+		
+        "OnSpellStart"
+		{
+            "ApplyModifier"
+            {
+                "Modifier Name"     "modifier_rammus_powerball_movespeed_buff"
+                "Target"			"CASTER"
+            }
+            
+			"CreateThinker"
+			{
+				"ModifierName" "rammus_powerball_thinker"
+                "Target" "CASTER"
+			}
+            
+		}
+        
+        "Modifiers"
+		{
+            "rammus_powerball_thinker"
+            {
+                "Duration" "%duration"
+                "ThinkInterval" "%tick_rate"
+                "OnCreated"
+                {                    
+                    "RunScript"
+                    {
+                        "ScriptFile"	"custom_scripted_abilities.lua"
+                        "Function"		"RammusPowerballGetMovespeed"
+                        "Target"		"CASTER"
+                    }
+                    
+                }
+                
+                "OnIntervalThink"
+                {
+					"FireEffect"
+                    {
+                        "Target" 					"CASTER"
+                        "EffectName" 				"particles/units/heroes/hero_alchemist/alchemist_acid_spray_debuff.vpcf"
+                        "EffectAttachType" 			"follow_origin"
+						"EffectRadius"				"100"
+						"EffectDurationScale"		"1"
+						"EffectLifeDurationScale" 	"1"
+                        "EffectLifeDurationScale" 	"1"
+                        "EffectColorA" 				"255 0 0"
+                    }
+				
+                    "RunScript"
+                    {
+                        "ScriptFile"	"custom_scripted_abilities.lua"
+                        "Function"		"RammusPowerballMovespeedBuff"
+                        "Target"		"CASTER"
+                    }
+					
+					"RunScript"
+                    {
+                        "ScriptFile"	"custom_scripted_abilities.lua"
+                        "Function"		"RammusPowerballKnockbackTarget"
+                        "Target"		"CASTER"
+                    }
+					
+                }
+                
+                "OnDestroy"
+                {
+                    
+                    "RunScript"
+                    {
+                        "ScriptFile"	"custom_scripted_abilities.lua"
+                        "Function"		"RammusPowerballResetMovespeed"
+                        "Target"		"CASTER"
+                    }
+                    
+                }
+            }
+        
+            "modifier_rammus_powerball_movespeed_buff"
+			{			
+                "Duration" "%duration"
+			}
+        
+		}
+        
+		// Special
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"					"FIELD_FLOAT"
+				"duration"					"7 7 7 7 7"
+			}
+            "02"
+			{
+				"var_type"					"FIELD_FLOAT"
+				"tick_rate"					"0.127" //7 second duration, 55 ticks
+			}
+		}
+	}    
