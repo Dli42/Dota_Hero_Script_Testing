@@ -38,23 +38,25 @@ function RammusPuncturingTaunt(keys)
     
 end
 
+--[[Detects whether any enemy units are within 150 aoe of the caster, if there is then knockback, deal damage, and cancel powerball]]
 ABILITY_powerball_knockback = thisEntity:FindAbilityByName("rammus_powerball_knockback")
 function RammusPowerballKnockbackTarget()
 
-local allEnemies = FindUnitsInRadius( DOTA_GC_TEAM_GOOD_GUYS | DOTA_GC_TEAM_BAD_GUYS | DOTA_GC_TEAM_NOTEAM, 
-									thisEntity:GetOrigin(), 
-									nil, 
-									150, 
-									DOTA_UNIT_TARGET_TEAM_ENEMY, 
-									DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_MECHANICAL | DOTA_UNIT_TARGET_CREEP | DOTA_UNIT_TARGET_OTHER, 
-									0, 
-									0, 
-									false )
-		if #allEnemies > 0 then
-			ABILITY_powerball_knockback:CastAbility()
-			RemoveModifierByName("modifier_rammus_powerball_movespeed_buff")
-			RemoveModifierByName("rammus_powerball_thinker")
-		end
+	local allEnemies = FindUnitsInRadius( 
+		DOTA_GC_TEAM_GOOD_GUYS | DOTA_GC_TEAM_BAD_GUYS | DOTA_GC_TEAM_NOTEAM, 
+		thisEntity:GetOrigin(), 
+		nil, 
+		150, 
+		DOTA_UNIT_TARGET_TEAM_ENEMY, 
+		DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_MECHANICAL | DOTA_UNIT_TARGET_CREEP | DOTA_UNIT_TARGET_OTHER, 
+		0, 
+		0, 
+		false )
+	if #allEnemies > 0 then
+		ABILITY_powerball_knockback:CastAbility()
+		RemoveModifierByName("modifier_rammus_powerball_movespeed_buff")
+		RemoveModifierByName("rammus_powerball_thinker")
+	end
 
 end
 
@@ -72,7 +74,9 @@ end
 function RammusPowerballGetMovespeed(keys)
 
     local caster = keys.caster
-    originalMoveSpeed = caster:GetBaseMoveSpeed()   
+    originalMoveSpeed = caster:GetBaseMoveSpeed()  
+		
+	--setModel("models\props_structures\bad_ancient_sphere.mdl")
     
 end
 
@@ -81,6 +85,8 @@ function RammusPowerballResetMovespeed(keys)
 
     local caster = keys.caster  
     caster:SetBaseMoveSpeed(originalMoveSpeed)
+	
+	--setModel("models\heroes\axe\axe.mdl")
 	
 end
 
