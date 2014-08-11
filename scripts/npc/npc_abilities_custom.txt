@@ -148,17 +148,13 @@
                         "Target"		"CASTER"
                     }
 					
-					"ApplyModifier"
-					{
-						"ModifierName"	"modifier_rammus_powerball_target"
-						"Target"
-						{
-							"Center" "CASTER"
-							"Radius" "%crush_radius"
-							"Teams" "DOTA_UNIT_TARGET_TEAM_ENEMY"
-							"Types" "DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_CREEP | DOTA_UNIT_TARGET_MECHANICAL | DOTA_UNIT_TARGET_OTHER"
-						}
-					}
+					"RunScript"
+                    {
+                        "ScriptFile"	"custom_scripted_abilities.lua"
+                        "Function"		"RammusPowerballKnockbackTarget"
+                        "Target"		"CASTER"
+                    }
+					
                 }
                 
                 "OnDestroy"
@@ -177,11 +173,6 @@
             "modifier_rammus_powerball_movespeed_buff"
 			{			
                 "Duration" "%duration"
-			}
-			
-			"modifier_rammus_powerball_target"
-			{
-				
 			}
         
 		}
@@ -255,7 +246,9 @@
         "Modifiers"
 		{
 			"modifier_rammus_puncturing_taunt_armor_reduction"
-			{				
+			{			
+				"IsDebuff" "1"
+				"IsPurgable" "1"
 				"Duration"		"%duration"
                 
                 "Properties"
@@ -265,7 +258,9 @@
 			}
             
             "modifier_rammus_puncturing_taunt_disable"
-			{				
+			{	
+				"IsDebuff" "1"
+				"IsPurgable" "1"
 				"Duration"		    "%duration"
                 "EffectName"        "particles/generic_gameplay/generic_stunned.vpcf"
                 "EffectAttachType"  "follow_overhead"

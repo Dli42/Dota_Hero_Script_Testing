@@ -39,7 +39,7 @@ function RammusPuncturingTaunt(keys)
 end
 
 ABILITY_powerball_knockback = thisEntity:FindAbilityByName("rammus_powerball_knockback")
-function RammusPowerballKnockback()
+function RammusPowerballKnockbackTarget()
 
 local allEnemies = FindUnitsInRadius( DOTA_GC_TEAM_GOOD_GUYS | DOTA_GC_TEAM_BAD_GUYS | DOTA_GC_TEAM_NOTEAM, 
 									thisEntity:GetOrigin(), 
