@@ -3,7 +3,387 @@
 {
 	"Version"		"1"
     
+	//=================================================================================================================
+	// Rammus Spiked Shell
+	//=================================================================================================================
+	"rammus_spiked_shell"
+	{
+		// General
+		//-------------------------------------------------------------------------------------------------------------
+		"BaseClass"				        "ability_datadriven"
+        "AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_PASSIVE | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
+        "AbilityTextureName"			"rammus_spiked_shell"
+
+        // Stats
+        //-------------------------------------------------------------------------------------------------------------
+        "MaxLevel"                      "1"        
+		
+        "OnSpellStart"
+		{            
+			"CreateThinker"
+			{
+				"ModifierName" "rammus_spiked_shell_thinker"
+                "Target" "CASTER"
+			}
+            
+		}
+        
+        "Modifiers"
+		{
+            "rammus_spiked_shell_thinker"
+            {
+                "ThinkInterval" "%tick_rate"
+                "OnCreated"
+                {                    
+                    "RunScript"
+                    {
+                        "ScriptFile"	"custom_scripted_abilities.lua"
+                        "Function"		"RammusSpikedShellInit"
+                        "Target"		"CASTER"
+                    }
+                    
+                }
+                
+                "OnIntervalThink"
+                {
+                    "RunScript"
+                    {
+                        "ScriptFile"	"custom_scripted_abilities.lua"
+                        "Function"		"RammusSpikedShellBuff"
+                        "Target"		"CASTER"
+                    }
+                }
+            }
+        
+		}
+        
+		// Special
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"					"FIELD_FLOAT"
+				"percentage"				"25"
+			}
+            "02"
+			{
+				"var_type"					"FIELD_FLOAT"
+				"tick_rate"					"0.1"
+			}
+		}
+	}  
+	
     //=================================================================================================================
+	// Rammus Powerball
+	//=================================================================================================================
+	"rammus_powerball"
+	{
+		// General
+		//-------------------------------------------------------------------------------------------------------------
+		"BaseClass"				        "ability_datadriven"
+        "AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_DONT_CANCEL_MOVEMENT "
+        "AbilityTextureName"			"rammus_powerball"
+
+		// Casting
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityCastPoint"				"0.0 0.0 0.0 0.0 0.0"
+
+		// Time		
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityCooldown"				"12.0 12.0 12.0 12.0 12.0"
+
+		// Cost
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityManaCost"				"50"
+        
+        // Stats
+        //-------------------------------------------------------------------------------------------------------------
+        "MaxLevel"                      "5"
+		
+        "OnSpellStart"
+		{
+            "ApplyModifier"
+            {
+                "Modifier Name"     "modifier_rammus_powerball_movespeed_buff"
+                "Target"			"CASTER"
+            }
+            
+			"CreateThinker"
+			{
+				"ModifierName" "rammus_powerball_thinker"
+                "Target" "CASTER"
+			}
+            
+		}
+        
+        "Modifiers"
+		{
+            "rammus_powerball_thinker"
+            {
+                "Duration" "%duration"
+                "ThinkInterval" "%tick_rate"
+                "OnCreated"
+                {                    
+                    "RunScript"
+                    {
+                        "ScriptFile"	"custom_scripted_abilities.lua"
+                        "Function"		"RammusPowerballGetMovespeed"
+                        "Target"		"CASTER"
+                    }
+                    
+                }
+                
+                "OnIntervalThink"
+                {
+					"AttachEffect"
+                    {
+                        "EffectName" 				"particles/units/heroes/hero_alchemist/alchemist_acid_spray_debuff.vpcf"
+                        "EffectAttachType" 			"world_origin"
+                        "Target"                    "CASTER"
+						"EffectRadius"				"100"
+                        "EffectColorA" 				"255 0 0"
+                    }
+				
+                    "RunScript"
+                    {
+                        "ScriptFile"	"custom_scripted_abilities.lua"
+                        "Function"		"RammusPowerballMovespeedBuff"
+                        "Target"		"CASTER"
+                    }					
+                }
+                
+                "OnDestroy"
+                {
+                    
+                    "RunScript"
+                    {
+                        "ScriptFile"	"custom_scripted_abilities.lua"
+                        "Function"		"RammusPowerballResetMovespeed"
+                        "Target"		"CASTER"
+                    }
+                    
+                }
+            }
+        
+            "modifier_rammus_powerball_movespeed_buff"
+			{			
+                "Duration" "%duration"
+			}
+        
+		}
+        
+		// Special
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"					"FIELD_FLOAT"
+				"duration"					"7 7 7 7 7"
+			}
+            "02"
+			{
+				"var_type"					"FIELD_FLOAT"
+				"tick_rate"					"0.127" //7 second duration, 55 ticks
+			}
+		}
+	}
+	
+	//=================================================================================================================
+	// Rammus Defensive Ball Curl
+	//=================================================================================================================
+	"rammus_defensive_ball_curl"
+	{
+		// General
+		//-------------------------------------------------------------------------------------------------------------
+		"BaseClass"				        "ability_datadriven"
+        "AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET"
+        "AbilityTextureName"			"rammus_defensive_ball_curl"
+
+		// Casting
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityCastPoint"				"0.0 0.0 0.0 0.0 0.0"
+
+		// Time		
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityCooldown"				"14.0 14.0 14.0 14.0 14.0"
+
+		// Cost
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityManaCost"				"40"
+        
+        // Stats
+        //-------------------------------------------------------------------------------------------------------------
+        "MaxLevel"                      "5"
+		
+        "OnSpellStart"
+		{
+			"ApplyModifier"
+			{
+				"Target"			"CASTER"
+				"ModifierName"		"modifier_rammus_defensive_ball_curl_buff"
+			}            
+		}
+        
+        "Modifiers"
+		{
+			"modifier_rammus_defensive_ball_curl_buff"
+			{				
+				"Duration"		    "%duration"
+                "EffectName"        "particles/units/heroes/hero_dark_seer/dark_seer_ion_shell.vpcf"
+                "EffectRadius"		"200"
+                "EffectAttachType"  "follow_overhead"
+                "Properties"
+				{
+					"MODIFIER_PROPERTY_PHYSICAL_ARMOR_BONUS" "%armor_bonus"
+					"MODIFIER_PROPERTY_MAGICAL_RESISTANCE_BONUS" "%magic_resist_bonus"
+				}
+                
+                "OnTakeDamage"
+                {
+                    "Damage"
+					{
+						"Type"		"DAMAGE_TYPE_MAGICAL"
+						"Damage"	"%damage_returned"
+						"Target"	"ATTACKER"
+					}
+                }
+
+			}
+		}
+        
+        
+		// Special
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"					"FIELD_INTEGER"
+				"armor_bonus"				"40 60 80 100 120"
+			}
+			"02"
+			{
+				"var_type"					"FIELD_INTEGER"
+				"magic_resist_bonus"		"40 60 80 100 120"
+			}
+			"03"
+			{
+				"var_type"					"FIELD_FLOAT"
+				"duration"					"6 6 6 6 6"
+			}
+			"04"
+			{
+				"var_type"					"FIELD_INTEGER"
+				"damage_returned"			"15 25 35 45 55"
+				
+			}
+		}
+	}
+    
+	//=================================================================================================================
+	// Rammus Puncturing Taunt
+	//=================================================================================================================
+	"rammus_puncturing_taunt"
+	{
+		// General
+		//-------------------------------------------------------------------------------------------------------------
+		"BaseClass"				        "ability_datadriven"
+        "AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_UNIT_TARGET"
+        "AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_ENEMY"
+		"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
+		"AbilityUnitTargetFlags"		"DOTA_UNIT_TARGET_FLAG_NOT_ANCIENTS"
+        "AbilityTextureName"			"rammus_puncturing_taunt"
+
+		// Casting
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityCastPoint"				"0.0 0.0 0.0 0.0 0.0"
+
+		// Time		
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityCooldown"				"12.0 12.0 12.0 12.0 12.0"
+
+		// Cost
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityManaCost"				"50"
+        
+        // Stats
+        //-------------------------------------------------------------------------------------------------------------
+        "MaxLevel"                      "5"
+		
+        "OnSpellStart"
+		{
+            "RunScript"
+            {
+                "ScriptFile"	"custom_scripted_abilities.lua"
+                "Function"		"RammusPuncturingTaunt"
+                "Target"		"TARGET"
+            }
+        
+			"ApplyModifier"
+			{
+				"Target"			"TARGET"
+				"ModifierName"		"modifier_rammus_puncturing_taunt_armor_reduction"
+			}
+            
+            "ApplyModifier"
+			{
+				"Target"			"TARGET"
+				"ModifierName"		"modifier_rammus_puncturing_taunt_disable"
+			}
+            
+		}
+        
+        "Modifiers"
+		{
+			"modifier_rammus_puncturing_taunt_armor_reduction"
+			{			
+				"IsDebuff"      "1"
+				"IsPurgable"    "1"
+				"Duration"		"%duration"
+                
+                "Properties"
+				{
+					"MODIFIER_PROPERTY_PHYSICAL_ARMOR_BONUS" "%armor_reduction"
+				}
+			}
+            
+            "modifier_rammus_puncturing_taunt_disable"
+			{	
+				"IsDebuff" "1"
+				"IsPurgable" "1"
+				"Duration"		    "%duration"
+                "EffectName"        "particles/units/heroes/hero_axe/axe_beserkers_call.vpcf"
+                "EffectRadius"		"200"
+                "EffectAttachType"  "follow_overhead"
+                
+                "States"
+				{
+					"MODIFIER_STATE_COMMAND_RESTRICTED" "MODIFIER_STATE_VALUE_ENABLED"
+				}
+			}
+		}
+        
+        
+		// Special
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"					"FIELD_INTEGER"
+				"armor_reduction"			"-10 -15 -20 -25 -30"
+			}
+			"02"
+			{
+				"var_type"					"FIELD_FLOAT"
+				"duration"					"1.25 1.5 1.75 2 2.25"
+			}
+		}
+	}
+	
+	//=================================================================================================================
 	// Rammus Tremors
 	//=================================================================================================================
 	"rammus_tremors"
@@ -262,386 +642,6 @@
             }
 		}
 	}
-    
-	//=================================================================================================================
-	// Rammus Spiked Shell
-	//=================================================================================================================
-	"rammus_spiked_shell"
-	{
-		// General
-		//-------------------------------------------------------------------------------------------------------------
-		"BaseClass"				        "ability_datadriven"
-        "AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_PASSIVE | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
-        "AbilityTextureName"			"rammus_spiked_shell"
-
-        // Stats
-        //-------------------------------------------------------------------------------------------------------------
-        "MaxLevel"                      "1"        
-		
-        "OnSpellStart"
-		{            
-			"CreateThinker"
-			{
-				"ModifierName" "rammus_spiked_shell_thinker"
-                "Target" "CASTER"
-			}
-            
-		}
-        
-        "Modifiers"
-		{
-            "rammus_spiked_shell_thinker"
-            {
-                "ThinkInterval" "%tick_rate"
-                "OnCreated"
-                {                    
-                    "RunScript"
-                    {
-                        "ScriptFile"	"custom_scripted_abilities.lua"
-                        "Function"		"RammusSpikedShellInit"
-                        "Target"		"CASTER"
-                    }
-                    
-                }
-                
-                "OnIntervalThink"
-                {
-                    "RunScript"
-                    {
-                        "ScriptFile"	"custom_scripted_abilities.lua"
-                        "Function"		"RammusSpikedShellBuff"
-                        "Target"		"CASTER"
-                    }
-                }
-            }
-        
-		}
-        
-		// Special
-		//-------------------------------------------------------------------------------------------------------------
-		"AbilitySpecial"
-		{
-			"01"
-			{
-				"var_type"					"FIELD_FLOAT"
-				"percentage"				"25"
-			}
-            "02"
-			{
-				"var_type"					"FIELD_FLOAT"
-				"tick_rate"					"0.1"
-			}
-		}
-	}  
-	
-    //=================================================================================================================
-	// Rammus Powerball
-	//=================================================================================================================
-	"rammus_powerball"
-	{
-		// General
-		//-------------------------------------------------------------------------------------------------------------
-		"BaseClass"				        "ability_datadriven"
-        "AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_DONT_CANCEL_MOVEMENT "
-        "AbilityTextureName"			"rammus_powerball"
-
-		// Casting
-		//-------------------------------------------------------------------------------------------------------------
-		"AbilityCastPoint"				"0.0 0.0 0.0 0.0 0.0"
-
-		// Time		
-		//-------------------------------------------------------------------------------------------------------------
-		"AbilityCooldown"				"12.0 12.0 12.0 12.0 12.0"
-
-		// Cost
-		//-------------------------------------------------------------------------------------------------------------
-		"AbilityManaCost"				"50"
-        
-        // Stats
-        //-------------------------------------------------------------------------------------------------------------
-        "MaxLevel"                      "5"
-		
-        "OnSpellStart"
-		{
-            "ApplyModifier"
-            {
-                "Modifier Name"     "modifier_rammus_powerball_movespeed_buff"
-                "Target"			"CASTER"
-            }
-            
-			"CreateThinker"
-			{
-				"ModifierName" "rammus_powerball_thinker"
-                "Target" "CASTER"
-			}
-            
-		}
-        
-        "Modifiers"
-		{
-            "rammus_powerball_thinker"
-            {
-                "Duration" "%duration"
-                "ThinkInterval" "%tick_rate"
-                "OnCreated"
-                {                    
-                    "RunScript"
-                    {
-                        "ScriptFile"	"custom_scripted_abilities.lua"
-                        "Function"		"RammusPowerballGetMovespeed"
-                        "Target"		"CASTER"
-                    }
-                    
-                }
-                
-                "OnIntervalThink"
-                {
-					"AttachEffect"
-                    {
-                        "EffectName" 				"particles/units/heroes/hero_alchemist/alchemist_acid_spray_debuff.vpcf"
-                        "EffectAttachType" 			"world_origin"
-                        "Target"                    "CASTER"
-						"EffectRadius"				"100"
-                        "EffectColorA" 				"255 0 0"
-                    }
-				
-                    "RunScript"
-                    {
-                        "ScriptFile"	"custom_scripted_abilities.lua"
-                        "Function"		"RammusPowerballMovespeedBuff"
-                        "Target"		"CASTER"
-                    }					
-                }
-                
-                "OnDestroy"
-                {
-                    
-                    "RunScript"
-                    {
-                        "ScriptFile"	"custom_scripted_abilities.lua"
-                        "Function"		"RammusPowerballResetMovespeed"
-                        "Target"		"CASTER"
-                    }
-                    
-                }
-            }
-        
-            "modifier_rammus_powerball_movespeed_buff"
-			{			
-                "Duration" "%duration"
-			}
-        
-		}
-        
-		// Special
-		//-------------------------------------------------------------------------------------------------------------
-		"AbilitySpecial"
-		{
-			"01"
-			{
-				"var_type"					"FIELD_FLOAT"
-				"duration"					"7 7 7 7 7"
-			}
-            "02"
-			{
-				"var_type"					"FIELD_FLOAT"
-				"tick_rate"					"0.127" //7 second duration, 55 ticks
-			}
-		}
-	}    
-    
-	//=================================================================================================================
-	// Rammus Puncturing Taunt
-	//=================================================================================================================
-	"rammus_puncturing_taunt"
-	{
-		// General
-		//-------------------------------------------------------------------------------------------------------------
-		"BaseClass"				        "ability_datadriven"
-        "AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_UNIT_TARGET"
-        "AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_ENEMY"
-		"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
-		"AbilityUnitTargetFlags"		"DOTA_UNIT_TARGET_FLAG_NOT_ANCIENTS"
-        "AbilityTextureName"			"rammus_puncturing_taunt"
-
-		// Casting
-		//-------------------------------------------------------------------------------------------------------------
-		"AbilityCastPoint"				"0.0 0.0 0.0 0.0 0.0"
-
-		// Time		
-		//-------------------------------------------------------------------------------------------------------------
-		"AbilityCooldown"				"12.0 12.0 12.0 12.0 12.0"
-
-		// Cost
-		//-------------------------------------------------------------------------------------------------------------
-		"AbilityManaCost"				"50"
-        
-        // Stats
-        //-------------------------------------------------------------------------------------------------------------
-        "MaxLevel"                      "5"
-		
-        "OnSpellStart"
-		{
-            "RunScript"
-            {
-                "ScriptFile"	"custom_scripted_abilities.lua"
-                "Function"		"RammusPuncturingTaunt"
-                "Target"		"TARGET"
-            }
-        
-			"ApplyModifier"
-			{
-				"Target"			"TARGET"
-				"ModifierName"		"modifier_rammus_puncturing_taunt_armor_reduction"
-			}
-            
-            "ApplyModifier"
-			{
-				"Target"			"TARGET"
-				"ModifierName"		"modifier_rammus_puncturing_taunt_disable"
-			}
-            
-		}
-        
-        "Modifiers"
-		{
-			"modifier_rammus_puncturing_taunt_armor_reduction"
-			{			
-				"IsDebuff"      "1"
-				"IsPurgable"    "1"
-				"Duration"		"%duration"
-                
-                "Properties"
-				{
-					"MODIFIER_PROPERTY_PHYSICAL_ARMOR_BONUS" "%armor_reduction"
-				}
-			}
-            
-            "modifier_rammus_puncturing_taunt_disable"
-			{	
-				"IsDebuff" "1"
-				"IsPurgable" "1"
-				"Duration"		    "%duration"
-                "EffectName"        "particles/units/heroes/hero_axe/axe_beserkers_call.vpcf"
-                "EffectRadius"		"200"
-                "EffectAttachType"  "follow_overhead"
-                
-                "States"
-				{
-					"MODIFIER_STATE_COMMAND_RESTRICTED" "MODIFIER_STATE_VALUE_ENABLED"
-				}
-			}
-		}
-        
-        
-		// Special
-		//-------------------------------------------------------------------------------------------------------------
-		"AbilitySpecial"
-		{
-			"01"
-			{
-				"var_type"					"FIELD_INTEGER"
-				"armor_reduction"			"-10 -15 -20 -25 -30"
-			}
-			"02"
-			{
-				"var_type"					"FIELD_FLOAT"
-				"duration"					"1.25 1.5 1.75 2 2.25"
-			}
-		}
-	}
-	
-	//=================================================================================================================
-	// Rammus Defensive Ball Curl
-	//=================================================================================================================
-	"rammus_defensive_ball_curl"
-	{
-		// General
-		//-------------------------------------------------------------------------------------------------------------
-		"BaseClass"				        "ability_datadriven"
-        "AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET"
-        "AbilityTextureName"			"rammus_defensive_ball_curl"
-
-		// Casting
-		//-------------------------------------------------------------------------------------------------------------
-		"AbilityCastPoint"				"0.0 0.0 0.0 0.0 0.0"
-
-		// Time		
-		//-------------------------------------------------------------------------------------------------------------
-		"AbilityCooldown"				"14.0 14.0 14.0 14.0 14.0"
-
-		// Cost
-		//-------------------------------------------------------------------------------------------------------------
-		"AbilityManaCost"				"40"
-        
-        // Stats
-        //-------------------------------------------------------------------------------------------------------------
-        "MaxLevel"                      "5"
-		
-        "OnSpellStart"
-		{
-			"ApplyModifier"
-			{
-				"Target"			"CASTER"
-				"ModifierName"		"modifier_rammus_defensive_ball_curl_buff"
-			}            
-		}
-        
-        "Modifiers"
-		{
-			"modifier_rammus_defensive_ball_curl_buff"
-			{				
-				"Duration"		    "%duration"
-                "EffectName"        "particles/units/heroes/hero_dark_seer/dark_seer_ion_shell.vpcf"
-                "EffectRadius"		"200"
-                "EffectAttachType"  "follow_overhead"
-                "Properties"
-				{
-					"MODIFIER_PROPERTY_PHYSICAL_ARMOR_BONUS" "%armor_bonus"
-					"MODIFIER_PROPERTY_MAGICAL_RESISTANCE_BONUS" "%magic_resist_bonus"
-				}
-                
-                "OnTakeDamage"
-                {
-                    "Damage"
-					{
-						"Type"		"DAMAGE_TYPE_MAGICAL"
-						"Damage"	"%damage_returned"
-						"Target"	"ATTACKER"
-					}
-                }
-
-			}
-		}
-        
-        
-		// Special
-		//-------------------------------------------------------------------------------------------------------------
-		"AbilitySpecial"
-		{
-			"01"
-			{
-				"var_type"					"FIELD_INTEGER"
-				"armor_bonus"				"40 60 80 100 120"
-			}
-			"02"
-			{
-				"var_type"					"FIELD_INTEGER"
-				"magic_resist_bonus"		"40 60 80 100 120"
-			}
-			"03"
-			{
-				"var_type"					"FIELD_FLOAT"
-				"duration"					"6 6 6 6 6"
-			}
-			"04"
-			{
-				"var_type"					"FIELD_INTEGER"
-				"damage_returned"			"15 25 35 45 55"
-				
-			}
-		}
-	}   
     
 }
 
