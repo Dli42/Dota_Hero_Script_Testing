@@ -108,6 +108,12 @@
                 "Modifier Name"     "modifier_rammus_powerball_movespeed_buff"
                 "Target"			"CASTER"
             }
+			
+			"ApplyModifier"
+            {
+                "Modifier Name"     "modifier_rammus_powerball_attack_disable"
+                "Target"			"CASTER"
+            }
             
 			"CreateThinker"
 			{
@@ -167,8 +173,18 @@
             }
         
             "modifier_rammus_powerball_movespeed_buff"
-			{			
+			{
                 "Duration" "%duration"
+			}
+			
+			"modifier_rammus_powerball_attack_disable"
+			{
+				"Duration" "%duration"
+				"States"
+				{
+					"MODIFIER_STATE_SOFT_DISARMED" "MODIFIER_STATE_VALUE_ENABLED"
+				}
+				
 			}
         
 		}
