@@ -584,8 +584,7 @@
 			{
 				"Target"			"CASTER"
 				"ModifierName"		"modifier_rammus_defensive_ball_curl_buff"
-			}
-            
+			}            
 		}
         
         "Modifiers"
@@ -637,7 +636,7 @@
 			}
 			"04"
 			{
-				var_type"					"FIELD_INTEGER"
+				"var_type"					"FIELD_INTEGER"
 				"damage_returned"			"15 25 35 45 55"
 				
 			}
