@@ -160,8 +160,7 @@
                 }
                 
                 "OnDestroy"
-                {
-                    
+                {                    
                     "RunScript"
                     {
                         "ScriptFile"	"custom_scripted_abilities.lua"
@@ -180,9 +179,9 @@
 			"modifier_rammus_powerball_attack_disable"
 			{
 				"Duration" "%duration"
-				"States"
+				"Properties"
 				{
-					"MODIFIER_STATE_SOFT_DISARMED" "MODIFIER_STATE_VALUE_ENABLED"
+					"MODIFIER_PROPERTY_DISABLE_AUTOATTACK"
 				}
 				
 			}
