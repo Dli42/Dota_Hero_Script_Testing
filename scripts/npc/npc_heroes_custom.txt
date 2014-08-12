@@ -60,6 +60,6 @@
 		// Movement
 		//-------------------------------------------------------------------------------------------------------------
 		"MovementSpeed"				"335"									// Speed.
-		//"MovementTurnRate"			"0.1"									// Turning rate.
+		"MovementTurnRate"			"1.0"									// Turning rate.
 	}
 }
