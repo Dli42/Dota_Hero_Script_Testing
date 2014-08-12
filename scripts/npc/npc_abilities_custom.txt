@@ -186,7 +186,27 @@
 			{
 				"var_type"					"FIELD_FLOAT"
 				"tick_rate"					"0.127" //7 second duration, 55 ticks
+			}			
+			"03"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"impact_radius"			"450"
 			}
+			"04"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"damage"				"100 100 100 100"
+			}
+			"05"
+			{
+				"var_type"				"FIELD_FLOAT"
+				"slow_duration"			"3.0"
+			}
+            "06"
+            {
+                "var_type"				"FIELD_INTEGER"
+                "slow_percentage"       "-20 -25 -30 -35 -40"
+            }
 		}
 	}
 	
