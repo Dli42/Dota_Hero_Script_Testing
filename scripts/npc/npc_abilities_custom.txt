@@ -348,30 +348,50 @@
         "MaxLevel"                      "5"
 		
         "OnSpellStart"
-		{
-            "RunScript"
-            {
-                "ScriptFile"	"custom_scripted_abilities.lua"
-                "Function"		"RammusPuncturingTaunt"
-                "Target"		"TARGET"
-            }
-        
+		{        
+			"CreateThinker"
+			{
+				"ModifierName" "rammus_puncturing_taunt_thinker"
+                "Target" "TARGET"
+			}
+		
 			"ApplyModifier"
 			{
 				"Target"			"TARGET"
 				"ModifierName"		"modifier_rammus_puncturing_taunt_armor_reduction"
 			}
-            
-            "ApplyModifier"
-			{
-				"Target"			"TARGET"
-				"ModifierName"		"modifier_rammus_puncturing_taunt_disable"
-			}
-            
 		}
         
         "Modifiers"
 		{
+			"rammus_puncturing_taunt_thinker"
+			{
+				"Duration" "%duration"
+                "ThinkInterval" "0.2"
+                
+                "OnIntervalThink"
+                {
+					"ApplyModifier"
+					{
+						"Target"			"TARGET"
+						"ModifierName"		"modifier_rammus_puncturing_taunt_enable"
+					}  
+					
+					"RunScript"
+					{
+						"ScriptFile"	"custom_scripted_abilities.lua"
+						"Function"		"RammusPuncturingTaunt"
+						"Target"		"TARGET"
+					}			
+					            
+					"ApplyModifier"
+					{
+						"Target"			"TARGET"
+						"ModifierName"		"modifier_rammus_puncturing_taunt_disable"
+					}            
+                }
+			}
+		
 			"modifier_rammus_puncturing_taunt_armor_reduction"
 			{			
 				"IsDebuff"      "1"
@@ -388,7 +408,6 @@
 			{	
 				"IsDebuff" "1"
 				"IsPurgable" "1"
-				"Duration"		    "%duration"
                 "EffectName"        "particles/units/heroes/hero_axe/axe_beserkers_call.vpcf"
                 "EffectRadius"		"200"
                 "EffectAttachType"  "follow_overhead"
@@ -396,6 +415,14 @@
                 "States"
 				{
 					"MODIFIER_STATE_COMMAND_RESTRICTED" "MODIFIER_STATE_VALUE_ENABLED"
+				}
+			}
+			
+			"modifier_rammus_puncturing_taunt_enable"
+			{	
+                "States"
+				{
+					"MODIFIER_STATE_COMMAND_RESTRICTED" "MODIFIER_STATE_VALUE_DISABLED"
 				}
 			}
 		}
