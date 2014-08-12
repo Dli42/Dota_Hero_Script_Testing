@@ -224,7 +224,7 @@
 		//-------------------------------------------------------------------------------------------------------------	
 		 "Modifiers"
 		 {
-                modifier_rammus_powerball_slow
+                "modifier_rammus_powerball_slow"
                 {
                     "Duration"		    "%slow_duration"
                 
