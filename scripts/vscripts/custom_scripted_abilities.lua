@@ -49,6 +49,29 @@ function RammusPowerballKnockbackTarget()
 		RemoveModifierByName("rammus_powerball_thinker")
 	end
 
+	
+	local vTargetUnits = FindUnitsInRadius(
+	caster:GetTeam(),
+	vCenter,nil,
+	nRazeRadius,
+	DOTA_UNIT_TARGET_TEAM_ENEMY,
+	DOTA_UNIT_TARGET_ALL,
+		0, FIND_CLOSEST,
+		false)
+	if vTargetUnits then
+		for k,v in pairs(vTargetUnits) do
+			local vDamageTable = {
+				victim = v,
+				attacker = caster,
+				damage = nRazeDamage,
+				damage_type = DAMAGE_TYPE_MAGICAL,
+				damage_flags = 0,
+				ability = ABILITY
+				}
+			ApplyDamage(vDamageTable)
+		end
+	end
+	
 end
 --]]
 
