@@ -1,10 +1,11 @@
 //Custom ability Template
 
-//=================================================================================================================
+    //=================================================================================================================
 	// Custom Ability
 	//=================================================================================================================
-	"ability_name"	//what the ability will be referred to in the code 
+	"ability_name"
 	{
+        // Remove any values not applicable (cast range for passives, etc.)
 		// General
 		//-------------------------------------------------------------------------------------------------------------
 		"BaseClass"				        "ability_datadriven"				//base class, use ability_datadriven for a new custom ability, use an existing ability to modify it's parameters
