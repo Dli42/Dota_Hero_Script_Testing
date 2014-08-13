@@ -82,7 +82,7 @@
         // General
         //-------------------------------------------------------------------------------------------------------------
         "BaseClass"                     "ability_datadriven"
-        "AbilityBehavior"               "DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_DONT_CANCEL_MOVEMENT "
+        "AbilityBehavior"               "DOTA_ABILITY_BEHAVIOR_NO_TARGET"
         "AbilityTextureName"            "rammus_powerball"
 
         // Casting
@@ -112,7 +112,7 @@
         
             "ApplyModifier"
             {
-                "ModifierName" "rammus_powerball_thinker"
+                "ModifierName" "rammus_powerball_pseudothinker"
                 "Target" "CASTER"
             }
             
@@ -126,7 +126,7 @@
         
         "Modifiers"
         {
-            "rammus_powerball_thinker"
+            "rammus_powerball_pseudothinker"
             {
                 "Duration" "%duration"
                 "ThinkInterval" "%tick_rate"
@@ -580,7 +580,7 @@
         // General
         //-------------------------------------------------------------------------------------------------------------
         "BaseClass"                     "ability_datadriven"
-        "AbilityBehavior"               "DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_AOE"
+        "AbilityBehavior"               "DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_AOE | DOTA_ABILITY_BEHAVIOR_DONT_RESUME_MOVEMENT"
         "AbilityUnitTargetTeam"         "DOTA_UNIT_TARGET_TEAM_ENEMY"
         "AbilityUnitDamageType"         "DAMAGE_TYPE_MAGICAL"
         "AbilityTextureName"            ""
@@ -626,6 +626,14 @@
                 "Duration"      "0.75"
                 "Distance"      "100"
                 "Height"        "50"
+            }
+            
+            "Knockback"
+            {
+                "Target" "CASTER"
+                "Duration"      "0.25"
+                "Distance"      "0"
+                "Height"        "5"
             }
             
             "ApplyModifier"

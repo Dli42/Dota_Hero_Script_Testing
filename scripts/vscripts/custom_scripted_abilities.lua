@@ -57,7 +57,7 @@ function RammusPowerballKnockbackTarget(keys)
 	if #enemiesInRange > 0 then
 		print( "I HIT THEM!" )
         caster:RemoveModifierByName("modifier_rammus_powerball_attack_disable")
-        caster:RemoveModifierByName("rammus_powerball_thinker")
+        caster:RemoveModifierByName("rammus_powerball_pseudothinker")
         RammusPowerballResetMovespeed(keys)
         ABILITY_powerball_knockback:CastAbility()
     else
@@ -93,7 +93,7 @@ end
 function RammusPowerballGetMovespeed(keys)
 
     local caster = keys.caster
-    originalMoveSpeed = caster:GetBaseMoveSpeed()  
+    originalMoveSpeed = caster:GetBaseMoveSpeed() 
 		
 	--setModel("models\props_structures\bad_ancient_sphere.mdl")
     
