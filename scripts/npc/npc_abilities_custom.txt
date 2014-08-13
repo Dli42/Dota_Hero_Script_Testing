@@ -922,10 +922,14 @@
         //-------------------------------------------------------------------------------------------------------------
         "AbilityManaCost"               "0 0 0 0"
         
-        "precache"
-        {
-            "particle_folder"           "particles/units/heroes/hero_tinker"
-        }
+        "precache" // testing, reduce precache when complete
+		{
+			"particlefile"				"particles/econ/generic/generic_aoe_persistent_sphere_1.pcf"
+			"particlefile"				"particles/econ/generic/generic_aoe_explosion_sphere_1.pcf"
+			"particlefile"				"particles/econ/generic/generic_buff_1.pcf"
+			"particlefile"				"particles/test_particle.pcf"
+			"particlefile"				"particles/units/heroes/hero_batrider.pcf"
+		}
 
         "OnSpellStart"
         {
@@ -942,15 +946,32 @@
 			}
         }
         
-        "OnProjectileHitUnit"
+        "OnProjectileFinish"
 		{
-			"DeleteOnHit"				"true"
-
-            "Damage"
+			"FireSound"
 			{
-				"Target"    "TARGET"
-				"Type"      "DAMAGE_TYPE_MAGICAL"
-				"Damage"    "%damage"
+				"EffectName"			"Hero_Batrider.Flamebreak.Impact"
+			}
+			"Damage"
+			{
+				"Target"
+				{
+					"Center"			"PROJECTILE"
+					"Teams"				"DOTA_UNIT_TARGET_TEAM_ENEMY"
+					"Radius"			"%outer_radius"
+				}
+				"Type"					"DAMAGE_TYPE_MAGICAL"
+				"Damage"				"%damage"
+			}
+			"Stun"
+			{
+				"Target"
+				{
+					"Center"			"PROJECTILE"
+					"Teams"				"DOTA_UNIT_TARGET_TEAM_ENEMY"
+					"Radius"			"%inner_radius"
+				}
+				"Duration"				"%stun_duration"
 			}
 		}
 
@@ -990,6 +1011,61 @@
             {
                 "var_type"          "FIELD_INTEGER"
                 "inner_radius"      "100"
+            }
+            "06"
+            {
+                "var_type"          "FIELD_FLOAT"
+                "stun_duration"      "1.25"
+            }
+        }
+    }
+    
+    //=================================================================================================================
+    // Old Heimerdinger Upgrade
+    //=================================================================================================================
+    "old_heimerdinger_upgrade"
+    {
+        // General
+        //-------------------------------------------------------------------------------------------------------------
+        "BaseClass"                     "ability_datadriven"
+        "AbilityBehavior"               "DOTA_ABILITY_BEHAVIOR_POINT | DOTA_ABILITY_BEHAVIOR_AOE"
+        "AbilityTextureName"            ""
+        
+        // Casting
+        //-------------------------------------------------------------------------------------------------------------
+        "AbilityCastRange"              "1100"
+        "AbilityCastPoint"              "0"                         // Time before spell goes off when cast
+
+        // Time        
+        //-------------------------------------------------------------------------------------------------------------
+        "AbilityCooldown"               "0.0 0.0 0.0 0.0"
+
+        // Cost
+        //-------------------------------------------------------------------------------------------------------------
+        "AbilityManaCost"               "0 0 0 0"
+        
+        
+
+        "OnSpellStart"
+        {
+            //swap out all other spells with upgraded versions, change all turret units to upgraded ones
+        }
+        
+        // Modifiers
+        //-------------------------------------------------------------------------------------------------------------    
+        "Modifiers"
+        {
+
+        }
+        
+        // Special
+        //-------------------------------------------------------------------------------------------------------------
+        "AbilitySpecial"
+        {
+            "01"
+            {
+                "var_type"          "FIELD_INTEGER"
+                "cooldown"          "100 80 60 "
             }
         }
     }

@@ -54,7 +54,7 @@ function RammusPowerballKnockbackTarget(keys)
         0, 0,
         false)
     
-    --FindUnitsInRadius( DOTA_TEAM_BADGUYS, thisEntity:GetOrigin(), nil, 20000, DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_HERO, DOTA_UNIT_TARGET_FLAG_NOT_CREEP_HERO + DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES, FIND_CLOSEST, false )
+    --FindUnitsInRadius( iTeamNumber, vPosition, hCacheUnit, flRadius, iTeamFilter, iTypeFilter, iFlagFilter, iOrder, bCanGrowCache)
         
 	if #enemiesInRange > 0 then
 		print( "I HIT THEM!" )
@@ -132,6 +132,32 @@ function RammusDefensiveBallCurlReturnDamage(keys)
 						
 	
 	target:ApplyDamage(damageTable)
+	
+end
+
+function OldHeimerdingerRocketsTarget(keys)
+    
+    local caster = keys.caster
+    local numTargets = keys.numTargets
+    local ABILITY_powerball_knockback = caster:FindAbilityByName("rammus_powerball_knockback")
+	
+	local enemiesInRange = FindUnitsInRadius(
+        caster:GetTeam(),
+        caster:GetOrigin(),
+        nil, 1100,
+        DOTA_UNIT_TARGET_TEAM_ENEMY,
+        DOTA_UNIT_TARGET_HERO,
+        DOTA_UNIT_TARGET_FLAG_NOT_CREEP_HERO, 
+        FIND_CLOSEST,
+        false)
+    
+    --FindUnitsInRadius( iTeamNumber, vPosition, hCacheUnit, flRadius, iTeamFilter, iTypeFilter, iFlagFilter, iOrder, bCanGrowCache)
+        
+	if #enemiesInRange > 0 then
+		for i = 1, 3 do
+            --create a projectile and hit each of the three closest enemies
+        end
+    end
 	
 end
 
