@@ -39,41 +39,45 @@ function RammusPuncturingTaunt(keys)
 end
 
 --[[Detects whether any enemy units are within 150 aoe of the caster, if there is then knockback, deal damage, and cancel powerball]]
---[[ABILITY_powerball_knockback = thisEntity:FindAbilityByName("rammus_powerball_knockback")
-function RammusPowerballKnockbackTarget()
-
-	local allEnemies = FindUnitsInRadius( DOTA_GC_TEAM_BAD_GUYS , thisEntity:GetOrigin(), nil, 150, DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_HERO , 0, 0,	false )
-	if #allEnemies > 0 then
-		ABILITY_powerball_knockback:CastAbility()
-		RemoveModifierByName("modifier_rammus_powerball_movespeed_buff")
-		RemoveModifierByName("rammus_powerball_thinker")
-	end
-
+---[[
+function RammusPowerballKnockbackTarget(keys)
+    
+    local caster = keys.caster
+    local ABILITY_powerball_knockback = caster:FindAbilityByName("rammus_powerball_knockback")
 	
-	local vTargetUnits = FindUnitsInRadius(
-	caster:GetTeam(),
-	vCenter,nil,
-	nRazeRadius,
-	DOTA_UNIT_TARGET_TEAM_ENEMY,
-	DOTA_UNIT_TARGET_ALL,
-		0, FIND_CLOSEST,
-		false)
-	if vTargetUnits then
-		for k,v in pairs(vTargetUnits) do
-			local vDamageTable = {
-				victim = v,
-				attacker = caster,
-				damage = nRazeDamage,
-				damage_type = DAMAGE_TYPE_MAGICAL,
-				damage_flags = 0,
-				ability = ABILITY
-				}
-			ApplyDamage(vDamageTable)
-		end
-	end
+	local enemiesInRange = FindUnitsInRadius(
+        caster:GetTeam(),
+        caster:GetOrigin(),
+        nil, 150,
+        DOTA_UNIT_TARGET_TEAM_ENEMY,
+        DOTA_UNIT_TARGET_ALL,
+        0, 0,
+        false)
+        
+	if #enemiesInRange > 0 then
+		print( "I HIT THEM!" )
+        caster:RemoveModifierByName("modifier_rammus_powerball_attack_disable")
+        caster:RemoveModifierByName("rammus_powerball_thinker")
+        RammusPowerballResetMovespeed(keys)
+        ABILITY_powerball_knockback:CastAbility()
+    else
+        print( "NOTHING HERE!!" )
+    end
 	
 end
 --]]
+
+function RammusPowerballKnockbackLevelUp(keys)
+
+    local caster = keys.caster
+    local ABILITY_powerball_knockback = caster:FindAbilityByName("rammus_powerball_knockback")
+    local ABILITY_powerball = caster:FindAbilityByName("rammus_powerball")
+    
+    local powerball_level = ABILITY_powerball:GetLevel()
+    ABILITY_powerball_knockback:SetLevel(powerball_level)    
+    
+    print( "knockback level: ", ABILITY_powerball_knockback:GetLevel())
+end
 
 --[[Adds 3% movespeed to base, called every .127 seconds for a max of +165%]]
 function RammusPowerballMovespeedBuff(keys)

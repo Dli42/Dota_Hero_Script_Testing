@@ -103,7 +103,14 @@
         
         "OnSpellStart"
         {            
-            "CreateThinker"
+            "RunScript"
+            {
+                "ScriptFile"    "custom_scripted_abilities.lua"
+                "Function"      "RammusPowerballKnockbackLevelUp"
+                "Target"        "CASTER"
+            }
+        
+            "ApplyModifier"
             {
                 "ModifierName" "rammus_powerball_thinker"
                 "Target" "CASTER"
@@ -124,7 +131,7 @@
                 "Duration" "%duration"
                 "ThinkInterval" "%tick_rate"
                 "OnCreated"
-                {                    
+                {
                     "RunScript"
                     {
                         "ScriptFile"    "custom_scripted_abilities.lua"
@@ -150,11 +157,18 @@
                         "ScriptFile"    "custom_scripted_abilities.lua"
                         "Function"      "RammusPowerballMovespeedBuff"
                         "Target"        "CASTER"
-                    }                    
+                    }
+                    
+                    "RunScript"
+                    {
+                        "ScriptFile"    "custom_scripted_abilities.lua"
+                        "Function"      "RammusPowerballKnockbackTarget"
+                        "Target"        "CASTER"
+                    }
                 }
                 
                 "OnDestroy"
-                {                    
+                {
                     "RunScript"
                     {
                         "ScriptFile"    "custom_scripted_abilities.lua"
@@ -417,27 +431,28 @@
     {
         // General
         //-------------------------------------------------------------------------------------------------------------
-        "BaseClass"                      "ability_datadriven"
-        "AbilityBehavior"                "DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_AOE"
-        "AbilityType"                    "DOTA_ABILITY_TYPE_ULTIMATE"
-        "AbilityUnitDamageType"          "DAMAGE_TYPE_MAGICAL"
-        "AbilityTextureName"             "rammus_tremors"
+        "BaseClass"                     "ability_datadriven"
+        "AbilityBehavior"               "DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_AOE"
+        "AbilityType"                   "DOTA_ABILITY_TYPE_ULTIMATE"
+        "AbilityUnitDamageType"         "DAMAGE_TYPE_MAGICAL"
+        "AbilityTextureName"            "rammus_tremors"
 
         // Casting
         //-------------------------------------------------------------------------------------------------------------
-        "AbilityCastPoint"                "0.0 0.0 0.0"
+        "AbilityCastPoint"              "0.0 0.0 0.0"
 
         // Time        
         //-------------------------------------------------------------------------------------------------------------
-        "AbilityCooldown"                "60.0 60.0 60.0"
+        "AbilityCooldown"               "60.0 60.0 60.0"
 
         // Cost
         //-------------------------------------------------------------------------------------------------------------
-        "AbilityManaCost"                "100"
+        "AbilityManaCost"               "100"
         
         "precache"
         {
-            "soundfile"                  "soundevents/game_sounds_heroes/game_sounds_brewmaster.vsndevts"
+            "soundfile"                 "soundevents/game_sounds_heroes/game_sounds_brewmaster.vsndevts"
+            "particle_folder"           "particles/units/heroes/hero_sandking"
         }
         
         "OnSpellStart"

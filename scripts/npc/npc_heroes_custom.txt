@@ -23,7 +23,8 @@
         "Ability3"              "rammus_puncturing_taunt"        
         "Ability4"              "rammus_tremors"
         "Ability5"              "rammus_spiked_shell"
-        "Ability6"              "attribute_bonus"
+        "Ability6"              "rammus_powerball_knockback"
+        "Ability7"              "attribute_bonus"
         
         // Armor
         //-------------------------------------------------------------------------------------------------------------
