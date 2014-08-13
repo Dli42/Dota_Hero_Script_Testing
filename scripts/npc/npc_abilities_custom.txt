@@ -656,8 +656,8 @@
         
         // Modifiers
         //-------------------------------------------------------------------------------------------------------------    
-         "Modifiers"
-         {
+        "Modifiers"
+        {
                 "modifier_rammus_powerball_slow"
                 {
                     "Duration"            "%slow_duration"
@@ -668,7 +668,7 @@
                     }
                 }
 
-         }
+        }
         
         // Special
         //-------------------------------------------------------------------------------------------------------------
@@ -693,6 +693,207 @@
             {
                 "var_type"              "FIELD_INTEGER"
                 "slow_percentage"       "-20 -25 -30 -35 -40"
+            }
+        }
+    }
+    
+    //=================================================================================================================
+    // Techmaturgical Repair Bots
+    //=================================================================================================================
+    "techmaturgical_repair_bots"
+    {
+        // General
+        //-------------------------------------------------------------------------------------------------------------
+        "BaseClass"                     "ability_datadriven"
+        "AbilityBehavior"               "DOTA_ABILITY_BEHAVIOR_PASSIVE | DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_AURA"
+        "AbilityTextureName"            ""    
+        
+        // Stats
+        //-------------------------------------------------------------------------------------------------------------
+        "MaxLevel"                      "1"     
+
+        "OnSpellStart"
+        {
+            "SpawnUnit"
+            {
+                "UnitName"			"npc_old_heimerdinger_turret"
+				"UnitCount"			"1"
+				"UnitLimit"			"%max_turrets"
+				"SpawnRadius"		"0"
+            }
+        }
+        
+        // Modifiers
+        //-------------------------------------------------------------------------------------------------------------    
+        "Modifiers"
+        {
+            "modifier_heimerdinger_repair_bots_aura"
+            {            
+                "Properties"
+                {
+                    "MODIFIER_PROPERTY_HEALTH_REGEN_CONSTANT" "%regen_rate"
+                }
+            }
+        }
+        
+        // Special
+        //-------------------------------------------------------------------------------------------------------------
+        "AbilitySpecial"
+        {
+            "01"
+            {
+                "var_type"              "FIELD_INTEGER"
+                "radius"                "1000"
+            }
+            "02"
+            {
+                "var_type"              "FIELD_INTEGER"
+                "regen_rate"            "2 3 4 5 6"     //10 15 20 25 30 per 5 seconds
+            }
+            "03"
+            {
+                "var_type"              "FIELD_INTEGER"
+                "sticky_duration"       "5"
+            }
+        }
+    }
+    
+    //=================================================================================================================
+    // Old Heimerdinger Turret
+    //=================================================================================================================
+    "old_heimerdinger_turret"
+    {
+        // General
+        //-------------------------------------------------------------------------------------------------------------
+        "BaseClass"                     "ability_datadriven"
+        "AbilityBehavior"               "DOTA_ABILITY_BEHAVIOR_POINT"
+        "AbilityTextureName"            ""
+        
+        // Casting
+        //-------------------------------------------------------------------------------------------------------------
+        "AbilityCastRange"              "200"
+        "AbilityCastPoint"              "0"                         // Time before spell goes off when cast
+
+        // Time        
+        //-------------------------------------------------------------------------------------------------------------
+        "AbilityCooldown"               "0.0 0.0 0.0 0.0"
+
+        // Cost
+        //-------------------------------------------------------------------------------------------------------------
+        "AbilityManaCost"               "0 0 0 0"
+
+        "OnSpellStart"
+        {
+            "SpawnUnit"
+            {
+                "UnitName"			"npc_old_heimerdinger_turret"
+				"UnitCount"			"1"
+				"UnitLimit"			"%max_turrets"
+				"SpawnRadius"		"0"
+            }
+        }
+        
+        // Modifiers
+        //-------------------------------------------------------------------------------------------------------------    
+        "Modifiers"
+        {
+
+        }
+        
+        // Special
+        //-------------------------------------------------------------------------------------------------------------
+        "AbilitySpecial"
+        {
+            "01"
+            {
+                "var_type"              "FIELD_INTEGER"
+                "max turrets"           "3"
+            }
+        }
+    }
+    
+    //=================================================================================================================
+    // Old Heimerdinger Hextech Micro-Rockets
+    //=================================================================================================================
+    "old_heimerdinger_rockets"
+    {
+        // General
+        //-------------------------------------------------------------------------------------------------------------
+        "BaseClass"                     "ability_datadriven"
+        "AbilityBehavior"               "DOTA_ABILITY_BEHAVIOR_NO_TARGET"
+        "AbilityTextureName"            ""
+        
+        // Casting
+        //-------------------------------------------------------------------------------------------------------------
+        "AbilityCastPoint"              "0"                         // Time before spell goes off when cast
+
+        // Time        
+        //-------------------------------------------------------------------------------------------------------------
+        "AbilityCooldown"               "0.0 0.0 0.0 0.0"
+
+        // Cost
+        //-------------------------------------------------------------------------------------------------------------
+        "AbilityManaCost"               "0 0 0 0"
+        
+        "precache"
+        {
+            "particle_folder"           "particles/units/heroes/hero_tinker"
+        }
+
+        "OnSpellStart"
+        {
+            "TrackingProjectile"
+			{
+				"Target"
+                {
+					"Center" "CASTER"
+					"Radius" "%range"
+					"Teams" "DOTA_UNIT_TARGET_TEAM_ENEMY"
+					"Types" "DOTA_UNIT_TARGET_HERO"
+				}
+				"MoveSpeed" "1250"
+				"EffectName" "abaddon_death_coil"
+			}
+        }
+        
+        "OnProjectileHitUnit"
+		{
+			"DeleteOnHit"				"true"
+
+            "Damage"
+			{
+				"Target"    "TARGET"
+				"Type"      "DAMAGE_TYPE_PURE"
+				"Damage"    "%damage"
+			}
+		}
+
+        
+        // Modifiers
+        //-------------------------------------------------------------------------------------------------------------    
+        "Modifiers"
+        {
+
+        }
+        
+        // Special
+        //-------------------------------------------------------------------------------------------------------------
+        "AbilitySpecial"
+        {
+            "01"
+            {
+                "var_type"          "FIELD_INTEGER"
+                "range"             "1100"
+            }
+            "02"
+            {
+                "var_type"          "FIELD_INTEGER"
+                "mana_cost"         "70 80 90 100 110"
+            }
+            "03"
+            {
+                "var_type"          "FIELD_INTEGER"
+                "damage"            "60 90 120 150 180"
             }
         }
     }
