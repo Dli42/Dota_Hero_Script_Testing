@@ -11,7 +11,12 @@ function Precache( context )
 			PrecacheResource( "soundfile", "*.vsndevts", context )
 			PrecacheResource( "particle", "*.vpcf", context )
 			PrecacheResource( "particle_folder", "particles/folder", context )
-	]]
+	]]    
+
+    PrecacheUnitByNameSync('npc_dota_hero_axe', context)
+    PrecacheResource( "soundfile", "*.vsndevts", context )
+    PrecacheResource( "particle_folder", "particles/frostivus_gameplay", context )
+    PrecacheUnitByNameSync('npc_precache_everything', context)
 end
 
 -- Create the game mode when we activate
