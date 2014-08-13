@@ -53,6 +53,8 @@ function RammusPowerballKnockbackTarget(keys)
         DOTA_UNIT_TARGET_ALL,
         0, 0,
         false)
+    
+    --FindUnitsInRadius( DOTA_TEAM_BADGUYS, thisEntity:GetOrigin(), nil, 20000, DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_HERO, DOTA_UNIT_TARGET_FLAG_NOT_CREEP_HERO + DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES, FIND_CLOSEST, false )
         
 	if #enemiesInRange > 0 then
 		print( "I HIT THEM!" )
