@@ -87,6 +87,8 @@ function RammusPowerballMovespeedBuff(keys)
     local newMoveSpeed = oldMoveSpeed + (originalMoveSpeed*.03)
     caster:SetBaseMoveSpeed(newMoveSpeed)   
     
+    
+    
 end
 
 --[[sets a global to track the original movespeed of the caster, needed at end of buff]]
@@ -97,6 +99,8 @@ function RammusPowerballGetMovespeed(keys)
 		
 	--setModel("models\props_structures\bad_ancient_sphere.mdl")
     
+    caster:AddNewModifier(caster, nil, "modifier_bloodseeker_thirst_speed", { duration = dur})
+    
 end
 
 --[[resets movespeed to original, can't go fast forever]]
@@ -106,6 +110,8 @@ function RammusPowerballResetMovespeed(keys)
     caster:SetBaseMoveSpeed(originalMoveSpeed)
 	
 	--setModel("models\heroes\axe\axe.mdl")
+    
+    caster:RemoveModifierByName("modifier_bloodseeker_thirst_speed")
 	
 end
 
