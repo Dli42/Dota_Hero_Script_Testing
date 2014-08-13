@@ -3,63 +3,63 @@
 // the specified key-value combinations.  Use override_hero <hero_to_override> for this.
 "DOTAHeroes"
 {
-	//=================================================================================================================
-	// HERO: Axe
-	//=================================================================================================================
-	"npc_dota_hero_axe_template"
-	{
-        "override_hero"			"npc_dota_hero_axe"	
+    //=================================================================================================================
+    // HERO: Axe
+    //=================================================================================================================
+    "npc_dota_hero_axe_template"
+    {
+        "override_hero"         "npc_dota_hero_axe"    
         
-		// General
-		//-------------------------------------------------------------------------------------------------------------	
-		"url"					"Axe"
-		
-		// Abilities
-		//-------------------------------------------------------------------------------------------------------------
-		"AbilityLayout"			"5"		
+        // General
+        //-------------------------------------------------------------------------------------------------------------    
+        "url"                   "Axe"
+        
+        // Abilities
+        //-------------------------------------------------------------------------------------------------------------
+        "AbilityLayout"         "5"        
 
-        "Ability1"              "rammus_spiked_shell"
-        "Ability2"				"rammus_powerball"
-        "Ability3"              "rammus_defensive_ball_curl"
-		"Ability4"				"rammus_puncturing_taunt"		
-        "Ability5"              "rammus_tremors"
-        "Ability6"				"attribute_bonus"
-		
-		// Armor
-		//-------------------------------------------------------------------------------------------------------------
-		"ArmorPhysical"			"25"											// Physical protection.
-		"ArmorResistance"		"30"											// Magical protection (percentage).
+        "Ability1"              "rammus_powerball"
+        "Ability2"              "rammus_defensive_ball_curl"
+        "Ability3"              "rammus_puncturing_taunt"        
+        "Ability4"              "rammus_tremors"
+        "Ability5"              "rammus_spiked_shell"
+        "Ability6"              "attribute_bonus"
+        
+        // Armor
+        //-------------------------------------------------------------------------------------------------------------
+        "ArmorPhysical"         "25"    // Physical protection.
+        "ArmorResistance"       "30"    // Magical protection (percentage).
 
-		// Attack
-		//-------------------------------------------------------------------------------------------------------------
-		"AttackCapabilities"		"DOTA_UNIT_CAP_MELEE_ATTACK"
-		"AttackDamageMin"			"50"									// Damage range min.
-		"AttackDamageMax"			"50"									// Damage range max.
-		"AttackRate"				"1.7"									// Speed of attack.
-		"AttackAnimationPoint"		"0.5"									// Normalized time in animation cycle to attack.
-		"AttackAcquisitionRange"	"600"									// Range within a target can be acquired.
-		"AttackRange"				"125"									// Range within a target can be attacked.
+        // Attack
+        //-------------------------------------------------------------------------------------------------------------
+        "AttackCapabilities"        "DOTA_UNIT_CAP_MELEE_ATTACK"
+        "AttackDamageMin"           "50"        // Damage range min.
+        "AttackDamageMax"           "50"        // Damage range max.
+        "AttackRate"                "1.7"       // Speed of attack.
+        "AttackAnimationPoint"      "0.5"       // Normalized time in animation cycle to attack.
+        "AttackAcquisitionRange"    "600"       // Range within a target can be acquired.
+        "AttackRange"               "125"       // Range within a target can be attacked.
 
-		// Attributes
-		//-------------------------------------------------------------------------------------------------------------
-		"AttributePrimary"			"DOTA_ATTRIBUTE_STRENGTH"
-		"AttributeBaseStrength"		"25"									// Base strength
-		"AttributeStrengthGain"		"2.5"									// Strength bonus per level.
-		"AttributeBaseIntelligence"	"18"									// Base intelligence
-		"AttributeIntelligenceGain"	"1.6"									// Intelligence bonus per level.
-		"AttributeBaseAgility"		"20"									// Base agility
-		"AttributeAgilityGain"		"2.2"									// Agility bonus per level.
+        // Attributes
+        //-------------------------------------------------------------------------------------------------------------
+        "AttributePrimary"              "DOTA_ATTRIBUTE_STRENGTH"
+        "AttributeBaseStrength"         "25"    // Base strength
+        "AttributeStrengthGain"         "2.5"   // Strength bonus per level.
+        "AttributeBaseIntelligence"     "18"    // Base intelligence
+        "AttributeIntelligenceGain"     "1.6"   // Intelligence bonus per level.
+        "AttributeBaseAgility"          "20"    // Base agility
+        "AttributeAgilityGain"          "2.2"   // Agility bonus per level.
 
-		// Status
-		//-------------------------------------------------------------------------------------------------------------
-		"StatusHealth"				"420"									// Base health.
-		"StatusHealthRegen"			"7"										// Health regeneration rate.
-		"StatusMana"				"255"									// Base mana.
-		"StatusManaRegen"			"7"										// Mana regeneration rate.
+        // Status
+        //-------------------------------------------------------------------------------------------------------------
+        "StatusHealth"                  "420"   // Base health.
+        "StatusHealthRegen"             "7"     // Health regeneration rate.
+        "StatusMana"                    "255"   // Base mana.
+        "StatusManaRegen"               "7"     // Mana regeneration rate.
 
-		// Movement
-		//-------------------------------------------------------------------------------------------------------------
-		"MovementSpeed"				"335"									// Speed.
-		"MovementTurnRate"			"1.0"									// Turning rate.
-	}
+        // Movement
+        //-------------------------------------------------------------------------------------------------------------
+        "MovementSpeed"                 "335"   // Speed.
+        "MovementTurnRate"              "1.0"   // Turning rate.
+    }
 }
