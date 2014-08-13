@@ -82,7 +82,7 @@
         // General
         //-------------------------------------------------------------------------------------------------------------
         "BaseClass"                     "ability_datadriven"
-        "AbilityBehavior"               "DOTA_ABILITY_BEHAVIOR_NO_TARGET"
+        "AbilityBehavior"               "DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IGNORE_BACKSWING"
         "AbilityTextureName"            "rammus_powerball"
 
         // Casting
@@ -863,7 +863,7 @@
             "Damage"
 			{
 				"Target"    "TARGET"
-				"Type"      "DAMAGE_TYPE_PURE"
+				"Type"      "DAMAGE_TYPE_MAGICAL"
 				"Damage"    "%damage"
 			}
 		}
@@ -894,6 +894,102 @@
             {
                 "var_type"          "FIELD_INTEGER"
                 "damage"            "60 90 120 150 180"
+            }
+        }
+    }
+    
+    //=================================================================================================================
+    // Old Heimerdinger Concussion Grenade
+    //=================================================================================================================
+    "old_heimerdinger_concussion_grenade"
+    {
+        // General
+        //-------------------------------------------------------------------------------------------------------------
+        "BaseClass"                     "ability_datadriven"
+        "AbilityBehavior"               "DOTA_ABILITY_BEHAVIOR_POINT | DOTA_ABILITY_BEHAVIOR_AOE"
+        "AbilityTextureName"            ""
+        
+        // Casting
+        //-------------------------------------------------------------------------------------------------------------
+        "AbilityCastRange"              "1100"
+        "AbilityCastPoint"              "0"                         // Time before spell goes off when cast
+
+        // Time        
+        //-------------------------------------------------------------------------------------------------------------
+        "AbilityCooldown"               "0.0 0.0 0.0 0.0"
+
+        // Cost
+        //-------------------------------------------------------------------------------------------------------------
+        "AbilityManaCost"               "0 0 0 0"
+        
+        "precache"
+        {
+            "particle_folder"           "particles/units/heroes/hero_tinker"
+        }
+
+        "OnSpellStart"
+        {
+            "LinearProjectile"
+			{
+				"Target"				"POINT"
+				"EffectName"			"frostivus_skeletonking_hellfireblast"
+				"MoveSpeed"				"900"
+				"StartRadius"			"%inner_radius"
+				"EndRadius"				"%inner_radius"
+				"TargetTeams"			"DOTA_UNIT_TARGET_TEAM_ENEMY"
+				"TargetTypes"			"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_CREEP"
+				"MoveSpeed" "1250"
+			}
+        }
+        
+        "OnProjectileHitUnit"
+		{
+			"DeleteOnHit"				"true"
+
+            "Damage"
+			{
+				"Target"    "TARGET"
+				"Type"      "DAMAGE_TYPE_MAGICAL"
+				"Damage"    "%damage"
+			}
+		}
+
+        
+        // Modifiers
+        //-------------------------------------------------------------------------------------------------------------    
+        "Modifiers"
+        {
+
+        }
+        
+        // Special
+        //-------------------------------------------------------------------------------------------------------------
+        "AbilitySpecial"
+        {
+            "01"
+            {
+                "var_type"          "FIELD_INTEGER"
+                "cast_range"             "1100"
+            }
+            "02"
+            {
+                "var_type"          "FIELD_INTEGER"
+                "mana_cost"         "70 80 90 100 110"
+            }
+            "03"
+            {
+                "var_type"          "FIELD_INTEGER"
+                "damage"            "60 90 120 150 180"
+            }
+            "04"
+            {
+                "var_type"          "FIELD_INTEGER"
+                "outer_radius"      "300"
+            }
+            "05"
+            {
+                "var_type"          "FIELD_INTEGER"
+                "inner_radius"      "100"
             }
         }
     }
