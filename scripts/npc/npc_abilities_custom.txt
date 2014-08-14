@@ -791,9 +791,9 @@
             "SpawnUnit"
             {
                 "UnitName"            "npc_old_heimerdinger_turret"
-                "UnitCount"            "1"
-                "UnitLimit"            "%max_turrets"
-                "SpawnRadius"        "0"
+                "UnitCount"           "1"
+                "UnitLimit"           "%max_turrets"
+                "SpawnRadius"        `"0"
             }
         }
         
@@ -1022,7 +1022,7 @@
             "01"
             {
                 "var_type"          "FIELD_INTEGER"
-                "cast_range"             "1100"
+                "cast_range"        "1100"
             }
             "02"
             {
