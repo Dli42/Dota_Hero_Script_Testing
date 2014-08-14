@@ -942,10 +942,10 @@
 
         "OnSpellStart"
         {
-            "LinearProjectile"
+            "TrackingProjectile"
 			{
 				"Target"				"POINT"
-				"EffectName"			"particles/units/heroes/hero_venomancer/venomancer_venomous_gale.vpcf"
+				"EffectName"			"particles/units/heroes/hero_venomancer/batrider_flamebreak.vpcf"
 				"MoveSpeed"				"900"
 				"StartRadius"			"%inner_radius"
 				"EndRadius"				"%inner_radius"
