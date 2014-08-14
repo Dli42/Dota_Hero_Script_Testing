@@ -4,15 +4,15 @@
 "DOTAHeroes"
 {
     //=================================================================================================================
-    // HERO: Axe
+    // HERO: Axe-Rammus
     //=================================================================================================================
-    "npc_dota_hero_axe_template"
+    "npc_dota_hero_axe_rammus"
     {
         "override_hero"         "npc_dota_hero_axe"    
         
         // General
         //-------------------------------------------------------------------------------------------------------------    
-        "url"                   "Axe"
+        "url"                   "Axe-Rammus"
         
         // Abilities
         //-------------------------------------------------------------------------------------------------------------
@@ -63,5 +63,66 @@
         "MovementCapabilities"          "DOTA_UNIT_CAP_MOVE_GROUND"
         "MovementSpeed"                 "335"   // Speed.
         "MovementTurnRate"              "5.0"   // Turning rate.
+    }
+    
+    //=================================================================================================================
+    // HERO: Tinkerdinger
+    //=================================================================================================================
+    "npc_dota_hero_tinkerdinger"
+    {
+        "override_hero"         "npc_dota_hero_tinker"    
+        
+        // General
+        //-------------------------------------------------------------------------------------------------------------    
+        "url"                   "Tinkerdinger"
+        
+        // Abilities
+        //-------------------------------------------------------------------------------------------------------------
+        "AbilityLayout"         "5"        
+
+        "Ability1"              "old_heimerdinger_turret"
+        "Ability2"              "old_heimerdinger_rockets"
+        "Ability3"              "old_heimerdinger_concussion_grenade"
+        "Ability4"              "old_heimerdinger_upgrade"
+        "Ability5"              "old_heimerdinger_techmaturgical_repair_bots"
+        "Ability6"              "attribute_bonus"
+        
+        // Armor
+        //-------------------------------------------------------------------------------------------------------------
+        "ArmorPhysical"         "25"    // Physical protection.
+        "ArmorResistance"       "30"    // Magical protection (percentage).
+
+        // Attack
+        //-------------------------------------------------------------------------------------------------------------
+        "AttackCapabilities"        "DOTA_UNIT_CAP_MELEE_ATTACK"
+        "AttackDamageMin"           "50"        // Damage range min.
+        "AttackDamageMax"           "50"        // Damage range max.
+        "AttackRate"                "1.7"       // Speed of attack.
+        "AttackAnimationPoint"      "0.5"       // Normalized time in animation cycle to attack.
+        "AttackAcquisitionRange"    "600"       // Range within a target can be acquired.
+        "AttackRange"               "125"       // Range within a target can be attacked.
+
+        // Attributes
+        //-------------------------------------------------------------------------------------------------------------
+        "AttributePrimary"              "DOTA_ATTRIBUTE_STRENGTH"
+        "AttributeBaseStrength"         "25"    // Base strength
+        "AttributeStrengthGain"         "2.5"   // Strength bonus per level.
+        "AttributeBaseIntelligence"     "18"    // Base intelligence
+        "AttributeIntelligenceGain"     "1.6"   // Intelligence bonus per level.
+        "AttributeBaseAgility"          "20"    // Base agility
+        "AttributeAgilityGain"          "2.2"   // Agility bonus per level.
+
+        // Status
+        //-------------------------------------------------------------------------------------------------------------
+        "StatusHealth"                  "420"   // Base health.
+        "StatusHealthRegen"             "7"     // Health regeneration rate.
+        "StatusMana"                    "255"   // Base mana.
+        "StatusManaRegen"               "7"     // Mana regeneration rate.
+
+        // Movement
+        //-------------------------------------------------------------------------------------------------------------
+        "MovementCapabilities"          "DOTA_UNIT_CAP_MOVE_GROUND"
+        "MovementSpeed"                 "335"   // Speed.
+        "MovementTurnRate"              "1.0"   // Turning rate.
     }
 }

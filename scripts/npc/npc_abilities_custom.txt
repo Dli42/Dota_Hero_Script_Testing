@@ -677,7 +677,7 @@
             "01"
             {
                 "var_type"              "FIELD_INTEGER"
-                "impact_radius"         "450"
+                "impact_radius"         "200"
             }
             "02"
             {
@@ -698,9 +698,9 @@
     }
     
     //=================================================================================================================
-    // Techmaturgical Repair Bots
+    // Old Techmaturgical Repair Bots
     //=================================================================================================================
-    "techmaturgical_repair_bots"
+    "old_heimerdinger_techmaturgical_repair_bots"
     {
         // General
         //-------------------------------------------------------------------------------------------------------------
@@ -781,6 +781,10 @@
         // Cost
         //-------------------------------------------------------------------------------------------------------------
         "AbilityManaCost"               "0 0 0 0"
+        
+        // Stats
+        //-------------------------------------------------------------------------------------------------------------
+        "MaxLevel"                      "5"
 
         "OnSpellStart"
         {
@@ -834,6 +838,10 @@
         // Cost
         //-------------------------------------------------------------------------------------------------------------
         "AbilityManaCost"               "0 0 0 0"
+        
+        // Stats
+        //-------------------------------------------------------------------------------------------------------------
+        "MaxLevel"                      "5"
         
         "precache"
         {
@@ -922,13 +930,14 @@
         //-------------------------------------------------------------------------------------------------------------
         "AbilityManaCost"               "0 0 0 0"
         
+        // Stats
+        //-------------------------------------------------------------------------------------------------------------
+        "MaxLevel"                      "5"
+        
         "precache" // testing, reduce precache when complete
 		{
-			"particlefile"				"particles/econ/generic/generic_aoe_persistent_sphere_1.pcf"
-			"particlefile"				"particles/econ/generic/generic_aoe_explosion_sphere_1.pcf"
-			"particlefile"				"particles/econ/generic/generic_buff_1.pcf"
-			"particlefile"				"particles/test_particle.pcf"
-			"particlefile"				"particles/units/heroes/hero_batrider.pcf"
+			"particle_folder"			"particles/units/heroes/hero_batrider"
+            "particle_folder"           "particles/units/heroes/hero_venomancer"
 		}
 
         "OnSpellStart"
@@ -936,7 +945,7 @@
             "LinearProjectile"
 			{
 				"Target"				"POINT"
-				"EffectName"			"frostivus_skeletonking_hellfireblast"
+				"EffectName"			"particles/units/heroes/hero_venomancer/venomancer_venomous_gale.vpcf"
 				"MoveSpeed"				"900"
 				"StartRadius"			"%inner_radius"
 				"EndRadius"				"%inner_radius"
@@ -948,10 +957,8 @@
         
         "OnProjectileFinish"
 		{
-			"FireSound"
-			{
-				"EffectName"			"Hero_Batrider.Flamebreak.Impact"
-			}
+            "DeleteOnHit"				"true"
+        
 			"Damage"
 			{
 				"Target"

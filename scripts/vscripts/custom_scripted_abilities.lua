@@ -63,7 +63,7 @@ function RammusPowerballKnockbackTarget(keys)
         RammusPowerballResetMovespeed(keys)
         ABILITY_powerball_knockback:CastAbility()
     else
-        print( "NOTHING HERE!!" )
+        print( "KEEP ON ROLLIN!!" )
     end
 	
 end
