@@ -137,6 +137,7 @@ end
 
 function OldHeimerdingerRocketsTarget(keys)
     
+    local hero = player.hero
     local caster = keys.caster
     local numTargets = keys.numTargets
     local ABILITY_powerball_knockback = caster:FindAbilityByName("rammus_powerball_knockback")
@@ -146,8 +147,8 @@ function OldHeimerdingerRocketsTarget(keys)
         caster:GetOrigin(),
         nil, 1100,
         DOTA_UNIT_TARGET_TEAM_ENEMY,
-        DOTA_UNIT_TARGET_HERO,
-        DOTA_UNIT_TARGET_FLAG_NOT_CREEP_HERO, 
+        DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_CREEP,
+        0, 
         FIND_CLOSEST,
         false)
     
@@ -155,7 +156,24 @@ function OldHeimerdingerRocketsTarget(keys)
         
 	if #enemiesInRange > 0 then
 		for i = 1, 3 do
-            --create a projectile and hit each of the three closest enemies
+            --create a projectile and hit each of the three(five) closest enemies
+            local targetEntity = enemiesInRange[i]            
+            local info = {
+                          EffectName = "tinker_heat_seeking_missile", --"obsidian_destroyer_arcane_orb", --,
+                          Ability = caster:getAbilityByName(hero, "item_reflex_meteor_cannon"),
+                          vSpawnOrigin = hero:GetOrigin(),
+                          fDistance = 5000,
+                          fStartRadius = 125,
+                          fEndRadius = 125,
+                          Target = targetEntity,
+                          Source = hero,
+                          iMoveSpeed = 500,
+                          bReplaceExisting = false,
+                          bHasFrontalCone = false,
+                          --fMaxSpeed = 5200,
+                        }
+            
+            ProjectileManager:CreateTrackingProjectile(info)
         end
     end
 	
