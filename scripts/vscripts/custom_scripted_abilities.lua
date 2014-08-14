@@ -160,7 +160,7 @@ function OldHeimerdingerRocketsTarget(keys)
             local targetEntity = enemiesInRange[i]            
             local info = {
                           EffectName = "tinker_heat_seeking_missile", --"obsidian_destroyer_arcane_orb", --,
-                          Ability = caster:getAbilityByName(hero, "item_reflex_meteor_cannon"),
+                          Ability = caster:getAbilityByName(hero, "old_heimerdinger_rockets"),
                           vSpawnOrigin = hero:GetOrigin(),
                           fDistance = 5000,
                           fStartRadius = 125,

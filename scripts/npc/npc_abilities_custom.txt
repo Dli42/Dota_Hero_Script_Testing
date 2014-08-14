@@ -716,10 +716,10 @@
         {
             "SpawnUnit"
             {
-                "UnitName"			"npc_old_heimerdinger_turret"
-				"UnitCount"			"1"
-				"UnitLimit"			"%max_turrets"
-				"SpawnRadius"		"0"
+                "UnitName"            "npc_old_heimerdinger_turret"
+                "UnitCount"            "1"
+                "UnitLimit"            "%max_turrets"
+                "SpawnRadius"        "0"
             }
         }
         
@@ -790,10 +790,10 @@
         {
             "SpawnUnit"
             {
-                "UnitName"			"npc_old_heimerdinger_turret"
-				"UnitCount"			"1"
-				"UnitLimit"			"%max_turrets"
-				"SpawnRadius"		"0"
+                "UnitName"            "npc_old_heimerdinger_turret"
+                "UnitCount"            "1"
+                "UnitLimit"            "%max_turrets"
+                "SpawnRadius"        "0"
             }
         }
         
@@ -850,31 +850,38 @@
 
         "OnSpellStart"
         {
-            "TrackingProjectile"
-			{
-				"Target"
-                {
-					"Center" "CASTER"
-					"Radius" "%range"
-					"Teams" "DOTA_UNIT_TARGET_TEAM_ENEMY"
-					"Types" "DOTA_UNIT_TARGET_HERO"
-				}
-				"MoveSpeed" "1250"
-				"EffectName" "abaddon_death_coil"
-			}
+            //"TrackingProjectile"
+            //{
+            //    "Target"
+            //    {
+            //        "Center" "CASTER"
+            //        "Radius" "%range"
+            //        "Teams" "DOTA_UNIT_TARGET_TEAM_ENEMY"
+            //        "Types" "DOTA_UNIT_TARGET_HERO"
+            //    }
+            //    "MoveSpeed" "1250"
+            //    "EffectName" "abaddon_death_coil"
+            //}
+            
+            "RunScript"
+            {
+                "ScriptFile"    "custom_scripted_abilities.lua"
+                "Function"      "OldHeimerdingerRocketsTarget"
+                "numTargets"    "3"
+            }   
         }
         
         "OnProjectileHitUnit"
-		{
-			"DeleteOnHit"				"true"
+        {
+            "DeleteOnHit"                "true"
 
             "Damage"
-			{
-				"Target"    "TARGET"
-				"Type"      "DAMAGE_TYPE_MAGICAL"
-				"Damage"    "%damage"
-			}
-		}
+            {
+                "Target"    "TARGET"
+                "Type"      "DAMAGE_TYPE_MAGICAL"
+                "Damage"    "%damage"
+            }
+        }
 
         
         // Modifiers
@@ -935,59 +942,77 @@
         "MaxLevel"                      "5"
         
         "precache" // testing, reduce precache when complete
-		{
-			"particle_folder"			"particles/units/heroes/hero_batrider"
+        {
+            "particle_folder"            "particles/units/heroes/hero_batrider"
             "particle_folder"           "particles/units/heroes/hero_venomancer"
-		}
+        }
 
         "OnSpellStart"
         {
             "TrackingProjectile"
-			{
-				"Target"				"POINT"
-				"EffectName"			"particles/units/heroes/hero_venomancer/batrider_flamebreak.vpcf"
-				"MoveSpeed"				"900"
-				"StartRadius"			"%inner_radius"
-				"EndRadius"				"%inner_radius"
-				"TargetTeams"			"DOTA_UNIT_TARGET_TEAM_ENEMY"
-				"TargetTypes"			"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_CREEP"
-				"MoveSpeed" "1250"
-			}
+            {
+                "Target"                "POINT"
+                "EffectName"            "particles/units/heroes/hero_venomancer/batrider_flamebreak.vpcf"
+                "MoveSpeed"                "900"
+                "StartRadius"            "%inner_radius"
+                "EndRadius"                "%inner_radius"
+                "TargetTeams"            "DOTA_UNIT_TARGET_TEAM_ENEMY"
+                "TargetTypes"            "DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_CREEP"
+                "MoveSpeed" "1250"
+            }
         }
         
         "OnProjectileFinish"
-		{
-            "DeleteOnHit"				"true"
+        {
+            "DeleteOnHit"                "true"
         
-			"Damage"
-			{
-				"Target"
-				{
-					"Center"			"PROJECTILE"
-					"Teams"				"DOTA_UNIT_TARGET_TEAM_ENEMY"
-					"Radius"			"%outer_radius"
-				}
-				"Type"					"DAMAGE_TYPE_MAGICAL"
-				"Damage"				"%damage"
-			}
-			"Stun"
-			{
-				"Target"
-				{
-					"Center"			"PROJECTILE"
-					"Teams"				"DOTA_UNIT_TARGET_TEAM_ENEMY"
-					"Radius"			"%inner_radius"
-				}
-				"Duration"				"%stun_duration"
-			}
-		}
+            "Damage"
+            {
+                "Target"
+                {
+                    "Center"            "PROJECTILE"
+                    "Teams"             "DOTA_UNIT_TARGET_TEAM_ENEMY"
+                    "Radius"            "%outer_radius"
+                }
+                "Type"                  "DAMAGE_TYPE_MAGICAL"
+                "Damage"                "%damage"
+            }
+            "ApplyModifier"
+            {
+                "ModifierName"          "old_heimerdinger_grenade_blind"
+                "Target"
+                {
+                    "Center"            "PROJECTILE"
+                    "Teams"             "DOTA_UNIT_TARGET_TEAM_ENEMY"
+                    "Radius"            "%outer_radius"
+                }
+            }
+            "Stun"
+            {
+                "Target"
+                {
+                    "Center"            "PROJECTILE"
+                    "Teams"             "DOTA_UNIT_TARGET_TEAM_ENEMY"
+                    "Radius"            "%inner_radius"
+                }
+                "Duration"              "%stun_duration"
+            }
+        }
 
         
         // Modifiers
         //-------------------------------------------------------------------------------------------------------------    
         "Modifiers"
         {
-
+            "old_heimerdinger_grenade_blind"
+            {
+                "Duration"            "%blind_duration"
+                
+                "States"
+                {
+                    "MODIFIER_STATE_STUNNED" "MODIFIER_STATE_VALUE_ENABLED"
+                }
+            }
         }
         
         // Special
@@ -1023,6 +1048,11 @@
             {
                 "var_type"          "FIELD_FLOAT"
                 "stun_duration"      "1.25"
+            }
+            "07"
+            {
+                "var_type"          "FIELD_FLOAT"
+                "blind_duration"    "5"
             }
         }
     }
