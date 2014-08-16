@@ -147,7 +147,7 @@ function OldHeimerdingerRocketsTarget(keys)
         caster:GetOrigin(),
         nil, 1100,
         DOTA_UNIT_TARGET_TEAM_ENEMY,
-        DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_CREEP,
+        DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_CREEP,
         0, 
         FIND_CLOSEST,
         false)

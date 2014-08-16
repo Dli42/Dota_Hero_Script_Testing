@@ -714,13 +714,7 @@
 
         "OnSpellStart"
         {
-            "SpawnUnit"
-            {
-                "UnitName"            "npc_old_heimerdinger_turret"
-                "UnitCount"            "1"
-                "UnitLimit"            "%max_turrets"
-                "SpawnRadius"        "0"
-            }
+        
         }
         
         // Modifiers
@@ -786,10 +780,16 @@
         //-------------------------------------------------------------------------------------------------------------
         "MaxLevel"                      "5"
 
+        "precache" // testing, reduce precache when complete
+        {
+            "particle_folder"           "particles/units/"
+        }
+        
         "OnSpellStart"
         {
             "SpawnUnit"
             {
+                "Target"              "POINT"
                 "UnitName"            "npc_old_heimerdinger_turret"
                 "UnitCount"           "1"
                 "UnitLimit"           "%max_turrets"
@@ -943,7 +943,7 @@
         
         "precache" // testing, reduce precache when complete
         {
-            "particle_folder"            "particles/units/heroes/hero_batrider"
+            "particle_folder"           "particles/units/heroes/hero_batrider"
             "particle_folder"           "particles/units/heroes/hero_venomancer"
         }
 
@@ -952,12 +952,10 @@
             "TrackingProjectile"
             {
                 "Target"                "POINT"
-                "EffectName"            "particles/units/heroes/hero_venomancer/batrider_flamebreak.vpcf"
-                "MoveSpeed"                "900"
-                "StartRadius"            "%inner_radius"
-                "EndRadius"                "%inner_radius"
-                "TargetTeams"            "DOTA_UNIT_TARGET_TEAM_ENEMY"
-                "TargetTypes"            "DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_CREEP"
+                "EffectName"            "particles/units/heroes/hero_venomancer/venomancer_venomous_gale.vpcf"
+                "MoveSpeed"             "900"
+                "StartRadius"           "%outer_radius"
+                "EndRadius"             "%outer_radius"
                 "MoveSpeed" "1250"
             }
         }
