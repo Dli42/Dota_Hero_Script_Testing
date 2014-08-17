@@ -16,7 +16,9 @@ function Precache( context )
     PrecacheUnitByNameSync('npc_dota_hero_axe', context)
     PrecacheResource( "soundfile", "*.vsndevts", context )
     PrecacheResource( "particle_folder", "particles/frostivus_gameplay", context )
+    PrecacheResource( "particle", "particles/units/heroes/hero_venomancer/venomancer_plague_ward_projectile.vpcf", context )
     PrecacheUnitByNameSync('npc_precache_everything', context)
+    PrecacheModel("models/heroes/venomancer/venomancer_ward.mdl", context)
 end
 
 -- Create the game mode when we activate
