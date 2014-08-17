@@ -706,6 +706,7 @@
         //-------------------------------------------------------------------------------------------------------------
         "BaseClass"                     "ability_datadriven"
         "AbilityBehavior"               "DOTA_ABILITY_BEHAVIOR_PASSIVE | DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_AURA"
+        "AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_FRIENDLY"
         "AbilityTextureName"            ""    
         
         // Stats
@@ -714,7 +715,17 @@
 
         "OnSpellStart"
         {
-        
+            "ApplyModifier"
+            {
+                "ModifierName"          "modifier_heimerdinger_repair_bots_aura"
+                "Target"
+				{
+					"Center"			"CASTER"
+					"Radius"			"%radius"
+					"Teams"				"DOTA_UNIT_TARGET_TEAM_FRIENDLY"
+					"Types"				"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_CREEP | DOTA_UNIT_TARGET_MECHANICAL | DOTA_UNIT_TARGET_BUILDING"
+				}
+            }
         }
         
         // Modifiers
@@ -722,7 +733,13 @@
         "Modifiers"
         {
             "modifier_heimerdinger_repair_bots_aura"
-            {            
+            {   
+                "IsHidden"				"0"
+                "Passive"				"1"
+                "Aura_Radius"			"%radius"
+                "Teams"				"DOTA_UNIT_TARGET_TEAM_FRIENDLY"
+				"Types"				"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_CREEP | DOTA_UNIT_TARGET_MECHANICAL | DOTA_UNIT_TARGET_BUILDING"	
+            
                 "Properties"
                 {
                     "MODIFIER_PROPERTY_HEALTH_REGEN_CONSTANT" "%regen_rate"
@@ -782,19 +799,17 @@
 
         "precache" // testing, reduce precache when complete
         {
-            "particle_folder"           "particles/units/"
+            "particle_folder"           "particles/units/venomancer"
         }
         
         "OnSpellStart"
         {
-            "SpawnUnit"
-            {
-                "Target"              "POINT"
-                "UnitName"            "npc_old_heimerdinger_turret"
-                "UnitCount"           "1"
-                "UnitLimit"           "%max_turrets"
-                "SpawnRadius"        `"0"
-            }
+            "RunScript"
+                    {
+                        "ScriptFile"    "custom_scripted_abilities.lua"
+                        "Function"      "OldHeimerdingerSpawnTurret"
+                        "Target"        "POINT"
+                    }
         }
         
         // Modifiers
@@ -811,7 +826,7 @@
             "01"
             {
                 "var_type"              "FIELD_INTEGER"
-                "max turrets"           "3"
+                "max_turrets"           "3"
             }
         }
     }
@@ -949,21 +964,24 @@
 
         "OnSpellStart"
         {
-            "TrackingProjectile"
+            "LinearProjectile"
             {
                 "Target"                "POINT"
-                "EffectName"            "particles/units/heroes/hero_venomancer/venomancer_venomous_gale.vpcf"
-                "MoveSpeed"             "900"
+                "EffectName"            "particles/units/heroes/hero_batrider/batrider_flamebreak.vpcf"
+                "MoveSpeed"             "500"
                 "StartRadius"           "%outer_radius"
                 "EndRadius"             "%outer_radius"
-                "MoveSpeed" "1250"
+                "MoveSpeed"             "1250"
             }
         }
         
-        "OnProjectileFinish"
-        {
-            "DeleteOnHit"                "true"
+        "OnProjectileHitUnit"
+		{
+			"DeleteOnHit"				"false"
+        }
         
+        "OnProjectileFinish"
+        {        
             "Damage"
             {
                 "Target"
@@ -1006,9 +1024,9 @@
             {
                 "Duration"            "%blind_duration"
                 
-                "States"
+                "Properties"
                 {
-                    "MODIFIER_STATE_STUNNED" "MODIFIER_STATE_VALUE_ENABLED"
+                    "MODIFIER_PROPERTY_MISS_PERCENTAGE" "100"
                 }
             }
         }

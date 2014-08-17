@@ -89,8 +89,6 @@ function RammusPowerballMovespeedBuff(keys)
     local newMoveSpeed = oldMoveSpeed + (originalMoveSpeed*.03)
     caster:SetBaseMoveSpeed(newMoveSpeed)   
     
-    
-    
 end
 
 --[[sets a global to track the original movespeed of the caster, needed at end of buff]]
@@ -137,10 +135,9 @@ end
 
 function OldHeimerdingerRocketsTarget(keys)
     
-    local hero = player.hero
     local caster = keys.caster
     local numTargets = keys.numTargets
-    local ABILITY_powerball_knockback = caster:FindAbilityByName("rammus_powerball_knockback")
+    local ABILITY_old_heimerdinger_rockets = caster:FindAbilityByName("old_heimerdinger_rockets")
 	
 	local enemiesInRange = FindUnitsInRadius(
         caster:GetTeam(),
@@ -148,7 +145,7 @@ function OldHeimerdingerRocketsTarget(keys)
         nil, 1100,
         DOTA_UNIT_TARGET_TEAM_ENEMY,
         DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_CREEP,
-        0, 
+        DOTA_UNIT_TARGET_FLAG_FOW_VISIBLE + DOTA_UNIT_TARGET_FLAG_NO_INVIS, 
         FIND_CLOSEST,
         false)
     
@@ -159,15 +156,15 @@ function OldHeimerdingerRocketsTarget(keys)
             --create a projectile and hit each of the three(five) closest enemies
             local targetEntity = enemiesInRange[i]            
             local info = {
-                          EffectName = "tinker_heat_seeking_missile", --"obsidian_destroyer_arcane_orb", --,
-                          Ability = caster:getAbilityByName(hero, "old_heimerdinger_rockets"),
-                          vSpawnOrigin = hero:GetOrigin(),
+                          EffectName = "particles/units/heroes/hero_tinker/tinker_missile.vpcf", --"obsidian_destroyer_arcane_orb", --,
+                          Ability = ABILITY_old_heimerdinger_rockets,
+                          vSpawnOrigin = caster:GetOrigin(),
                           fDistance = 5000,
                           fStartRadius = 125,
                           fEndRadius = 125,
                           Target = targetEntity,
-                          Source = hero,
-                          iMoveSpeed = 500,
+                          Source = caster,
+                          iMoveSpeed = 2000,
                           bReplaceExisting = false,
                           bHasFrontalCone = false,
                           --fMaxSpeed = 5200,
@@ -175,7 +172,41 @@ function OldHeimerdingerRocketsTarget(keys)
             
             ProjectileManager:CreateTrackingProjectile(info)
         end
+    end	
+end
+
+function OldHeimerdingerSpawnTurret(keys)
+    
+    local caster = keys.caster
+    local ABILITY_turret = caster:FindAbilityByName("old_heimerdinger_turret")    
+    local turretLevel = ABILITY_turret:GetLevel()
+    
+    if turretTable == nil then
+        turretTable = {}
     end
-	
+
+     -- Create the unit around the caster and find free space for it to prevent getting suck
+     local unit = CreateUnitByName("npc_old_heimerdinger_turret", keys.target_points[1], true, nil, nil, keys.caster:GetTeam())
+     -- Set the owner of the new unit to the owner of the old unit
+     unit.vOwner = keys.caster:GetOwner()
+     -- Set the new owner as the controlling player
+     unit:SetControllableByPlayer(keys.caster:GetOwner():GetPlayerID(), true )
+        -- Note: Only heroes will return the correct value for keys.caster:GetPlayerOwnerID()
+        -- Using keys.caster:GetOwner():GetPlayerID() will allow created units to create more units
+        -- For example having builder make a building and that building create units
+    table.insert(turretTable, unit)
+    
+    local count = 0 
+    for key,value in pairs(turretTable) do 
+        count = count + 1 
+    end
+    
+    print(count)
+    
+    if turretTable[4] ~= nil then
+        turretTable[1]:ForceKill(true)
+        table.remove(turretTable, 1)
+    end
+    
 end
 
