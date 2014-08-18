@@ -1,0 +1,393 @@
+Hunters
+
+5 v 1
+
+No classes, instead weapon and equips types
+Medic, Sniper, Heavy, Scout, Assualt
+
+Medic
+    Medpack     - Heals in melee range, charges
+    Medevac     - Teleports self and target to base, doesn't work if base teleporter is destroyed
+    Stimpack    - Increase attack and movespeed, costs % health, charges
+    Protoshield - long cooldown, places a shield that nullifies one attack
+    
+    
+Sniper
+    Tracing Shots - low damage, infinite range, gives vision
+    Sniper Rifle - high damage, infinite range
+    Aerial Scanner - gives aoe vision of area, long cooldown, no invis detection
+    Bolas - Skillshot snare
+    Homing Shot - like sniper's assassinate
+    
+Heavy
+    Rotary Cannon - HWG gun, thinner cone, more falloff
+    Grenade Launcher - limited range, detonates x seconds after fired
+    Rocket Launcher - infinite range, accelerates, blocked by trees
+    Land Mine
+    Blaster Launcher - self guided huge bomb
+    
+Scout
+    Choppa - melee attack, removes trees
+    Scout Drone - mobile flying unit, gives small vision radius and larger invis detection
+    Jump Pack - small distance leap, to reach high ground or skip forests
+    Tracking device - single use, gives vision of tracked target
+    
+Assault
+    Machine Gun - burst fire, long range, not too accurate
+    Shotgun -   short range, huge number of pellets with small damage on each
+    Flame Thrower - moves very slowly while firing, stacking dot effect, friendly fire, burns down trees
+    Smoke Cloud - Can't see out of the cloud, like Graves
+    Charge Boots - self force staff
+    
+Utility items
+    Universal Ammor Generator   - places an immobile ammo shop
+    Provisions - regens a small amount, adds more on killing animals
+    Binocs  - increases day vision range
+    Night Vision Goggles - increases night vision
+    Teleport Beacon - Placed, allows teleports to this location, destroyable
+    Transmission module - activate to teleport to beacon or to base, acts like tp scroll
+    Survellance Camera - visible ward
+    All terrain boots - boosts movespeed
+    Stasis Trap - Stuns in aoe for a short time, setup time, must be manually detonated
+
+Hunter Base - structures in base, all have health and do not regenerate if destroyed, random start location on map
+    - The Ship - if destroyed the monster wins
+    - Teleporter - if destroyed all teleports are disabled
+    - Medpod - provides regen in base area
+    - Ammo generator - ammo restock
+    - Shop
+    - Ressurection Station - Bring a corpse to revive it, revived characters lose all gold and random items
+    - 3 Total Survellance Cameras - buildings give no vision, so if these are killed things get scary, these detect invis
+
+Monster
+Melee, Ranged, Stealth, Durability
+
+Either skill order matters (256 unique combos) or only total combination matters (35 unique combos)
+Each rank has bonuses some related stats
+    melee - base damage, movespeed
+    ranged - attack range, attack speed
+    stealth - movespeed, vision range
+    durability - armor, health
+
+Melee x4 - The Bruiser
+    Claw Swipe
+    Charge
+    Crippling Bite
+    Crush
+    Reverse Polarity
+    
+Melee x3 Ranged x1  
+    
+Melee x3 Stealth x1
+Melee x3 Durability x1
+Melee x2 Ranged x2
+Melee x2 Stealth x2
+Melee x2 Durability x2
+Melee x2 Ranged x1 Stealth x1
+Melee x2 Ranged x1 Durability x1
+Melee x2 Stealth x1 Durability x1
+Melee x1 Ranged x1 Stealth x1 Durability x1
+
+Ranged x4
+    
+Ranged x3 Melee x1
+Ranged x3 Stealth x1
+Ranged x3 Durability x1
+Ranged x2 Stealth x2
+Ranged x2 Durability x2
+Ranged x2 Melee x1 Stealth x1
+Ranged x2 Melee x1 Durability x1
+Ranged x2 Stealth x1 Durability x1
+
+Stealth x4 - The Lurker
+    Sneak Attack - ghost walk + jinada in one, short duration
+    Blink stealth - blink and stealth, deals damage in aoe at origin and target
+    Tracking Parasite - long cooldown, long duration track
+    Permanent Invis
+    Assassinate - Follow a target and channel, if not interrupted instant kill
+    
+Stealth x3 Melee x1 - Stalker
+    
+Stealth x3 Ranged x1 - Aqueousform
+    Free pathing
+    
+Stealth x3 Durability x1
+Stealth x2 Durability x2
+Stealth x2 Melee x1 Ranged x1
+Stealth x2 Melee x1 Durability x1
+Stealth x2 Ranged x1 Durability x1
+
+Durability x4 - Juggernaut
+    
+
+Durability x3 Melee x1 - Tank
+Durability x3 Ranged x1 - Seige Turtle
+Durability x3 Stealth x1 - 
+Durability x2 Melee x1 Ranged x1
+Durability x2 Melee x1 Stealth x1
+Durability x2 Ranged x1 Stealth x1
+
+
+
+Melee, Melee, Melee, Melee 
+Melee, Melee, Melee, Ranged
+Melee, Melee, Melee, Stealth
+Melee, Melee, Melee, Durability
+Melee, Melee, Ranged, Melee
+Melee, Melee, Ranged, Ranged
+Melee, Melee, Ranged, Stealth
+Melee, Melee, Ranged, Durability
+Melee, Melee, Stealth, Melee
+Melee, Melee, Stealth, Ranged
+Melee, Melee, Stealth, Stealth
+Melee, Melee, Stealth, Durability
+Melee, Melee, Durability, Melee
+Melee, Melee, Durability, Ranged
+Melee, Melee, Durability, Stealth
+Melee, Melee, Durability, Durability
+Melee, Ranged, Melee, Melee
+Melee, Ranged, Melee, Ranged
+Melee, Ranged, Melee, Stealth
+Melee, Ranged, Melee, Durability
+Melee, Ranged, Ranged, Melee
+Melee, Ranged, Ranged, Ranged
+Melee, Ranged, Ranged, Stealth
+Melee, Ranged, Ranged, Durability
+Melee, Ranged, Stealth, Melee
+Melee, Ranged, Stealth, Ranged
+Melee, Ranged, Stealth, Stealth
+Melee, Ranged, Stealth, Durability
+Melee, Ranged, Durability, Melee
+Melee, Ranged, Durability, Ranged
+Melee, Ranged, Durability, Stealth
+Melee, Ranged, Durability, Durability
+Melee, Stealth, Melee, Melee
+Melee, Stealth, Melee, Ranged
+Melee, Stealth, Melee, Stealth
+Melee, Stealth, Melee, Durability
+Melee, Stealth, Ranged, Melee
+Melee, Stealth, Ranged, Ranged
+Melee, Stealth, Ranged, Stealth
+Melee, Stealth, Ranged, Durability
+Melee, Stealth, Stealth, Melee
+Melee, Stealth, Stealth, Ranged
+Melee, Stealth, Stealth, Stealth
+Melee, Stealth, Stealth, Durability
+Melee, Stealth, Durability, Melee
+Melee, Stealth, Durability, Ranged
+Melee, Stealth, Durability, Stealth
+Melee, Stealth, Durability, Durability
+Melee, Durability, Melee, Melee
+Melee, Durability, Melee, Ranged
+Melee, Durability, Melee, Stealth
+Melee, Durability, Melee, Durability
+Melee, Durability, Ranged, Melee
+Melee, Durability, Ranged, Ranged
+Melee, Durability, Ranged, Stealth
+Melee, Durability, Ranged, Durability
+Melee, Durability, Stealth, Melee
+Melee, Durability, Stealth, Ranged
+Melee, Durability, Stealth, Stealth
+Melee, Durability, Stealth, Durability
+Melee, Durability, Durability, Melee
+Melee, Durability, Durability, Ranged
+Melee, Durability, Durability, Stealth
+Melee, Durability, Durability, Durability
+Ranged, Melee, Melee, Melee
+Ranged, Melee, Melee, Ranged
+Ranged, Melee, Melee, Stealth
+Ranged, Melee, Melee, Durability
+Ranged, Melee, Ranged, Melee
+Ranged, Melee, Ranged, Ranged
+Ranged, Melee, Ranged, Stealth
+Ranged, Melee, Ranged, Durability
+Ranged, Melee, Stealth, Melee
+Ranged, Melee, Stealth, Ranged
+Ranged, Melee, Stealth, Stealth
+Ranged, Melee, Stealth, Durability
+Ranged, Melee, Durability, Melee
+Ranged, Melee, Durability, Ranged
+Ranged, Melee, Durability, Stealth
+Ranged, Melee, Durability, Durability
+Ranged, Ranged, Melee, Melee
+Ranged, Ranged, Melee, Ranged
+Ranged, Ranged, Melee, Stealth
+Ranged, Ranged, Melee, Durability
+Ranged, Ranged, Ranged, Melee
+Ranged, Ranged, Ranged, Ranged
+Ranged, Ranged, Ranged, Stealth
+Ranged, Ranged, Ranged, Durability
+Ranged, Ranged, Stealth, Melee
+Ranged, Ranged, Stealth, Ranged
+Ranged, Ranged, Stealth, Stealth
+Ranged, Ranged, Stealth, Durability
+Ranged, Ranged, Durability, Melee
+Ranged, Ranged, Durability, Ranged
+Ranged, Ranged, Durability, Stealth
+Ranged, Ranged, Durability, Durability
+Ranged, Stealth, Melee, Melee
+Ranged, Stealth, Melee, Ranged
+Ranged, Stealth, Melee, Stealth
+Ranged, Stealth, Melee, Durability
+Ranged, Stealth, Ranged, Melee
+Ranged, Stealth, Ranged, Ranged
+Ranged, Stealth, Ranged, Stealth
+Ranged, Stealth, Ranged, Durability
+Ranged, Stealth, Stealth, Melee
+Ranged, Stealth, Stealth, Ranged
+Ranged, Stealth, Stealth, Stealth
+Ranged, Stealth, Stealth, Durability
+Ranged, Stealth, Durability, Melee
+Ranged, Stealth, Durability, Ranged
+Ranged, Stealth, Durability, Stealth
+Ranged, Stealth, Durability, Durability
+Ranged, Durability, Melee, Melee
+Ranged, Durability, Melee, Ranged
+Ranged, Durability, Melee, Stealth
+Ranged, Durability, Melee, Durability
+Ranged, Durability, Ranged, Melee
+Ranged, Durability, Ranged, Ranged
+Ranged, Durability, Ranged, Stealth
+Ranged, Durability, Ranged, Durability
+Ranged, Durability, Stealth, Melee
+Ranged, Durability, Stealth, Ranged
+Ranged, Durability, Stealth, Stealth
+Ranged, Durability, Stealth, Durability
+Ranged, Durability, Durability, Melee
+Ranged, Durability, Durability, Ranged
+Ranged, Durability, Durability, Stealth
+Ranged, Durability, Durability, Durability
+Stealth, Melee, Melee, Melee
+Stealth, Melee, Melee, Ranged
+Stealth, Melee, Melee, Stealth
+Stealth, Melee, Melee, Durability
+Stealth, Melee, Ranged, Melee
+Stealth, Melee, Ranged, Ranged
+Stealth, Melee, Ranged, Stealth
+Stealth, Melee, Ranged, Durability
+Stealth, Melee, Stealth, Melee
+Stealth, Melee, Stealth, Ranged
+Stealth, Melee, Stealth, Stealth
+Stealth, Melee, Stealth, Durability
+Stealth, Melee, Durability, Melee
+Stealth, Melee, Durability, Ranged
+Stealth, Melee, Durability, Stealth
+Stealth, Melee, Durability, Durability
+Stealth, Ranged, Melee, Melee
+Stealth, Ranged, Melee, Ranged
+Stealth, Ranged, Melee, Stealth
+Stealth, Ranged, Melee, Durability
+Stealth, Ranged, Ranged, Melee
+Stealth, Ranged, Ranged, Ranged
+Stealth, Ranged, Ranged, Stealth
+Stealth, Ranged, Ranged, Durability
+Stealth, Ranged, Stealth, Melee
+Stealth, Ranged, Stealth, Ranged
+Stealth, Ranged, Stealth, Stealth
+Stealth, Ranged, Stealth, Durability
+Stealth, Ranged, Durability, Melee
+Stealth, Ranged, Durability, Ranged
+Stealth, Ranged, Durability, Stealth
+Stealth, Ranged, Durability, Durability
+Stealth, Stealth, Melee, Melee
+Stealth, Stealth, Melee, Ranged
+Stealth, Stealth, Melee, Stealth
+Stealth, Stealth, Melee, Durability
+Stealth, Stealth, Ranged, Melee
+Stealth, Stealth, Ranged, Ranged
+Stealth, Stealth, Ranged, Stealth
+Stealth, Stealth, Ranged, Durability
+Stealth, Stealth, Stealth, Melee
+Stealth, Stealth, Stealth, Ranged
+Stealth, Stealth, Stealth, Stealth
+Stealth, Stealth, Stealth, Durability
+Stealth, Stealth, Durability, Melee
+Stealth, Stealth, Durability, Ranged
+Stealth, Stealth, Durability, Stealth
+Stealth, Stealth, Durability, Durability
+Stealth, Durability, Melee, Melee
+Stealth, Durability, Melee, Ranged
+Stealth, Durability, Melee, Stealth
+Stealth, Durability, Melee, Durability
+Stealth, Durability, Ranged, Melee
+Stealth, Durability, Ranged, Ranged
+Stealth, Durability, Ranged, Stealth
+Stealth, Durability, Ranged, Durability
+Stealth, Durability, Stealth, Melee
+Stealth, Durability, Stealth, Ranged
+Stealth, Durability, Stealth, Stealth
+Stealth, Durability, Stealth, Durability
+Stealth, Durability, Durability, Melee
+Stealth, Durability, Durability, Ranged
+Stealth, Durability, Durability, Stealth
+Stealth, Durability, Durability, Durability
+Durability, Melee, Melee, Melee
+Durability, Melee, Melee, Ranged
+Durability, Melee, Melee, Stealth
+Durability, Melee, Melee, Durability
+Durability, Melee, Ranged, Melee
+Durability, Melee, Ranged, Ranged
+Durability, Melee, Ranged, Stealth
+Durability, Melee, Ranged, Durability
+Durability, Melee, Stealth, Melee
+Durability, Melee, Stealth, Ranged
+Durability, Melee, Stealth, Stealth
+Durability, Melee, Stealth, Durability
+Durability, Melee, Durability, Melee
+Durability, Melee, Durability, Ranged
+Durability, Melee, Durability, Stealth
+Durability, Melee, Durability, Durability
+Durability, Ranged, Melee, Melee
+Durability, Ranged, Melee, Ranged
+Durability, Ranged, Melee, Stealth
+Durability, Ranged, Melee, Durability
+Durability, Ranged, Ranged, Melee
+Durability, Ranged, Ranged, Ranged
+Durability, Ranged, Ranged, Stealth
+Durability, Ranged, Ranged, Durability
+Durability, Ranged, Stealth, Melee
+Durability, Ranged, Stealth, Ranged
+Durability, Ranged, Stealth, Stealth
+Durability, Ranged, Stealth, Durability
+Durability, Ranged, Durability, Melee
+Durability, Ranged, Durability, Ranged
+Durability, Ranged, Durability, Stealth
+Durability, Ranged, Durability, Durability
+Durability, Stealth, Melee, Melee
+Durability, Stealth, Melee, Ranged
+Durability, Stealth, Melee, Stealth
+Durability, Stealth, Melee, Durability
+Durability, Stealth, Ranged, Melee
+Durability, Stealth, Ranged, Ranged
+Durability, Stealth, Ranged, Stealth
+Durability, Stealth, Ranged, Durability
+Durability, Stealth, Stealth, Melee
+Durability, Stealth, Stealth, Ranged
+Durability, Stealth, Stealth, Stealth
+Durability, Stealth, Stealth, Durability
+Durability, Stealth, Durability, Melee
+Durability, Stealth, Durability, Ranged
+Durability, Stealth, Durability, Stealth
+Durability, Stealth, Durability, Durability
+Durability, Durability, Melee, Melee
+Durability, Durability, Melee, Ranged
+Durability, Durability, Melee, Stealth
+Durability, Durability, Melee, Durability
+Durability, Durability, Ranged, Melee
+Durability, Durability, Ranged, Ranged
+Durability, Durability, Ranged, Stealth
+Durability, Durability, Ranged, Durability
+Durability, Durability, Stealth, Melee
+Durability, Durability, Stealth, Ranged
+Durability, Durability, Stealth, Stealth
+Durability, Durability, Stealth, Durability
+Durability, Durability, Durability, Melee
+Durability, Durability, Durability, Ranged
+Durability, Durability, Durability, Stealth
+Durability, Durability, Durability, Durability
+
+
+
+
+
+
