@@ -199,7 +199,6 @@ function OldHeimerdingerGrenade(keys)
                 fEndRadius = 125,
                 Source = caster,
                 iMoveSpeed = movespeed,
-                vVelocity =  Vector( 0, 0, 0 )* movespeed,
                 bReplaceExisting = false,
                 bHasFrontalCone = false,                  			
                 iUnitTargetTeam = DOTA_UNIT_TARGET_TEAM_ENEMY,
