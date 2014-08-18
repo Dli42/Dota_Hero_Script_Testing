@@ -151,8 +151,14 @@ function OldHeimerdingerRocketsTarget(keys)
     
     --FindUnitsInRadius( iTeamNumber, vPosition, hCacheUnit, flRadius, iTeamFilter, iTypeFilter, iFlagFilter, iOrder, bCanGrowCache)
         
+    if caster:HasModifier("old_heimerdinger_upgrade_modifier") then
+        numTargets = 5
+    end
+    
+    print(numTargets)
+        
 	if #enemiesInRange > 0 then
-		for i = 1, 3 do
+		for i = 1, numTargets do
             --create a projectile and hit each of the three(five) closest enemies
             local targetEntity = enemiesInRange[i]            
             local info = {
@@ -175,18 +181,59 @@ function OldHeimerdingerRocketsTarget(keys)
     end	
 end
 
+function OldHeimerdingerGrenade(keys)
+    local caster = keys.caster
+    local target = keys.target
+    local ABILITY_old_heimerdinger_grenade = caster:FindAbilityByName("old_heimerdinger_concussion_grenade")
+    local movespeed = 1250
+    if caster:HasModifier("old_heimerdinger_upgrade_modifier") then
+        movespeed = 2500
+    end
+    
+    local info = {
+                EffectName = "particles/units/heroes/hero_batrider/batrider_flamebreak.vpcf",
+                Ability = ABILITY_old_heimerdinger_grenade,
+                vSpawnOrigin = caster:GetOrigin(),
+                fDistance = 5000,
+                fStartRadius = 125,
+                fEndRadius = 125,
+                Source = caster,
+                iMoveSpeed = movespeed,
+                vVelocity =  Vector( 0, 0, 0 )* movespeed,
+                bReplaceExisting = false,
+                bHasFrontalCone = false,                  			
+                iUnitTargetTeam = DOTA_UNIT_TARGET_TEAM_ENEMY,
+                iUnitTargetType = DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_BASIC + DOTA_UNIT_TARGET_OTHER
+                }
+    
+    ProjectileManager:CreateLinearProjectile(info)
+    print(movespeed)
+end
+
 function OldHeimerdingerSpawnTurret(keys)
     
     local caster = keys.caster
     local ABILITY_turret = caster:FindAbilityByName("old_heimerdinger_turret")    
     local turretLevel = ABILITY_turret:GetLevel()
     
+    local npcTable = {
+    "npc_old_heimerdinger_turret_1",
+    "npc_old_heimerdinger_turret_2",
+    "npc_old_heimerdinger_turret_3",
+    "npc_old_heimerdinger_turret_4",
+    "npc_old_heimerdinger_turret_5"
+    }
+    
+    local turretName = npcTable[turretLevel]
+    
+    print(turretName)
+  
     if turretTable == nil then
         turretTable = {}
-    end
+    end        
 
      -- Create the unit around the caster and find free space for it to prevent getting suck
-     local unit = CreateUnitByName("npc_old_heimerdinger_turret", keys.target_points[1], true, nil, nil, keys.caster:GetTeam())
+     local unit = CreateUnitByName(turretName, keys.target_points[1], true, nil, nil, keys.caster:GetTeam())
      -- Set the owner of the new unit to the owner of the old unit
      unit.vOwner = keys.caster:GetOwner()
      -- Set the new owner as the controlling player
@@ -208,5 +255,15 @@ function OldHeimerdingerSpawnTurret(keys)
         table.remove(turretTable, 1)
     end
     
+end
+
+function OldHeimerdingerUpgrade(keys)
+    local caster = keys.caster
+    local ABILITY_turret = caster:FindAbilityByName("old_heimerdinger_turret")
+    local ABILITY_rockets = caster:FindAbilityByName("old_heimerdinger_rockets")
+    local ABILITY_grenade = caster:FindAbilityByName("old_heimerdinger_concussion_grenade")
+    ABILITY_turret:EndCooldown()
+    ABILITY_rockets:EndCooldown()
+    ABILITY_grenade:EndCooldown()
 end
 

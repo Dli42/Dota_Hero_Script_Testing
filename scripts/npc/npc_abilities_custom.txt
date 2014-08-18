@@ -787,7 +787,7 @@
 
         // Time        
         //-------------------------------------------------------------------------------------------------------------
-        "AbilityCooldown"               "0.0 0.0 0.0 0.0"
+        "AbilityCooldown"               "15.0 15.0 15.0 15.0 15.0"
 
         // Cost
         //-------------------------------------------------------------------------------------------------------------
@@ -848,7 +848,7 @@
 
         // Time        
         //-------------------------------------------------------------------------------------------------------------
-        "AbilityCooldown"               "0.0 0.0 0.0 0.0"
+        "AbilityCooldown"               "10.0 10.0 10.0 10.0 10.0"
 
         // Cost
         //-------------------------------------------------------------------------------------------------------------
@@ -864,20 +864,7 @@
         }
 
         "OnSpellStart"
-        {
-            //"TrackingProjectile"
-            //{
-            //    "Target"
-            //    {
-            //        "Center" "CASTER"
-            //        "Radius" "%range"
-            //        "Teams" "DOTA_UNIT_TARGET_TEAM_ENEMY"
-            //        "Types" "DOTA_UNIT_TARGET_HERO"
-            //    }
-            //    "MoveSpeed" "1250"
-            //    "EffectName" "abaddon_death_coil"
-            //}
-            
+        {            
             "RunScript"
             {
                 "ScriptFile"    "custom_scripted_abilities.lua"
@@ -946,7 +933,7 @@
 
         // Time        
         //-------------------------------------------------------------------------------------------------------------
-        "AbilityCooldown"               "0.0 0.0 0.0 0.0"
+        "AbilityCooldown"               "10.0 10.0 10.0 10.0 10.0"
 
         // Cost
         //-------------------------------------------------------------------------------------------------------------
@@ -963,7 +950,13 @@
         }
 
         "OnSpellStart"
-        {
+        {        
+            "RunScript"
+            {
+                "ScriptFile"    "custom_scripted_abilities.lua"
+                "Function"      "OldHeimerdingerGrenade"
+                "Target"        "POINT"
+            }   
             "LinearProjectile"
             {
                 "Target"                "POINT"
@@ -1081,7 +1074,8 @@
         // General
         //-------------------------------------------------------------------------------------------------------------
         "BaseClass"                     "ability_datadriven"
-        "AbilityBehavior"               "DOTA_ABILITY_BEHAVIOR_POINT | DOTA_ABILITY_BEHAVIOR_AOE"
+        "AbilityBehavior"               "DOTA_ABILITY_BEHAVIOR_NO_TARGET"
+        "AbilityType"                   "DOTA_ABILITY_TYPE_ULTIMATE"
         "AbilityTextureName"            ""
         
         // Casting
@@ -1091,24 +1085,51 @@
 
         // Time        
         //-------------------------------------------------------------------------------------------------------------
-        "AbilityCooldown"               "0.0 0.0 0.0 0.0"
+        "AbilityCooldown"               "%cooldown"
 
         // Cost
         //-------------------------------------------------------------------------------------------------------------
-        "AbilityManaCost"               "0 0 0 0"
+        "AbilityManaCost"               "0 0 0"
         
-        
+        "precache"
+        {
+            "particle_folder"           "particles/econ/items/tinker/boots_of_travel"
+        }
 
         "OnSpellStart"
         {
             //swap out all other spells with upgraded versions, change all turret units to upgraded ones
+            "ApplyModifier"
+            {
+                "ModifierName" "old_heimerdinger_upgrade_modifier"
+                "Target" "CASTER"
+            }
+            
+            "RunScript"
+            {
+                "ScriptFile"    "custom_scripted_abilities.lua"
+                "Function"      "OldHeimerdingerUpgrade"
+            }
         }
         
         // Modifiers
         //-------------------------------------------------------------------------------------------------------------    
         "Modifiers"
         {
-
+            "old_heimerdinger_upgrade_modifier"
+            {
+                "Duration"  "%duration"
+                
+                "OnCreated"
+                {
+                    "AttachEffect"
+                    {
+                     "Target" "CASTER"
+                     "EffectName" "particles/econ/items/tinker/boots_of_travel/teleport_start_bots_cog.vpcf"
+                     "EffectAttachType" "follow_overhead"
+                    }
+                }
+            }
         }
         
         // Special
@@ -1119,6 +1140,11 @@
             {
                 "var_type"          "FIELD_INTEGER"
                 "cooldown"          "100 80 60 "
+            }
+            "02"
+            {
+                "var_type"          "FIELD_INTEGER"
+                "duration"          "10.0 10.0 10.0"
             }
         }
     }
