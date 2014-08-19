@@ -1,3 +1,6 @@
+require('util')
+require('action_test')
+
 -- Generated from template
 
 if CAddonTemplateGameMode == nil then
