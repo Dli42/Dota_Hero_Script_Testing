@@ -1,7 +1,14 @@
-Hunters
+http://hex6.se/dota/modifier_functions.txt
+
+item:GetCurrentCharges
+item:SetCurrentCharges 
+
+The Hunted
 
 5 v 1
+Hunters vs Beast
 
+Hunters
 No classes, instead weapon and equips types
 Medic, Sniper, Heavy, Scout, Assualt
 
@@ -59,7 +66,7 @@ Hunter Base - structures in base, all have health and do not regenerate if destr
     - Ressurection Station - Bring a corpse to revive it, revived characters lose all gold and random items
     - 3 Total Survellance Cameras - buildings give no vision, so if these are killed things get scary, these detect invis
 
-Monster
+Beast
 Melee, Ranged, Stealth, Durability
 
 Either skill order matters (256 unique combos) or only total combination matters (35 unique combos)
@@ -76,23 +83,48 @@ Melee x4 - The Bruiser
     Crush
     Reverse Polarity
     
-Melee x3 Ranged x1  
+Melee x3 Ranged x1 - Hulking Hurler
+    Boulder Toss - Target area, throws everything in front of it
+    Seismic Wave    
     
-Melee x3 Stealth x1
-Melee x3 Durability x1
-Melee x2 Ranged x2
-Melee x2 Stealth x2
-Melee x2 Durability x2
-Melee x2 Ranged x1 Stealth x1
-Melee x2 Ranged x1 Durability x1
-Melee x2 Stealth x1 Durability x1
-Melee x1 Ranged x1 Stealth x1 Durability x1
+Melee x3 Stealth x1 - Cavernmouth
+    Lay in Wait
+    Devour - eats enemy, dot, canceled after taking X damage, if full duration destroy random equip
 
-Ranged x4
+Melee x3 Durability x1 - Land shark
+    carnivourous skin - being in contact drains life
+    Feeding Frenzy - massive lifesteal, as and ms buff
+
+Melee x2 Ranged x2 - Shocktrooper
+    Area bomb
+    Roar - long duration fear
+
+Melee x2 Stealth x2 - Arachnid
+    Spin Web - infinite
+    Spawn egg - egg spawns spiderlings over time
+    
+Melee x2 Durability x2 - Hulk
+    Giant leap
+    Rage - lower health = more regen, damage, attack speed, etc.
+    
+Melee x2 Ranged x1 Stealth x1 - 
+
+Melee x2 Ranged x1 Durability x1 - 
+
+Melee x2 Stealth x1 Durability x1 - 
+
+Melee x1 Ranged x1 Stealth x1 Durability x1 - Primeval
+
+Ranged x4 - Far Reach
+    Cone attack
+    impaling shot - peircing knockback, long range
+    blinkshot
+    scout bulb
+    global artillery
     
 Ranged x3 Melee x1
 Ranged x3 Stealth x1
-Ranged x3 Durability x1
+Ranged x3 Durability x1 - Ballista
 Ranged x2 Stealth x2
 Ranged x2 Durability x2
 Ranged x2 Melee x1 Stealth x1
@@ -113,7 +145,7 @@ Stealth x3 Ranged x1 - Aqueousform
     
 Stealth x3 Durability x1
 Stealth x2 Durability x2
-Stealth x2 Melee x1 Ranged x1
+Stealth x2 Melee x1 Ranged x1 - Nighthawk
 Stealth x2 Melee x1 Durability x1
 Stealth x2 Ranged x1 Durability x1
 
@@ -122,12 +154,14 @@ Durability x4 - Juggernaut
 
 Durability x3 Melee x1 - Tank
 Durability x3 Ranged x1 - Seige Turtle
-Durability x3 Stealth x1 - 
-Durability x2 Melee x1 Ranged x1
-Durability x2 Melee x1 Stealth x1
-Durability x2 Ranged x1 Stealth x1
+Durability x3 Stealth x1 - Tremor
+Durability x2 Melee x1 Ranged x1 - Quillbeast
+Durability x2 Melee x1 Stealth x1 - Regenerator
+    Regenerate - stealth, channel, massive regen
 
-
+Durability x2 Ranged x1 Stealth x1 - Infestor
+    Dark Cloud - all enemy attacks deal no damage while in cloud
+    Infest - infest any unit, limited duration, deals damage and heals on ending
 
 Melee, Melee, Melee, Melee 
 Melee, Melee, Melee, Ranged
