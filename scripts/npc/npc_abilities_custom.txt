@@ -528,7 +528,7 @@
                     {
                          "Target" "CASTER"
                          "EffectName" "particles/units/heroes/hero_sandking/sandking_epicenter.vpcf"
-                         "EffectAttachType" "follow_origin"
+                         "EffectAttachType" "world_origin"
                          "ControlPoints"
                         {
                             "00" "0 0 0"
@@ -706,28 +706,13 @@
         // General
         //-------------------------------------------------------------------------------------------------------------
         "BaseClass"                     "ability_datadriven"
-        "AbilityBehavior"               "DOTA_ABILITY_BEHAVIOR_PASSIVE | DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_AURA"
+        "AbilityBehavior"               "DOTA_ABILITY_BEHAVIOR_PASSIVE | DOTA_ABILITY_BEHAVIOR_AURA"
         "AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_FRIENDLY"
-        "AbilityTextureName"            ""    
+        "AbilityTextureName"            "heimer_repair_bots"    
         
         // Stats
         //-------------------------------------------------------------------------------------------------------------
-        "MaxLevel"                      "1"     
-
-        "OnSpellStart"
-        {
-            "ApplyModifier"
-            {
-                "ModifierName"          "modifier_heimerdinger_repair_bots_aura"
-                "Target"
-				{
-					"Center"			"CASTER"
-					"Radius"			"%radius"
-					"Teams"				"DOTA_UNIT_TARGET_TEAM_FRIENDLY"
-					"Types"				"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_CREEP | DOTA_UNIT_TARGET_MECHANICAL | DOTA_UNIT_TARGET_BUILDING"
-				}
-            }
-        }
+        "MaxLevel"                      "1"
         
         // Modifiers
         //-------------------------------------------------------------------------------------------------------------    
@@ -735,12 +720,16 @@
         {
             "modifier_heimerdinger_repair_bots_aura"
             {   
-                "IsHidden"				"0"
-                "Passive"				"1"
-                "Aura_Radius"			"%radius"
-                "Teams"				"DOTA_UNIT_TARGET_TEAM_FRIENDLY"
-				"Types"				"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_CREEP | DOTA_UNIT_TARGET_MECHANICAL | DOTA_UNIT_TARGET_BUILDING"	
+                "IsHidden"        "1"
+                "Passive"       "1"
+                "Aura"			"repair_bots_aura"
+				"Aura_Radius"	"1000"
+				"Aura_Teams"	"DOTA_UNIT_TARGET_TEAM_FRIENDLY"
+				"Aura_Types"	"DOTA_UNIT_TARGET_ALL"      
+            }
             
+            "repair_bots_aura"
+            {
                 "Properties"
                 {
                     "MODIFIER_PROPERTY_HEALTH_REGEN_CONSTANT" "%regen_rate"
@@ -779,7 +768,7 @@
         //-------------------------------------------------------------------------------------------------------------
         "BaseClass"                     "ability_datadriven"
         "AbilityBehavior"               "DOTA_ABILITY_BEHAVIOR_POINT"
-        "AbilityTextureName"            ""
+        "AbilityTextureName"            "heimer_turret"
         
         // Casting
         //-------------------------------------------------------------------------------------------------------------
@@ -801,6 +790,7 @@
         "precache" // testing, reduce precache when complete
         {
             "particle_folder"           "particles/units/venomancer"
+            "particle_folder"		    "particles/units/heroes/hero_crystalmaiden"
         }
         
         "OnSpellStart"
@@ -819,6 +809,22 @@
         {
             "modifier_heimerdinger_turret_upgraded_attack"
             {
+                "OnCreated"
+                {
+                    "AttachEffect"
+                    {
+                        "Target"			"TARGET"
+						"EffectName"		"particles/units/heroes/hero_crystalmaiden/maiden_freezing_field_snow_b.vpcf"
+						"EffectAttachType"	"follow_origin"
+						
+						"ControlPoints"
+						{
+							"00"	"0 0 0"
+							"01"	"%radius_rot 0 0"
+						}
+                    }
+                }
+            
                 "OnAttackLanded"
                 {
                     "ApplyModifier"
@@ -872,7 +878,7 @@
         //-------------------------------------------------------------------------------------------------------------
         "BaseClass"                     "ability_datadriven"
         "AbilityBehavior"               "DOTA_ABILITY_BEHAVIOR_NO_TARGET"
-        "AbilityTextureName"            ""
+        "AbilityTextureName"            "heimer_rockets"
         
         // Casting
         //-------------------------------------------------------------------------------------------------------------
@@ -956,7 +962,7 @@
         //-------------------------------------------------------------------------------------------------------------
         "BaseClass"                     "ability_datadriven"
         "AbilityBehavior"               "DOTA_ABILITY_BEHAVIOR_POINT | DOTA_ABILITY_BEHAVIOR_AOE"
-        "AbilityTextureName"            ""
+        "AbilityTextureName"            "heimer_grenade"
         
         // Casting
         //-------------------------------------------------------------------------------------------------------------
@@ -983,12 +989,12 @@
 
         "OnSpellStart"
         {        
-            "RunScript"
-            {
-                "ScriptFile"    "custom_scripted_abilities.lua"
-                "Function"      "OldHeimerdingerGrenade"
-                "Target"        "POINT"
-            }   
+            //"RunScript"
+            //{
+            //    "ScriptFile"    "custom_scripted_abilities.lua"
+            //    "Function"      "OldHeimerdingerGrenade"
+            //    "Target"        "POINT"
+            //}   
             "LinearProjectile"
             {
                 "Target"                "POINT"
@@ -1108,7 +1114,7 @@
         "BaseClass"                     "ability_datadriven"
         "AbilityBehavior"               "DOTA_ABILITY_BEHAVIOR_NO_TARGET"
         "AbilityType"                   "DOTA_ABILITY_TYPE_ULTIMATE"
-        "AbilityTextureName"            ""
+        "AbilityTextureName"            "heimer_upgrade"
         
         // Casting
         //-------------------------------------------------------------------------------------------------------------
@@ -1177,6 +1183,136 @@
             {
                 "var_type"          "FIELD_INTEGER"
                 "duration"          "10.0 10.0 10.0"
+            }
+        }
+    }
+    
+    //=================================================================================================================
+	// Ability: Blizzard
+	//=================================================================================================================
+	"blizzard"
+    {
+		//--------------------------------------------------------------
+		//General
+		//--------------------------------------------------------------
+		//No cd and mana cost for testing purposes
+		"BaseClass"							"ability_datadriven"
+		"AbilityBehavior"					"DOTA_ABILITY_BEHAVIOR_AOE | DOTA_ABILITY_BEHAVIOR_POINT"
+		"AbilityCastRange"					"800"
+		"AbilityUnitDamageType"				"DAMAGE_TYPE_MAGICAL"
+		"AbilityTextureName"				"crystal_maiden_freezing_field"
+		"AbilityCastAnimation"				"ACT_DOTA_CAST_ABILITY_2"
+		"precache"
+        {
+			"particle_folder"				"particles/units/heroes/hero_crystalmaiden"
+            "particle_folder"               "particles/econ/generic/generic_aoe_explosion_sphere_1"
+		}
+
+		//--------------------------------------------------------------
+		//Ability
+		//--------------------------------------------------------------
+		"OnSpellStart"{
+			"Damage"{
+				"Type"		"DAMAGE_TYPE_MAGICAL"
+				"Damage"	"40"
+				"Target"{
+					"Center"	"POINT"
+					"Radius"	"%radius"
+					"Teams" "DOTA_UNIT_TARGET_TEAM_ENEMY"
+					"Types" "DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_CREEP"
+				}
+			}
+			"FireEffect"{
+				"EffectName"			"particles/units/heroes/hero_crystalmaiden/maiden_crystal_nova.vpcf"
+				"TargetPoint"			"POINT"
+				"EffectRadius"			"%radius"
+                "EffectAttachType"      "world_origin"
+			}
+			
+		}
+		
+		//-------------------------------------------------------------
+		//Variables
+		//-------------------------------------------------------------		
+		"AbilitySpecial"{
+			"01"{
+				"var_type"				"FIELD_INTEGER"
+				"radius" 				"200 250 300 350"	
+			}
+		}
+	}
+    
+    
+    
+    
+    //=================================================================================================================
+    // Turret Upgrade Applier
+    //=================================================================================================================
+    "modifier_heimerdinger_turret_upgraded_attack_applier"
+    {
+        // General
+        //-------------------------------------------------------------------------------------------------------------
+        "BaseClass"                     "ability_datadriven"
+        "AbilityBehavior"               "DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE | DOTA_ABILITY_BEHAVIOR_UNRESTRICTED | DOTA_ABILITY_BEHAVIOR_IGNORE_BACKSWING"
+        "AbilityTextureName"            ""
+
+        "precache"
+        {
+            "particle_folder"		    "particles/units/heroes/hero_crystalmaiden"
+            "particle_folder"		    "particles/generic_gameplay"
+        }
+        
+        "OnSpellStart"
+        {
+            "ApplyModifier"
+                    {
+                        "ModifierName"  "modifier_heimerdinger_turret_upgraded_attack"
+                        "Target"        "CASTER"
+                    }
+        }
+        
+        // Modifiers
+        //-------------------------------------------------------------------------------------------------------------    
+        "Modifiers"
+        {
+            "modifier_heimerdinger_turret_upgraded_attack"
+            {
+                "Duration" "10.0"
+                "OnCreated"
+                {
+                    "AttachEffect"
+                    {
+                        "Target"			"CASTER"
+						"EffectName"		"particles/units/heroes/hero_crystalmaiden/maiden_frostbite_buff_base.vpcf"
+						"EffectAttachType"	"follow_origin"
+                    }
+                }
+                
+                "OnAttackLanded"
+                {
+                    "ApplyModifier"
+                    {                        
+                        "Target"        "TARGET"
+                        "ModifierName"  "modifier_heimerdinger_turret_slow"
+                    }
+                    "AttachEffect"
+                    {
+                        "Target"			"TARGET"
+                        "EffectName"		"particles/generic_gameplay/generic_slowed_cold.vpcf"
+                        "EffectAttachType"	"follow_origin"
+                    }                
+                }
+            }
+            
+            "modifier_heimerdinger_turret_slow"
+            {
+                "IsDebuff"          "1"
+                "Duration"          "0.5"
+            
+                "Properties"
+                {
+                    "MODIFIER_PROPERTY_MOVESPEED_BONUS_PERCENTAGE" "-20"
+                }
             }
         }
     }

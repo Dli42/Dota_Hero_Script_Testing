@@ -181,7 +181,7 @@ function OldHeimerdingerRocketsTarget(keys)
     end	
 end
 
-function OldHeimerdingerGrenade(keys)
+function OldHeimerdingerGrenade(keys)   --Doesn't work
     local caster = keys.caster
     local target = keys.target
     local ABILITY_old_heimerdinger_grenade = caster:FindAbilityByName("old_heimerdinger_concussion_grenade")
@@ -264,5 +264,12 @@ function OldHeimerdingerUpgrade(keys)
     ABILITY_turret:EndCooldown()
     ABILITY_rockets:EndCooldown()
     ABILITY_grenade:EndCooldown()
+    
+    if turretTable ~= nil then
+        for key,turret in pairs(turretTable) do 
+            callModApplier( turret, "modifier_heimerdinger_turret_upgraded_attack")
+            print("applied to turret ", key)
+        end
+    end
 end
 
