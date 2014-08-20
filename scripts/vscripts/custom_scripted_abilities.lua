@@ -284,6 +284,8 @@ function FinalAtomicBuster_part_1 (keys)
     local vec = direction:Normalized() * 3.0
  
     args.caster:SetAbsOrigin(casterPos + vec)
+    
+    --SetAngularVelocity(float pitch, float yaw, float roll)
 end
 
 function FinalAtomicBuster_part_2 (keys)
