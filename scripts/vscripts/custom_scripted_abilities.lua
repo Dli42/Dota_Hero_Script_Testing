@@ -273,3 +273,66 @@ function OldHeimerdingerUpgrade(keys)
     end
 end
 
+function FinalAtomicBuster_part_1 (keys)
+    local caster = keys.caster
+    local target = keys.target
+    
+    local targetPos = target:GetAbsOrigin()
+    local casterPos = caster:GetAbsOrigin()
+ 
+    local direction = targetPos - casterPos
+    local vec = direction:Normalized() * 3.0
+ 
+    args.caster:SetAbsOrigin(casterPos + vec)
+end
+
+function FinalAtomicBuster_part_2 (keys)
+    local caster = keys.caster
+    local target = keys.target
+    
+end
+
+function FinalAtomicBuster_part_3 (keys)
+    local caster = keys.caster
+    local target = keys.target
+    
+end
+
+function calculate_parabola (start_vector, end_vector, height, num_points)
+
+    local point_table = {}
+    local y_distance = math.abs(end_vector.y - start_vector.y)
+    local x_distance = math.abs(end_vector.x - start_vector.x)
+    local abs_distance = math.sqrt((y_distance^2) + (x_distance^2))
+
+    local a = (4*height)/(abs_distance^2)
+
+    print(y_distance)
+    print(x_distance)
+    print(abs_distance)
+    print(a)
+
+    print ("y = -",a,"x^2 + ",height)
+
+    local x_step_size = x_distance/num_points
+    local y_step_size = y_distance/num_points
+    local abs_step_size = math.sqrt(x_step_size^2 + y_step_size^2)
+
+    for i = 0, num_points do
+        
+        local new_x = start_vector.x + i*x_step_size
+        local new_y = start_vector.y + i*y_step_size
+
+        local abs_point = i*abs_step_size-(abs_distance/2)
+        local new_z = ((-1*a)*((abs_point)^2)) + height
+
+        local new_vector = Vector:new(new_x, new_y, new_z)
+        
+        table.insert(point_table, new_vector)
+        print(new_x, new_y, new_z)
+    end
+
+    return point_table
+    
+end
+
