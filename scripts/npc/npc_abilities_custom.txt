@@ -707,7 +707,7 @@
         //-------------------------------------------------------------------------------------------------------------
         "BaseClass"                     "ability_datadriven"
         "AbilityBehavior"               "DOTA_ABILITY_BEHAVIOR_PASSIVE | DOTA_ABILITY_BEHAVIOR_AURA"
-        "AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_FRIENDLY"
+        "AbilityUnitTargetTeam"            "DOTA_UNIT_TARGET_TEAM_FRIENDLY"
         "AbilityTextureName"            "heimer_repair_bots"    
         
         // Stats
@@ -722,10 +722,10 @@
             {   
                 "IsHidden"        "1"
                 "Passive"       "1"
-                "Aura"			"repair_bots_aura"
-				"Aura_Radius"	"1000"
-				"Aura_Teams"	"DOTA_UNIT_TARGET_TEAM_FRIENDLY"
-				"Aura_Types"	"DOTA_UNIT_TARGET_ALL"      
+                "Aura"            "repair_bots_aura"
+                "Aura_Radius"    "1000"
+                "Aura_Teams"    "DOTA_UNIT_TARGET_TEAM_FRIENDLY"
+                "Aura_Types"    "DOTA_UNIT_TARGET_ALL"      
             }
             
             "repair_bots_aura"
@@ -790,7 +790,7 @@
         "precache" // testing, reduce precache when complete
         {
             "particle_folder"           "particles/units/venomancer"
-            "particle_folder"		    "particles/units/heroes/hero_crystalmaiden"
+            "particle_folder"            "particles/units/heroes/hero_crystalmaiden"
         }
         
         "OnSpellStart"
@@ -813,15 +813,15 @@
                 {
                     "AttachEffect"
                     {
-                        "Target"			"TARGET"
-						"EffectName"		"particles/units/heroes/hero_crystalmaiden/maiden_freezing_field_snow_b.vpcf"
-						"EffectAttachType"	"follow_origin"
-						
-						"ControlPoints"
-						{
-							"00"	"0 0 0"
-							"01"	"%radius_rot 0 0"
-						}
+                        "Target"            "TARGET"
+                        "EffectName"        "particles/units/heroes/hero_crystalmaiden/maiden_freezing_field_snow_b.vpcf"
+                        "EffectAttachType"    "follow_origin"
+                        
+                        "ControlPoints"
+                        {
+                            "00"    "0 0 0"
+                            "01"    "%radius_rot 0 0"
+                        }
                     }
                 }
             
@@ -1007,8 +1007,8 @@
         }
         
         "OnProjectileHitUnit"
-		{
-			"DeleteOnHit"				"false"
+        {
+            "DeleteOnHit"                "false"
         }
         
         "OnProjectileFinish"
@@ -1188,60 +1188,251 @@
     }
     
     //=================================================================================================================
-	// Ability: Blizzard
-	//=================================================================================================================
-	"blizzard"
+    // Ability: Blizzard
+    //=================================================================================================================
+    "blizzard"
     {
-		//--------------------------------------------------------------
-		//General
-		//--------------------------------------------------------------
-		//No cd and mana cost for testing purposes
-		"BaseClass"							"ability_datadriven"
-		"AbilityBehavior"					"DOTA_ABILITY_BEHAVIOR_AOE | DOTA_ABILITY_BEHAVIOR_POINT"
-		"AbilityCastRange"					"800"
-		"AbilityUnitDamageType"				"DAMAGE_TYPE_MAGICAL"
-		"AbilityTextureName"				"crystal_maiden_freezing_field"
-		"AbilityCastAnimation"				"ACT_DOTA_CAST_ABILITY_2"
-		"precache"
+        //--------------------------------------------------------------
+        //General
+        //--------------------------------------------------------------
+        //No cd and mana cost for testing purposes
+        "BaseClass"                            "ability_datadriven"
+        "AbilityBehavior"                    "DOTA_ABILITY_BEHAVIOR_AOE | DOTA_ABILITY_BEHAVIOR_POINT"
+        "AbilityCastRange"                    "800"
+        "AbilityUnitDamageType"                "DAMAGE_TYPE_MAGICAL"
+        "AbilityTextureName"                "crystal_maiden_freezing_field"
+        "AbilityCastAnimation"                "ACT_DOTA_CAST_ABILITY_2"
+        "precache"
         {
-			"particle_folder"				"particles/units/heroes/hero_crystalmaiden"
+            "particle_folder"                "particles/units/heroes/hero_crystalmaiden"
             "particle_folder"               "particles/econ/generic/generic_aoe_explosion_sphere_1"
-		}
+        }
 
-		//--------------------------------------------------------------
-		//Ability
-		//--------------------------------------------------------------
-		"OnSpellStart"{
-			"Damage"{
-				"Type"		"DAMAGE_TYPE_MAGICAL"
-				"Damage"	"40"
-				"Target"{
-					"Center"	"POINT"
-					"Radius"	"%radius"
-					"Teams" "DOTA_UNIT_TARGET_TEAM_ENEMY"
-					"Types" "DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_CREEP"
-				}
-			}
-			"FireEffect"{
-				"EffectName"			"particles/units/heroes/hero_crystalmaiden/maiden_crystal_nova.vpcf"
-				"TargetPoint"			"POINT"
-				"EffectRadius"			"%radius"
+        //--------------------------------------------------------------
+        //Ability
+        //--------------------------------------------------------------
+        "OnSpellStart"{
+            "Damage"{
+                "Type"        "DAMAGE_TYPE_MAGICAL"
+                "Damage"    "40"
+                "Target"{
+                    "Center"    "POINT"
+                    "Radius"    "%radius"
+                    "Teams" "DOTA_UNIT_TARGET_TEAM_ENEMY"
+                    "Types" "DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_CREEP"
+                }
+            }
+            "FireEffect"{
+                "EffectName"            "particles/units/heroes/hero_crystalmaiden/maiden_crystal_nova.vpcf"
+                "TargetPoint"            "POINT"
+                "EffectRadius"            "%radius"
                 "EffectAttachType"      "world_origin"
-			}
-			
-		}
-		
-		//-------------------------------------------------------------
-		//Variables
-		//-------------------------------------------------------------		
-		"AbilitySpecial"{
-			"01"{
-				"var_type"				"FIELD_INTEGER"
-				"radius" 				"200 250 300 350"	
-			}
-		}
-	}
+            }
+            
+        }
+        
+        //-------------------------------------------------------------
+        //Variables
+        //-------------------------------------------------------------        
+        "AbilitySpecial"{
+            "01"{
+                "var_type"                "FIELD_INTEGER"
+                "radius"                 "200 250 300 350"    
+            }
+        }
+    }
     
+    //=================================================================================================================
+    // Ability: Flamethrower
+    //=================================================================================================================
+    "flamethrower_ability"
+    {
+        //--------------------------------------------------------------
+        //General
+        //--------------------------------------------------------------
+        //No cd and mana cost for testing purposes
+        "BaseClass"                 "ability_datadriven"
+        "AbilityBehavior"           "DOTA_ABILITY_BEHAVIOR_AOE | DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_TOGGLE | DOTA_ABILITY_BEHAVIOR_DIRECTIONAL"
+        "AbilityUnitDamageType"     "DAMAGE_TYPE_MAGICAL"
+        "AbilityTextureName"        "ogre_magi_fireblast"
+        "AbilityCastAnimation"      "ACT_DOTA_CAST_ABILITY_2"
+        
+        "precache"
+        {
+            "particle_folder"                "particles/units/heroes/hero_jakiro"
+            "particle_folder"                "particles/units/heroes/hero_dragon_knight"
+        }
+
+        //--------------------------------------------------------------
+        //Ability
+        //--------------------------------------------------------------
+        "OnToggleOn"
+        {
+            "ApplyModifier"
+            {
+                "Target"        "CASTER"
+				"ModifierName"  "flamethrower_pseudothinker"
+            }
+        }
+        
+        "OnToggleOff"
+        {
+            "RemoveModifier"
+            {
+                "Target"        "CASTER"
+				"ModifierName"  "flamethrower_pseudothinker"
+            }
+        }
+        
+        "OnProjectileHitUnit"
+		{
+			"DeleteOnHit" "0"
+			"Damage"
+			{
+				"Type"		"DAMAGE_TYPE_MAGICAL"
+				"Damage"	"%damage"
+				"Target"	"TARGET"
+			}
+		}
+        
+        //-------------------------------------------------------------
+        //Modifiers
+        //-------------------------------------------------------------        
+        "Modifiers"
+        {
+            "flamethrower_pseudothinker"
+            {
+                "ThinkInterval"     "%tick_rate"
+                
+                "OnIntervalThink"
+                {
+                    "LinearProjectile"
+                    {
+                        "EffectName"			"particles/units/heroes/hero_dragon_knight/dragon_knight_breathe_fire.vpcf"
+                        "MoveSpeed"				"300"
+                        "StartPosition"		    "attach_attack1"
+                        "FixedDistance"			"500"
+                        "StartRadius"			"25"
+                        "EndRadius"				"150"
+                        "TargetTeams"			"DOTA_UNIT_TARGET_TEAM_ENEMY"
+                        "TargetTypes"			"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
+                        //"TargetFlags"			"DOTA_UNIT_TARGET_FLAG_NOT_ANCIENTS"
+                        "HasFrontalCone"		"0"
+                        "ProvidesVision"		"1"
+                        "VisionRadius"			"300"
+                    }
+                }
+            }
+        }
+        
+        //-------------------------------------------------------------
+        //Variables
+        //-------------------------------------------------------------        
+        "AbilitySpecial"
+        {
+            "01"
+            {
+                "var_type"              "FIELD_INTEGER"
+                "radius"                "200 250 300 350"    
+            }
+            "02"
+            {
+                "var_type"              "FIELD_FLOAT"
+                "tick_rate"             "0.20"    
+            }
+            "03"
+            {
+                "var_type"              "FIELD_INTEGER"
+                "damage"                "20"    
+            }
+        }
+    }
+    
+    //=================================================================================================================
+    // Ability: Hurt and Heal
+    //=================================================================================================================
+    "custom_hurt_heal"
+    {
+        //--------------------------------------------------------------
+        //General
+        //--------------------------------------------------------------
+        //No cd and mana cost for testing purposes
+        "BaseClass"                 "ability_datadriven"
+        "AbilityBehavior"           "DOTA_ABILITY_BEHAVIOR_UNIT_TARGET"
+        "AbilityUnitDamageType"     "DAMAGE_TYPE_HP_REMOVAL"
+        "AbilityUnitTargetTeam"	    "DOTA_UNIT_TARGET_TEAM_FRIENDLY"
+		"AbilityUnitTargetType"		"DOTA_UNIT_TARGET_HERO"
+        "AbilityTextureName"        "legion_commander_press_the_attack"
+        
+        "precache"
+        {
+            "particle_folder"                "particles/units/heroes/hero_jakiro"
+            "particle_folder"                "particles/units/heroes/hero_legion_commander"
+        }
+        
+        "OnSpellStart"
+        {            
+            "Damage"
+            {
+                "Type"      "DAMAGE_TYPE_MAGICAL"
+                "Target"    "TARGET"
+                "Damage"    "%damage"
+            }
+        
+            "ApplyModifier"
+            {
+                "Target"        "TARGET"
+				"ModifierName"  "massive_heal_modifier"
+            }
+        }
+        
+        //-------------------------------------------------------------
+        //Modifiers
+        //-------------------------------------------------------------        
+        "Modifiers"
+        {
+            "massive_heal_modifier"
+            {
+                "Duration"  "%duration"
+                "Properties"
+                {
+                    "MODIFIER_PROPERTY_HEALTH_REGEN_CONSTANT" "%regen_rate"
+                }
+                
+                "OnCreated"
+                {
+                    "AttachEffect"
+                    {
+                        "EffectName"		"particles/units/heroes/hero_legion_commander/legion_commander_press.vpcf"
+                        "EffectAttachType"	"follow_origin"
+                        "Target"			"TARGET"
+                    }
+                }
+            }
+        }
+        
+        //-------------------------------------------------------------
+        //Variables
+        //-------------------------------------------------------------        
+        "AbilitySpecial"
+        {
+            "01"
+            {
+                "var_type"              "FIELD_FLOAT"
+                "duration"              "5"    
+            }
+            "02"
+            {
+                "var_type"              "FIELD_FLOAT"
+                "regen_rate"            "150"    
+            }
+            "03"
+            {
+                "var_type"              "FIELD_INTEGER"
+                "damage"                "500"    
+            }
+        }
+    }
     
     
     
@@ -1258,8 +1449,8 @@
 
         "precache"
         {
-            "particle_folder"		    "particles/units/heroes/hero_crystalmaiden"
-            "particle_folder"		    "particles/generic_gameplay"
+            "particle_folder"            "particles/units/heroes/hero_crystalmaiden"
+            "particle_folder"            "particles/generic_gameplay"
         }
         
         "OnSpellStart"
@@ -1282,9 +1473,9 @@
                 {
                     "AttachEffect"
                     {
-                        "Target"			"CASTER"
-						"EffectName"		"particles/units/heroes/hero_crystalmaiden/maiden_frostbite_buff_base.vpcf"
-						"EffectAttachType"	"follow_origin"
+                        "Target"            "CASTER"
+                        "EffectName"        "particles/units/heroes/hero_crystalmaiden/maiden_frostbite_buff_base.vpcf"
+                        "EffectAttachType"    "follow_origin"
                     }
                 }
                 
@@ -1297,9 +1488,9 @@
                     }
                     "AttachEffect"
                     {
-                        "Target"			"TARGET"
-                        "EffectName"		"particles/generic_gameplay/generic_slowed_cold.vpcf"
-                        "EffectAttachType"	"follow_origin"
+                        "Target"            "TARGET"
+                        "EffectName"        "particles/generic_gameplay/generic_slowed_cold.vpcf"
+                        "EffectAttachType"    "follow_origin"
                     }                
                 }
             }
@@ -1316,6 +1507,8 @@
             }
         }
     }
+    
+    
     
 }
 
