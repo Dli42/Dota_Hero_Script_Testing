@@ -143,8 +143,8 @@
 
         "Ability1"              "flamethrower_ability"
         "Ability2"              "custom_hurt_heal"
-        "Ability3"              ""
-        "Ability4"              ""
+        "Ability3"              "atomic_buster"
+        "Ability4"              "rocket_jump"
         "Ability5"              ""
         "Ability7"              "attribute_bonus"
         
