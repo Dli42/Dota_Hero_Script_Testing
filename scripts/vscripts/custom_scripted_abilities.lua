@@ -350,6 +350,10 @@ function FinalAtomicBuster_part_3 (keys)
     
 end
 
+function jump_impulse(move_me, start_pos, end_pos, height, movespeed, gravity)
+    
+end
+
 function calculate_parabola (start_vector, end_vector, height, num_points)
 
     local point_table = {}
@@ -378,7 +382,7 @@ function calculate_parabola (start_vector, end_vector, height, num_points)
         local abs_point = i*abs_step_size-(abs_distance/2)
         local new_z = ((-1*a)*((abs_point)^2)) + height
 
-        local new_vector = Vector:new(new_x, new_y, new_z)
+        local new_vector = Vector(new_x, new_y, new_z)
         
         table.insert(point_table, new_vector)
         print(new_x, new_y, new_z)
@@ -409,5 +413,56 @@ function MakeForwardLinearProjectile(keys)
         fExpireTime = GameRules:GetGameTime() + 10.0,
     }
     local projectile = ProjectileManager:CreateLinearProjectile(info)
+end
+
+function RiflemanRocketJump(keys)
+    
+    local target = keys.target_points[1]
+    local caster = keys.caster
+    
+    Physics:Unit(caster)
+    
+    if target==nil then
+      return
+    end
+    
+    caster:PreventDI(true)
+    caster:SetAutoUnstuck(false)
+    caster:SetNavCollisionType(PHYSICS_NAV_NOTHING)
+    caster:FollowNavMesh(false)
+    
+    local distance = target - caster:GetAbsOrigin()
+    local direction = target - caster:GetAbsOrigin()
+    direction = direction:Normalized()
+    caster:SetPhysicsFriction(0)
+    
+    local gravity = -100
+    local velocity = 1000
+    local timetotarget = distance:Length() / velocity
+    local jump = gravity * (30*timetotarget) * -1
+    jump = jump/2
+    
+    caster:SetPhysicsVelocity(direction * velocity)
+    
+    caster:AddPhysicsAcceleration(Vector(0,0,gravity))
+    caster:AddPhysicsVelocity(Vector(0,0,jump))
+    
+    Timers:CreateTimer(math.min(timetotarget, .5),
+    function()
+      local groundpos = GetGroundPosition(caster:GetAbsOrigin(), caster)
+      if caster:GetAbsOrigin().z - groundpos.z <= 20 then
+          caster:SetPhysicsAcceleration(Vector(0,0,0))
+          caster:SetPhysicsVelocity(Vector(0,0,0))
+          caster:OnPhysicsFrame(nil)
+          caster:PreventDI(false)
+          caster:SetNavCollisionType(PHYSICS_NAV_SLIDE)
+          caster:SetAutoUnstuck(true)
+          caster:FollowNavMesh(true)
+          caster:SetPhysicsFriction(.05)
+          FindClearSpaceForUnit(caster, target, true)
+          return nil
+      end
+      return 0.01
+    end)
 end
 

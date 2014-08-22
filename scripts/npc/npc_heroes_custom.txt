@@ -100,7 +100,7 @@
         "AttackRate"                "1.7"       // Speed of attack.
         "AttackAnimationPoint"      "0.5"       // Normalized time in animation cycle to attack.
         "AttackAcquisitionRange"    "600"       // Range within a target can be acquired.
-        "AttackRange"               "125"       // Range within a target can be attacked.
+        "AttackRange"               "600"       // Range within a target can be attacked.
 
         // Attributes
         //-------------------------------------------------------------------------------------------------------------
@@ -144,7 +144,7 @@
         "Ability1"              "flamethrower_ability"
         "Ability2"              "custom_hurt_heal"
         "Ability3"              "atomic_buster"
-        "Ability4"              ""
+        "Ability4"              "rocket_jump"
         "Ability5"              ""
         "Ability6"              "attribute_bonus"
         
@@ -161,7 +161,7 @@
         "AttackRate"                "1.7"       // Speed of attack.
         "AttackAnimationPoint"      "0.5"       // Normalized time in animation cycle to attack.
         "AttackAcquisitionRange"    "600"       // Range within a target can be acquired.
-        "AttackRange"               "125"       // Range within a target can be attacked.
+        "AttackRange"               "600"       // Range within a target can be attacked.
 
         // Attributes
         //-------------------------------------------------------------------------------------------------------------

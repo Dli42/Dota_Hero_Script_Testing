@@ -1552,7 +1552,63 @@
         "Modifiers"
         {
             
-        }    
+        }
+    }
+    
+    //=================================================================================================================
+    // Rocket Jump
+    //=================================================================================================================
+    "rocket_jump"
+    {
+        // General
+        //-------------------------------------------------------------------------------------------------------------
+        "BaseClass"                     "ability_datadriven"
+        "AbilityBehavior"               "DOTA_ABILITY_BEHAVIOR_POINT_TARGET | DOTA_ABILITY_BEHAVIOR_IGNORE_BACKSWING"
+        "AbilityTextureName"            "mirana_leap"
+
+        // Casting
+        //-------------------------------------------------------------------------------------------------------------
+        "AbilityCastPoint"              "0.0 0.0 0.0 0.0 0.0"
+
+        // Time        
+        //-------------------------------------------------------------------------------------------------------------
+        "AbilityCooldown"               "0"
+        "AbilityCastRange"				"1000"
+
+        // Cost
+        //-------------------------------------------------------------------------------------------------------------
+        "AbilityManaCost"               "0"
+        
+        // Stats
+        //-------------------------------------------------------------------------------------------------------------
+        "MaxLevel"                      "4"
+        
+        "OnSpellStart"
+        {            
+            "RunScript"
+            {
+                "ScriptFile"    "custom_scripted_abilities.lua"
+                "Function"      "RiflemanRocketJump"
+                "Target"        "TARGET"
+            }
+            
+        }
+        
+        "Modifiers"
+        {
+            
+        }
+    }
+        
+ /*
+ 
+ A projectile that bounces along the map for a limited number of bounces, doing aoe damage at each bounce.
+
+A point targeted ability that forces enemy heroes to be drawn to that point and properly interacts with any other motion controller abilities.
+
+Final Atomic Buster. Grabs a target, jumps and carries them to a location, and then jumps higher and slams them into the ground, causing aoe damage on the smash.
+
+Cone Aoe that does damage from the casters position + additional ability that instead makes the cone come from a chosen location towards the cursor location*/
 }
 
     
