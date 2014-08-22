@@ -1259,7 +1259,7 @@
         
         "precache"
         {
-            "particle_folder"                "particles/units/heroes/hero_jakiro"
+            "particle_folder"                "particles/hw_fx/"
             "particle_folder"                "particles/units/heroes/hero_dragon_knight"
         }
 
@@ -1306,9 +1306,11 @@
                 
                 "OnIntervalThink"
                 {
-                    "LinearProjectile"
+                    "RunScript"
                     {
-                        "EffectName"			"particles/units/heroes/hero_dragon_knight/dragon_knight_breathe_fire.vpcf"
+                        "ScriptFile"            "custom_scripted_abilities.lua"
+                        "Function"              "MakeForwardLinearProjectile"        
+                        "EffectName"			"particles/hw_fx/hw_rosh_fire_blast.vpcf"
                         "MoveSpeed"				"300"
                         "StartPosition"		    "attach_attack1"
                         "FixedDistance"			"500"
@@ -1316,7 +1318,7 @@
                         "EndRadius"				"150"
                         "TargetTeams"			"DOTA_UNIT_TARGET_TEAM_ENEMY"
                         "TargetTypes"			"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
-                        //"TargetFlags"			"DOTA_UNIT_TARGET_FLAG_NOT_ANCIENTS"
+                        "TargetFlags"			"DOTA_UNIT_TARGET_FLAG_NOT_ANCIENTS"
                         "HasFrontalCone"		"0"
                         "ProvidesVision"		"1"
                         "VisionRadius"			"300"

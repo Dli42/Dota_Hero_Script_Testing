@@ -388,3 +388,26 @@ function calculate_parabola (start_vector, end_vector, height, num_points)
     
 end
 
+function MakeForwardLinearProjectile(keys)
+    local caster = keys.caster
+    local info = 
+    {
+        Ability = keys.ability,
+        EffectName = keys.EffectName,
+        iMoveSpeed = keys.MoveSpeed,
+        vSpawnOrigin = caster:GetAbsOrigin(),
+        vVelocity = caster:GetForwardVector() * keys.MoveSpeed,
+        fDistance = keys.FixedDistance,
+        fStartRadius = keys.StartRadius,
+        fEndRadius = keys.EndRadius,
+        Source = caster, 
+        bHasFrontalCone = keys.HasFrontalCone,
+        bReplaceExisting = false,
+        iUnitTargetTeam = keys.TargetTeams,
+        iUnitTargetFlags = keys.TargetFlags,
+        iUnitTargetType = keys.argetTypes,
+        fExpireTime = GameRules:GetGameTime() + 10.0,
+    }
+    local projectile = ProjectileManager:CreateLinearProjectile(info)
+end
+

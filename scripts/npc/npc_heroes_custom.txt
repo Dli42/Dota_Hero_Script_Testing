@@ -139,14 +139,14 @@
         
         // Abilities
         //-------------------------------------------------------------------------------------------------------------
-        "AbilityLayout"         "6"        
+        "AbilityLayout"         "5"        
 
         "Ability1"              "flamethrower_ability"
         "Ability2"              "custom_hurt_heal"
         "Ability3"              "atomic_buster"
         "Ability4"              ""
         "Ability5"              ""
-        "Ability7"              "attribute_bonus"
+        "Ability6"              "attribute_bonus"
         
         // Armor
         //-------------------------------------------------------------------------------------------------------------
