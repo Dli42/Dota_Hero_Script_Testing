@@ -129,7 +129,7 @@ function RammusDefensiveBallCurlReturnDamage(keys)
 		damage_type = DAMAGE_TYPE_MAGICAL}
 						
 	
-	target:ApplyDamage(damageTable)
+	ApplyDamage(damageTable)
 	
 end
 
@@ -290,8 +290,58 @@ end
 
 function FinalAtomicBuster_part_2 (keys)
     local caster = keys.caster
-    local target = keys.target
+    local target = caster:GetAbsOrigin() + (Vector(0,0,1) * 1000)
+    print(target.x, target.y, target.z, caster:GetAbsOrigin().z)
+    Physics:Unit(caster)
+    if target==nil then
+      print("Target nil")
+      return
+    end
     
+    caster:PreventDI(true)
+    caster:SetAutoUnstuck(false)
+    caster:SetNavCollisionType(PHYSICS_NAV_NOTHING)
+    caster:FollowNavMesh(false)
+    
+    local distance = target - caster:GetAbsOrigin()
+    local direction = target - caster:GetAbsOrigin()
+    direction = direction:Normalized()
+    caster:SetPhysicsFriction(0)
+    
+    local gravity = -10
+    local velocity = 1000
+
+    local timetotarget = ((distance:Length()) / math.abs(gravity))
+
+    caster:SetPhysicsVelocity(direction * velocity)
+        print(distance:Length(), timetotarget, caster:GetPhysicsVelocity().z)
+    caster:SetPhysicsAcceleration(Vector(0,0,gravity))
+    --caster:AddPhysicsVelocity(Vector(0,0,jump))
+    
+    Timers:CreateTimer(timetotarget,
+    function()
+      local groundpos = GetGroundPosition(caster:GetAbsOrigin(), caster)
+          print(caster:GetPhysicsAcceleration().z, caster:GetPhysicsVelocity().z)
+          caster:SetPhysicsAcceleration(Vector(0,0,0))
+          caster:SetPhysicsVelocity(Vector(0,0,0))
+          caster:OnPhysicsFrame(nil)
+          caster:PreventDI(false)
+          caster:SetNavCollisionType(PHYSICS_NAV_SLIDE)
+          caster:SetAutoUnstuck(true)
+          caster:FollowNavMesh(true)
+          caster:SetPhysicsFriction(.05)
+          
+          local damageTable = {
+            victim = caster,
+            attacker = caster,
+            damage = 50,
+            damage_type = DAMAGE_TYPE_PHYSICAL}
+                                
+          ApplyDamage(damageTable)
+          print("Timer Over")
+          return nil
+    end)
+    print("exiting FinalAtomicBuster_part_2")
 end
 
 function FinalAtomicBuster_part_3 (keys)

@@ -1,6 +1,7 @@
 require('util')
 require('action_test')
 require('physics')
+require('timers')
 
 -- Generated from template
 

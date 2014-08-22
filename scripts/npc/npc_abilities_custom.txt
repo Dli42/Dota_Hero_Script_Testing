@@ -1516,7 +1516,7 @@
         // General
         //-------------------------------------------------------------------------------------------------------------
         "BaseClass"                     "ability_datadriven"
-        "AbilityBehavior"               "DOTA_ABILITY_BEHAVIOR_UNIT_TARGET | DOTA_ABILITY_BEHAVIOR_IGNORE_BACKSWING"
+        "AbilityBehavior"               "DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IGNORE_BACKSWING"
         "AbilityTextureName"            "tiny_toss"
 
         // Casting
@@ -1525,12 +1525,12 @@
 
         // Time        
         //-------------------------------------------------------------------------------------------------------------
-        "AbilityCooldown"               "12.0 12.0 12.0 12.0 12.0"
+        "AbilityCooldown"               "0"
         "AbilityCastRange"				"100"
 
         // Cost
         //-------------------------------------------------------------------------------------------------------------
-        "AbilityManaCost"               "50"
+        "AbilityManaCost"               "0"
         
         // Stats
         //-------------------------------------------------------------------------------------------------------------
@@ -1541,8 +1541,8 @@
             "RunScript"
             {
                 "ScriptFile"    "custom_scripted_abilities.lua"
-                "Function"      "FinalAtomicBuster"
-                "Target"        "TARGET"
+                "Function"      "FinalAtomicBuster_part_2"
+                "Target"        "CASTER"
             }
             
         }
