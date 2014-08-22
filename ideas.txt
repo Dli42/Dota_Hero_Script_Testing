@@ -15,7 +15,7 @@ Medic, Sniper, Heavy, Scout, Assualt
 Medic
     Medpack     - Heals in melee range, charges
     Medevac     - Teleports self and target to base, doesn't work if base teleporter is destroyed
-    Stimpack    - Increase attack and movespeed, costs % health, charges
+    Stimpack    - Increase attack and movespeed, costs % health
     Protoshield - long cooldown, places a shield that nullifies one attack
     
     
