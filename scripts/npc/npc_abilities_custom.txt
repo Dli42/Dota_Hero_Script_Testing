@@ -1436,6 +1436,61 @@
         }
     }
     
+    //=================================================================================================================
+    // Ability: Push
+    //=================================================================================================================
+    "custom_push"
+    {
+        //--------------------------------------------------------------
+        //General
+        //--------------------------------------------------------------
+        //No cd and mana cost for testing purposes
+        "BaseClass"                 "ability_datadriven"
+        "AbilityBehavior"           "DOTA_ABILITY_BEHAVIOR_UNIT_TARGET"
+        "AbilityUnitTargetTeam"	    "DOTA_UNIT_TARGET_TEAM_ENEMY"
+		"AbilityUnitTargetType"		"DOTA_UNIT_TARGET_HERO"
+        "AbilityTextureName"        ""
+        
+        // Casting
+        //-------------------------------------------------------------------------------------------------------------
+        "AbilityCastRange"              "1100"
+        "AbilityCastPoint"              "0"                         // Time before spell goes off when cast
+
+        // Time        
+        //-------------------------------------------------------------------------------------------------------------
+        "AbilityCooldown"               "%cooldown"
+        
+        "OnSpellStart"
+        {
+            "Knockback"
+            {
+                "Target"    "TARGET"
+                "Duration"  "0.5"
+                "Height"    "50"
+                "Distance"  "50"
+            }
+        }
+        
+        //-------------------------------------------------------------
+        //Modifiers
+        //-------------------------------------------------------------        
+        "Modifiers"
+        {
+        }
+        
+        //-------------------------------------------------------------
+        //Variables
+        //-------------------------------------------------------------        
+        "AbilitySpecial"
+        {
+            "01"
+            {
+                "var_type"              "FIELD_FLOAT"
+                "duration"              "5"    
+            }
+        }
+    }
+    
     
     
     //=================================================================================================================
@@ -1505,6 +1560,53 @@
                 "Properties"
                 {
                     "MODIFIER_PROPERTY_MOVESPEED_BONUS_PERCENTAGE" "-20"
+                }
+            }
+        }
+    }
+    
+    //=================================================================================================================
+    // The Thing Infected Blood Applier
+    //=================================================================================================================
+    "modifier_infected_blood_applier"
+    {
+        // General
+        //-------------------------------------------------------------------------------------------------------------
+        "BaseClass"                     "ability_datadriven"
+        "AbilityBehavior"               "DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE | DOTA_ABILITY_BEHAVIOR_UNRESTRICTED | DOTA_ABILITY_BEHAVIOR_IGNORE_BACKSWING"
+        "AbilityTextureName"            "bloodseeker_rupture"
+
+        "precache"
+        {
+            "particle_folder"            "particles/units/heroes/hero_crystalmaiden"
+            "particle_folder"            "particles/generic_gameplay"
+        }
+        
+        "OnSpellStart"
+        {
+            "ApplyModifier"
+                    {
+                        "ModifierName"  "modifier_infected_blood"
+                        "Target"        "CASTER"
+                    }
+        }
+        
+        // Modifiers
+        //-------------------------------------------------------------------------------------------------------------    
+        "Modifiers"
+        {
+            "modifier_infected_blood"
+            {
+                "Hidden"    "1"
+                "OnCreated"
+                {
+                    "RunScript"
+                    {
+                        "ScriptFile"    "custom_scripted_abilities.lua"
+                        "Function"      "WhisperToTarget"
+                        "Target"        "CASTER"
+                        "String"        "You are The Thing"
+                    }
                 }
             }
         }

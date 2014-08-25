@@ -145,7 +145,7 @@
         "Ability2"              "custom_hurt_heal"
         "Ability3"              "atomic_buster"
         "Ability4"              "rocket_jump"
-        "Ability5"              ""
+        "Ability5"              "modifier_infected_blood_applier"
         "Ability6"              "attribute_bonus"
         
         // Armor

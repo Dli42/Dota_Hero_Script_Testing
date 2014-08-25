@@ -466,3 +466,22 @@ function RiflemanRocketJump(keys)
     end)
 end
 
+function BloodTest(keys)
+    local target = keys.target
+    if target:HasModifier("modifier_infected_blood") then
+        ShowMessage("This person is the Thing!")
+    else
+        ShowMessage("No reaction...")
+    end    
+end
+
+function WhisperToTarget(keys)
+    local caster = keys.caster
+    local target = keys.target
+    local myString = keys.String
+    local teamID = target:GetTeamID()
+    local playerID = target:GetPlayerOwnerID()
+    
+    GameRules:SendCustomMessage(myString,teamID,playerID)    
+end
+
