@@ -3,6 +3,8 @@
 {
     "Version"        "1"
     
+//LOL ABILITIES
+//=====================================================================================================================
     //=================================================================================================================
     // Rammus Spiked Shell
     //=================================================================================================================
@@ -267,7 +269,7 @@
         "Modifiers"
         {
             "modifier_rammus_defensive_ball_curl_buff"
-            {                
+            {
                 "Duration"          "%duration"
                 "EffectName"        "particles/units/heroes/hero_dark_seer/dark_seer_ion_shell.vpcf"
                 "EffectAttachType"  "follow_origin"
@@ -1187,6 +1189,9 @@
         }
     }
     
+//RANDOM ABILITIES
+//=====================================================================================================================
+    
     //=================================================================================================================
     // Ability: Blizzard
     //=================================================================================================================
@@ -1492,136 +1497,6 @@
     }
     
     
-    
-    //=================================================================================================================
-    // Turret Upgrade Applier
-    //=================================================================================================================
-    "modifier_heimerdinger_turret_upgraded_attack_applier"
-    {
-        // General
-        //-------------------------------------------------------------------------------------------------------------
-        "BaseClass"                     "ability_datadriven"
-        "AbilityBehavior"               "DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE | DOTA_ABILITY_BEHAVIOR_UNRESTRICTED | DOTA_ABILITY_BEHAVIOR_IGNORE_BACKSWING"
-        "AbilityTextureName"            ""
-
-        "precache"
-        {
-            "particle_folder"            "particles/units/heroes/hero_crystalmaiden"
-            "particle_folder"            "particles/generic_gameplay"
-        }
-        
-        "OnSpellStart"
-        {
-            "ApplyModifier"
-                    {
-                        "ModifierName"  "modifier_heimerdinger_turret_upgraded_attack"
-                        "Target"        "CASTER"
-                    }
-        }
-        
-        // Modifiers
-        //-------------------------------------------------------------------------------------------------------------    
-        "Modifiers"
-        {
-            "modifier_heimerdinger_turret_upgraded_attack"
-            {
-                "Duration" "10.0"
-                "OnCreated"
-                {
-                    "AttachEffect"
-                    {
-                        "Target"            "CASTER"
-                        "EffectName"        "particles/units/heroes/hero_crystalmaiden/maiden_frostbite_buff_base.vpcf"
-                        "EffectAttachType"    "follow_origin"
-                    }
-                }
-                
-                "OnAttackLanded"
-                {
-                    "ApplyModifier"
-                    {                        
-                        "Target"        "TARGET"
-                        "ModifierName"  "modifier_heimerdinger_turret_slow"
-                    }
-                    "AttachEffect"
-                    {
-                        "Target"            "TARGET"
-                        "EffectName"        "particles/generic_gameplay/generic_slowed_cold.vpcf"
-                        "EffectAttachType"    "follow_origin"
-                    }                
-                }
-            }
-            
-            "modifier_heimerdinger_turret_slow"
-            {
-                "IsDebuff"          "1"
-                "Duration"          "0.5"
-            
-                "Properties"
-                {
-                    "MODIFIER_PROPERTY_MOVESPEED_BONUS_PERCENTAGE" "-20"
-                }
-            }
-        }
-    }
-    
-    // The Thing Infected Blood Applier
-    //=================================================================================================================
-    "modifier_infected_blood_applier"
-    {
-        // General
-        //-------------------------------------------------------------------------------------------------------------
-        "BaseClass"                     "ability_datadriven"
-        "AbilityBehavior"               "DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE | DOTA_ABILITY_BEHAVIOR_UNRESTRICTED | DOTA_ABILITY_BEHAVIOR_IGNORE_BACKSWING"
-        "AbilityTextureName"            "bloodseeker_rupture"
-        
-
-        "precache"
-        {
-            "soundfile"                  "sounds/ui/ping.vsnd"
-            "particle_folder"            "particles/ui_mouseactions"
-            "particle_folder"            "particles/units/heroes/hero_crystalmaiden"
-            "particle_folder"            "particles/generic_gameplay"
-        }
-        
-        "OnSpellStart"
-        {
-            "ApplyModifier"
-            {
-                "ModifierName"  "modifier_infected_blood"
-                "Target"        "CASTER"
-            }
-            
-            "RunScript"
-            {
-                "ScriptFile"    "custom_scripted_abilities.lua"
-                "Function"      "PingItemInRange"
-                "Target"        "CASTER"
-                "Range"         "1400"
-            }
-        }
-        
-        // Modifiers
-        //-------------------------------------------------------------------------------------------------------------    
-        "Modifiers"
-        {
-            "modifier_infected_blood"
-            {
-                "Hidden"    "1"
-                "OnCreated"
-                {
-                    "RunScript"
-                    {
-                        "ScriptFile"    "custom_scripted_abilities.lua"
-                        "Function"      "WhisperToTarget"
-                        "Target"        "CASTER"
-                        "String"        "You are The Thing"
-                    }
-                }
-            }
-        }
-    }
-
     //=================================================================================================================
     // Atomic Buster
     //=================================================================================================================
@@ -1727,16 +1602,186 @@
             
         }
     }
+    
+    //=================================================================================================================
+    // Ensnare
+    //=================================================================================================================
+    "hunter_ensnare"
+    {
+        // General
+        //-------------------------------------------------------------------------------------------------------------
+        "BaseClass"                     "ability_datadriven"
+        "AbilityBehavior"               "DOTA_ABILITY_BEHAVIOR_UNIT_TARGET"
+        "AbilityTextureName"            "meepo_earthbind"
+
+        // Casting
+        //-------------------------------------------------------------------------------------------------------------
+        "AbilityCastPoint"              "0.0 0.0 0.0 0.0 0.0"
+
+        // Time        
+        //-------------------------------------------------------------------------------------------------------------
+        "AbilityCooldown"               "0"
+        "AbilityCastRange"				"1000"
+
+        // Cost
+        //-------------------------------------------------------------------------------------------------------------
+        "AbilityManaCost"               "0"
         
- /*
- 
- A projectile that bounces along the map for a limited number of bounces, doing aoe damage at each bounce.
+        // Stats
+        //-------------------------------------------------------------------------------------------------------------
+        "MaxLevel"                      "4"
+        
+        "OnProjectileHitUnit"
+        {            
+            "RunScript"
+            {
+                "ScriptFile"    "custom_scripted_abilities.lua"
+                "Function"      "EnsnareUnit"
+                "Target"        "TARGET"
+            }            
+        }
+        
+        "Modifiers"
+        {
+            
+        }
+    }
+    
+    
+//MODIFIER APPLIERS
+//=====================================================================================================================
 
-A point targeted ability that forces enemy heroes to be drawn to that point and properly interacts with any other motion controller abilities.
+    //=================================================================================================================
+    // Turret Upgrade Applier
+    //=================================================================================================================
+    "modifier_heimerdinger_turret_upgraded_attack_applier"
+    {
+        // General
+        //-------------------------------------------------------------------------------------------------------------
+        "BaseClass"                     "ability_datadriven"
+        "AbilityBehavior"               "DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE | DOTA_ABILITY_BEHAVIOR_UNRESTRICTED | DOTA_ABILITY_BEHAVIOR_IGNORE_BACKSWING"
+        "AbilityTextureName"            ""
 
-Final Atomic Buster. Grabs a target, jumps and carries them to a location, and then jumps higher and slams them into the ground, causing aoe damage on the smash.
+        "precache"
+        {
+            "particle_folder"            "particles/units/heroes/hero_crystalmaiden"
+            "particle_folder"            "particles/generic_gameplay"
+        }
+        
+        "OnSpellStart"
+        {
+            "ApplyModifier"
+                    {
+                        "ModifierName"  "modifier_heimerdinger_turret_upgraded_attack"
+                        "Target"        "CASTER"
+                    }
+        }
+        
+        // Modifiers
+        //-------------------------------------------------------------------------------------------------------------    
+        "Modifiers"
+        {
+            "modifier_heimerdinger_turret_upgraded_attack"
+            {
+                "Duration" "10.0"
+                "OnCreated"
+                {
+                    "AttachEffect"
+                    {
+                        "Target"            "CASTER"
+                        "EffectName"        "particles/units/heroes/hero_crystalmaiden/maiden_frostbite_buff_base.vpcf"
+                        "EffectAttachType"    "follow_origin"
+                    }
+                }
+                
+                "OnAttackLanded"
+                {
+                    "ApplyModifier"
+                    {                        
+                        "Target"        "TARGET"
+                        "ModifierName"  "modifier_heimerdinger_turret_slow"
+                    }
+                    "AttachEffect"
+                    {
+                        "Target"            "TARGET"
+                        "EffectName"        "particles/generic_gameplay/generic_slowed_cold.vpcf"
+                        "EffectAttachType"    "follow_origin"
+                    }                
+                }
+            }
+            
+            "modifier_heimerdinger_turret_slow"
+            {
+                "IsDebuff"          "1"
+                "Duration"          "0.5"
+            
+                "Properties"
+                {
+                    "MODIFIER_PROPERTY_MOVESPEED_BONUS_PERCENTAGE" "-20"
+                }
+            }
+        }
+    }
+    
+    //=================================================================================================================
+    // The Thing Infected Blood Applier
+    //=================================================================================================================
+    "modifier_infected_blood_applier"
+    {
+        // General
+        //-------------------------------------------------------------------------------------------------------------
+        "BaseClass"                     "ability_datadriven"
+        "AbilityBehavior"               "DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE | DOTA_ABILITY_BEHAVIOR_UNRESTRICTED | DOTA_ABILITY_BEHAVIOR_IGNORE_BACKSWING"
+        "AbilityTextureName"            "bloodseeker_rupture"
+        
 
-Cone Aoe that does damage from the casters position + additional ability that instead makes the cone come from a chosen location towards the cursor location*/
+        "precache"
+        {
+            "soundfile"                  "sounds/ui/ping.vsnd"
+            "particle_folder"            "particles/ui_mouseactions"
+            "particle_folder"            "particles/units/heroes/hero_crystalmaiden"
+            "particle_folder"            "particles/generic_gameplay"
+        }
+        
+        "OnSpellStart"
+        {
+            "ApplyModifier"
+            {
+                "ModifierName"  "modifier_infected_blood"
+                "Target"        "CASTER"
+            }
+            
+            "RunScript"
+            {
+                "ScriptFile"    "custom_scripted_abilities.lua"
+                "Function"      "PingItemInRange"
+                "Target"        "CASTER"
+                "Range"         "1400"
+                "ItemName"      "item_greater_clarity"
+            }
+        }
+        
+        // Modifiers
+        //-------------------------------------------------------------------------------------------------------------    
+        "Modifiers"
+        {
+            "modifier_infected_blood"
+            {
+                "Hidden"    "1"
+                "OnCreated"
+                {
+                    "RunScript"
+                    {
+                        "ScriptFile"    "custom_scripted_abilities.lua"
+                        "Function"      "WhisperToTarget"
+                        "Target"        "CASTER"
+                        "String"        "<b><font color='#FF1100' size = '10'>You are THE THING</font></b>"
+                    }
+                }
+            }
+        }
+    }
+
 }
 
     
