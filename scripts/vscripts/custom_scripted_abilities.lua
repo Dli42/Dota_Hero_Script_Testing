@@ -487,25 +487,28 @@ function PingItemInRange(keys)
     PrintTable(keys)
     local caster = keys.caster
     local range = keys.Range
+    local itemName = keys.ItemName
     
     print("caster info", caster:GetTeam(), caster:GetOrigin(),range)
-    --FindUnitsInRadius( iTeamNumber, vPosition, hCacheUnit, flRadius, iTeamFilter, iTypeFilter, iFlagFilter, iOrder, bCanGrowCache)
-    local unitsInRange = FindUnitsInRadius(
-        caster:GetTeam(),
+    --FindInSphere(handle startFrom, Vector origin, float maxRadius)
+    local entitiesInRange = FindInSphere(
+        nil,
         caster:GetOrigin(),
-        nil, range,
-        DOTA_UNIT_TARGET_TEAM_BOTH,
-        DOTA_UNIT_TARGET_ALL,
-        0, 0,
-        false)
-    print("found", #unitsInRange, "units in range")
-    for key,unit in pairs(unitsInRange) do
-        print("loop", key, unit)
-        if unit:GetName() == "item_greater_clarity" then
-            print("pinging", unit, "at", unit.GetAbsOrigin().x, unit.GetAbsOrigin().y)
-            ParticleManager:CreateParticle("particles/ui_mouseactions/ping_world.vpcf", unit, caster)
-            unit:EmitSound("sounds/ui/ping.vsnd")
+        range)
+    print("found", #entitiesInRange, "units in range")
+    for key,entity in pairs(entitiesInRange) do
+        print("loop", key, entity)
+        if entity:GetName() == itemName then
+            print("pinging", entity, "at", entity.GetAbsOrigin().x, entity.GetAbsOrigin().y)
+            ParticleManager:CreateParticle("particles/ui_mouseactions/ping_world.vpcf", entity, caster)
+            entity:EmitSound("sounds/ui/ping.vsnd")
         end
-    end
+    end    
+end
+
+function EnsnareUnit(keys)
+    local caster = keys.caster
+    local target = keys.target
+    local duration = keys.Duration
     
 end
