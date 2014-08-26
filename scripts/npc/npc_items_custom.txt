@@ -317,4 +317,78 @@
 			}
 		}
 	}
+    
+    //=================================================================================================================
+	//Blood Test
+	//=================================================================================================================
+	"item_blood_test"
+	{
+
+		// General
+		//-------------------------------------------------------------------------------------------------------------
+        "AbilityBehavior"               "DOTA_ABILITY_BEHAVIOR_UNIT_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE"
+		"BaseClass"						"item_datadriven"
+        "AbilityTextureName"			"bloodseeker_rupture"
+
+		// Stats		
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityCooldown"				"0.0"
+
+		// Item Info
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityManaCost"				"0"
+		"ItemCost"						"100"
+		"ItemShopTags"					""
+		"ItemQuality"					"rare"
+		"ItemDeclarations"				"DECLARE_PURCHASES_TO_SPECTATORS"
+		"ItemDisassembleRule"			"0"
+		"ItemAlertable"					"1"
+		"ItemAliases"					"blood"
+		"ItemPurchasable"				"1"
+		"SecretShop"					"1"
+		"ItemBaseLevel"					"1"
+
+		"OnSpellStart"
+		{            
+            "RunScript"
+            {
+                "ScriptFile"    "custom_scripted_abilities.lua"
+                "Function"      "BloodTest"
+                "Target"        "TARGET"
+            }
+        }
+        
+        // Modifiers
+        //-------------------------------------------------------------------------------------------------------------
+        "Modifiers"
+        {
+
+        }
+        
+		// Special	
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"			"FIELD_INTEGER"
+				"hurt_amount"		"100"
+			}
+            "02"
+			{
+				"var_type"			"FIELD_INTEGER"
+				"bonus_movespeed"	"100"
+			}
+            "03"
+			{
+				"var_type"			"FIELD_INTEGER"
+				"bonus_attackspeed"	"100"
+			}
+            "04"
+			{
+				"var_type"			"FIELD_FLOAT"
+				"bonus_attackspeed"	"10.0"
+			}
+		}
+	}
 }

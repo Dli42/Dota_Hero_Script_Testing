@@ -1436,6 +1436,61 @@
         }
     }
     
+    //=================================================================================================================
+    // Ability: Push
+    //=================================================================================================================
+    "custom_push"
+    {
+        //--------------------------------------------------------------
+        //General
+        //--------------------------------------------------------------
+        //No cd and mana cost for testing purposes
+        "BaseClass"                 "ability_datadriven"
+        "AbilityBehavior"           "DOTA_ABILITY_BEHAVIOR_UNIT_TARGET"
+        "AbilityUnitTargetTeam"	    "DOTA_UNIT_TARGET_TEAM_ENEMY"
+		"AbilityUnitTargetType"		"DOTA_UNIT_TARGET_HERO"
+        "AbilityTextureName"        ""
+        
+        // Casting
+        //-------------------------------------------------------------------------------------------------------------
+        "AbilityCastRange"              "1100"
+        "AbilityCastPoint"              "0"                         // Time before spell goes off when cast
+
+        // Time        
+        //-------------------------------------------------------------------------------------------------------------
+        "AbilityCooldown"               "%cooldown"
+        
+        "OnSpellStart"
+        {
+            "Knockback"
+            {
+                "Target"    "TARGET"
+                "Duration"  "0.5"
+                "Height"    "50"
+                "Distance"  "50"
+            }
+        }
+        
+        //-------------------------------------------------------------
+        //Modifiers
+        //-------------------------------------------------------------        
+        "Modifiers"
+        {
+        }
+        
+        //-------------------------------------------------------------
+        //Variables
+        //-------------------------------------------------------------        
+        "AbilitySpecial"
+        {
+            "01"
+            {
+                "var_type"              "FIELD_FLOAT"
+                "duration"              "5"    
+            }
+        }
+    }
+    
     
     
     //=================================================================================================================
@@ -1510,84 +1565,44 @@
         }
     }
     
+    // The Thing Infected Blood Applier
     //=================================================================================================================
-    // Spinning Pile Driver
-    //=================================================================================================================
-    "spinning_pile_driver"
+    "modifier_infected_blood_applier"
     {
-        // General
-        //-------------------------------------------------------------------------------------------------------------
-        "BaseClass"                     "ability_datadriven"
-        "AbilityBehavior"               "DOTA_ABILITY_BEHAVIOR_UNIT_TARGET | DOTA_ABILITY_BEHAVIOR_IGNORE_BACKSWING"
-        "AbilityUnitTargetTeam"	        "DOTA_UNIT_TARGET_TEAM_ENEMY"
-		"AbilityUnitTargetType"		    "DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_CREEP"
-        "AbilityTextureName"            "tiny_toss"
 
-        // Casting
-        //-------------------------------------------------------------------------------------------------------------
-        "AbilityCastPoint"              "0.0 0.0 0.0 0.0 0.0"
+        "AbilityBehavior"               "DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE | DOTA_ABILITY_BEHAVIOR_UNRESTRICTED | DOTA_ABILITY_BEHAVIOR_IGNORE_BACKSWING"
+        "AbilityTextureName"            "bloodseeker_rupture"
 
-        // Time        
-        //-------------------------------------------------------------------------------------------------------------
-        "AbilityCooldown"               "0"
-        "AbilityCastRange"				"50"
-
-        // Cost
-        //-------------------------------------------------------------------------------------------------------------
-        "AbilityManaCost"               "0"
-        
-        // Stats
-        //-------------------------------------------------------------------------------------------------------------
-        "MaxLevel"                      "4"
+        "precache"
+        {
+            "particle_folder"            "particles/units/heroes/hero_crystalmaiden"
+            "particle_folder"            "particles/generic_gameplay"
+        }
         
         "OnSpellStart"
         {
-            "CreateThinker"
-            {
-                "ModifierName"  "spin_thinker"
-                "Target"        "CASTER"
-            }
-            
-            "RunScript"
-            {
-                "ScriptFile"    "custom_scripted_abilities.lua"
-                "Function"      "FinalAtomicBuster_part_2"
-                "Target"        "CASTER"
-            }
-            
-            "Knockback"
-            {
-                "Height"            "450"
-                "Distance"          "0"
-                "Target"            "CASTER"
-                "Duration"          "1"
-            }
-            
-            "Knockback"
-            {
-                "Height"            "450"
-                "Distance"          "0"
-                "Target"            "TARGET"
-                "Duration"          "1"
-            }
-            
+            "ApplyModifier"
+                    {
+                        "ModifierName"  "modifier_infected_blood"
+                        "Target"        "CASTER"
+                    }
         }
         
-        
+        // Modifiers
+        //-------------------------------------------------------------------------------------------------------------    
         "Modifiers"
         {
-            "spin_thinker"
+            "modifier_infected_blood"
             {
-                "Duration"      "1.0"
-                "ThinkInterval" "0.05"
-                
-                "OnIntervalThink"
+                "Hidden"    "1"
+                "OnCreated"
                 {
                     "RunScript"
                     {
                         "ScriptFile"    "custom_scripted_abilities.lua"
-                        "Function"      "SpinHero"
-                        "Angle"         "36"
+                        "Function"      "WhisperToTarget"
+                        "Target"        "CASTER"
+                        "String"        "You are The Thing"
                     }
                 }
             }
