@@ -1569,12 +1569,17 @@
     //=================================================================================================================
     "modifier_infected_blood_applier"
     {
-
+        // General
+        //-------------------------------------------------------------------------------------------------------------
+        "BaseClass"                     "ability_datadriven"
         "AbilityBehavior"               "DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE | DOTA_ABILITY_BEHAVIOR_UNRESTRICTED | DOTA_ABILITY_BEHAVIOR_IGNORE_BACKSWING"
         "AbilityTextureName"            "bloodseeker_rupture"
+        
 
         "precache"
         {
+            "soundfile"                  "sounds/ui/ping.vsnd"
+            "particle_folder"            "particles/ui_mouseactions"
             "particle_folder"            "particles/units/heroes/hero_crystalmaiden"
             "particle_folder"            "particles/generic_gameplay"
         }
@@ -1582,10 +1587,18 @@
         "OnSpellStart"
         {
             "ApplyModifier"
-                    {
-                        "ModifierName"  "modifier_infected_blood"
-                        "Target"        "CASTER"
-                    }
+            {
+                "ModifierName"  "modifier_infected_blood"
+                "Target"        "CASTER"
+            }
+            
+            "RunScript"
+            {
+                "ScriptFile"    "custom_scripted_abilities.lua"
+                "Function"      "PingItemInRange"
+                "Target"        "CASTER"
+                "Range"         "1400"
+            }
         }
         
         // Modifiers

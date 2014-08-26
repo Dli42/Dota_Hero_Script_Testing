@@ -97,7 +97,7 @@ function RammusPowerballGetMovespeed(keys)
     local caster = keys.caster
     originalMoveSpeed = caster:GetBaseMoveSpeed() 
 		
-	--setModel("models\props_structures\bad_ancient_sphere.mdl")
+	--setModel("models/props_structures/bad_ancient_sphere.mdl")
     
     caster:AddNewModifier(caster, nil, "modifier_bloodseeker_thirst_speed", { duration = dur})
     
@@ -109,7 +109,7 @@ function RammusPowerballResetMovespeed(keys)
     local caster = keys.caster  
     caster:SetBaseMoveSpeed(originalMoveSpeed)
 	
-	--setModel("models\heroes\axe\axe.mdl")
+	--setModel("models/heroes/axe/axe.mdl")
     
     caster:RemoveModifierByName("modifier_bloodseeker_thirst_speed")
 	
@@ -160,7 +160,7 @@ function OldHeimerdingerRocketsTarget(keys)
 	if #enemiesInRange > 0 then
 		for i = 1, numTargets do
             --create a projectile and hit each of the three(five) closest enemies
-            local targetEntity = enemiesInRange[i]            
+            local targetEntity = enemiesInRange[i]      
             local info = {
                           EffectName = "particles/units/heroes/hero_tinker/tinker_missile.vpcf", --"obsidian_destroyer_arcane_orb", --,
                           Ability = ABILITY_old_heimerdinger_rockets,
@@ -300,7 +300,7 @@ function FinalAtomicBuster_part_2 (keys)
     local direction = (Vector(0,0,1) * 500)
     direction = direction:Normalized()
     caster:SetPhysicsFriction(0)
-    +
+    
     local gravity = -10
     local velocity = 500
 
@@ -471,12 +471,41 @@ function BloodTest(keys)
 end
 
 function WhisperToTarget(keys)
+    PrintTable(keys)
     local caster = keys.caster
     local target = keys.target
     local myString = keys.String
-    local teamID = target:GetTeamID()
+    local teamID = target:GetTeam()
     local playerID = target:GetPlayerOwnerID()
+    
+    print(caster, target, teamID, playerID)
     
     GameRules:SendCustomMessage(myString,teamID,playerID)    
 end
 
+function PingItemInRange(keys)
+    PrintTable(keys)
+    local caster = keys.caster
+    local range = keys.Range
+    
+    print("caster info", caster:GetTeam(), caster:GetOrigin(),range)
+    --FindUnitsInRadius( iTeamNumber, vPosition, hCacheUnit, flRadius, iTeamFilter, iTypeFilter, iFlagFilter, iOrder, bCanGrowCache)
+    local unitsInRange = FindUnitsInRadius(
+        caster:GetTeam(),
+        caster:GetOrigin(),
+        nil, range,
+        DOTA_UNIT_TARGET_TEAM_BOTH,
+        DOTA_UNIT_TARGET_ALL,
+        0, 0,
+        false)
+    print("found", #unitsInRange, "units in range")
+    for key,unit in pairs(unitsInRange) do
+        print("loop", key, unit)
+        if unit:GetName() == "item_greater_clarity" then
+            print("pinging", unit, "at", unit.GetAbsOrigin().x, unit.GetAbsOrigin().y)
+            ParticleManager:CreateParticle("particles/ui_mouseactions/ping_world.vpcf", unit, caster)
+            unit:EmitSound("sounds/ui/ping.vsnd")
+        end
+    end
+    
+end

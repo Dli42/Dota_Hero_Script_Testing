@@ -5,7 +5,7 @@
 
     "consumables"
     {
-        "item"      "ITEM_NAME"
+        "item"      "item_greater_clarity"
     }
 
     "attributes"
