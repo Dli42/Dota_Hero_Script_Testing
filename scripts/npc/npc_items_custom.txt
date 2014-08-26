@@ -86,6 +86,7 @@
 
 		// General
 		//-------------------------------------------------------------------------------------------------------------
+        "ID"							"1700"	
         "AbilityBehavior"               "DOTA_ABILITY_BEHAVIOR_UNIT_TARGET | DOTA_ABILITY_BEHAVIOR_CHANNELLED"
         "AbilityUnitTargetTeam"	        "DOTA_UNIT_TARGET_TEAM_FRIENDLY"
 		"AbilityUnitTargetType"		    "DOTA_UNIT_TARGET_HERO"
@@ -111,10 +112,9 @@
 		"ItemInitialCharges"			"5"
 		"ItemRequiresCharges"			"1"
 		"ItemPurchasable"				"1"
-		"SecretShop"					"1"
 		"ItemBaseLevel"					"1"
 
-		"OnSpellStart"
+		"OnChannelSucceeded"
 		{
 			"SpendCharge"
 			{}
@@ -146,9 +146,8 @@
 
 		// General
 		//-------------------------------------------------------------------------------------------------------------
+        "ID"							"1701"	
         "AbilityBehavior"               "DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE"
-        "AbilityUnitTargetTeam"	        "DOTA_UNIT_TARGET_TEAM_FRIENDLY"
-		"AbilityUnitTargetType"		    "DOTA_UNIT_TARGET_HERO"
 		"BaseClass"						"item_datadriven"
         "AbilityTextureName"			"item_stimpack"
 
@@ -167,7 +166,6 @@
 		"ItemAlertable"					"1"
 		"ItemAliases"					"stim"
 		"ItemPurchasable"				"1"
-		"SecretShop"					"1"
 		"ItemBaseLevel"					"1"
 
 		"OnSpellStart"
@@ -176,14 +174,16 @@
             "Damage"
             {
                 "Target"        "CASTER"
-                "HealAmount"	"%hurt_amount"
+                "Type"          "DAMAGE_TYPE_MAGICAL"
+                "Damage"	    "%hurt_amount"
             }
             
             "ApplyModifier"
-            {
-                "ModifierName"  "modifier_stim_buff"
-                "Target"        "CASTER"
-            }           
+			{
+				"Target"				"CASTER"
+				"Duration"				"%duration"
+				"ModifierName"			"modifier_stim_buff"
+			}
             
         }
         
@@ -193,7 +193,7 @@
         {
             "modifier_stim_buff"
             {
-                "Duration"  "%duration"
+                "Target"    "CASTER"
                 "Properties"
                 {
                     "MODIFIER_PROPERTY_MOVESPEED_BONUS_CONSTANT"    "%bonus_movespeed"
@@ -226,6 +226,11 @@
 				"var_type"			"FIELD_FLOAT"
 				"bonus_attackspeed"	"10.0"
 			}
+            "05"
+            {
+                "var_type"			"FIELD_FLOAT"
+				"duration"	        "10.0"
+            }
 		}
 	}
     
@@ -237,9 +242,10 @@
 
 		// General
 		//-------------------------------------------------------------------------------------------------------------
+        "ID"							"1702"	
         "AbilityBehavior"               "DOTA_ABILITY_BEHAVIOR_POINT_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE"
 		"BaseClass"						"item_datadriven"
-        "AbilityTextureName"			"item_stimpack"
+        "AbilityTextureName"			"item_clairvoyance"
 
 		// Stats		
 		//-------------------------------------------------------------------------------------------------------------
@@ -254,28 +260,49 @@
 		"ItemDeclarations"				"DECLARE_PURCHASES_TO_SPECTATORS"
 		"ItemDisassembleRule"			"0"
 		"ItemAlertable"					"1"
-		"ItemAliases"					"stim"
+		"ItemAliases"					"scan"
 		"ItemPurchasable"				"1"
-		"SecretShop"					"1"
+		"SecretShop"					"0"
 		"ItemBaseLevel"					"1"
 
 		"OnSpellStart"
 		{            
-            
+            "SpawnUnit"
+            {
+                "UnitName"          "dummy_spotter"
+				"UnitCount"			"1"
+				"UnitLimit"			"64"
+				"SpawnRadius"		"0"
+				"Duration"			"%duration"
+				"Target"			"POINT"
+                
+                "OnSpawn"
+                {
+                    "ApplyModifier"
+                    {
+                        "Target"				"TARGET"
+                        "Duration"				"%duration"
+                        "ModifierName"			"dummy_modifier"
+                    }
+                }
+            }
         }
         
         // Modifiers
         //-------------------------------------------------------------------------------------------------------------
         "Modifiers"
         {
-            "modifier_stim_buff"
+            "dummy_modifier"
             {
-                "Duration"  "%duration"
-                "Properties"
-                {
-                    "MODIFIER_PROPERTY_MOVESPEED_BONUS_CONSTANT"    "%bonus_movespeed"
-                    "MODIFIER_PROPERTY_ATTACKSPEED_BONUS_CONSTANT"  "%bonus_attackspeed"
-                }
+                "Target"				"TARGET"
+				"IsHidden"              "1"    
+				"States"
+				{
+					"MODIFIER_STATE_UNSELECTABLE"   "MODIFIER_STATE_VALUE_ENABLED"
+					"MODIFIER_STATE_INVULNERABLE"   "MODIFIER_STATE_VALUE_ENABLED"
+					"MODIFIER_STATE_NOT_ON_MINIMAP" "MODIFIER_STATE_VALUE_ENABLED"
+					"MODIFIER_STATE_FLYING"         "MODIFIER_STATE_VALUE_ENABLED"
+				}
             }
         }
         
@@ -286,22 +313,7 @@
 			"01"
 			{
 				"var_type"			"FIELD_INTEGER"
-				"hurt_amount"		"100"
-			}
-            "02"
-			{
-				"var_type"			"FIELD_INTEGER"
-				"bonus_movespeed"	"100"
-			}
-            "03"
-			{
-				"var_type"			"FIELD_INTEGER"
-				"bonus_attackspeed"	"100"
-			}
-            "04"
-			{
-				"var_type"			"FIELD_FLOAT"
-				"bonus_attackspeed"	"10.0"
+				"duration"		    "5"
 			}
 		}
 	}

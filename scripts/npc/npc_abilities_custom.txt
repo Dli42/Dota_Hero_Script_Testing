@@ -1509,6 +1509,90 @@
             }
         }
     }
+    
+    //=================================================================================================================
+    // Spinning Pile Driver
+    //=================================================================================================================
+    "spinning_pile_driver"
+    {
+        // General
+        //-------------------------------------------------------------------------------------------------------------
+        "BaseClass"                     "ability_datadriven"
+        "AbilityBehavior"               "DOTA_ABILITY_BEHAVIOR_UNIT_TARGET | DOTA_ABILITY_BEHAVIOR_IGNORE_BACKSWING"
+        "AbilityUnitTargetTeam"	        "DOTA_UNIT_TARGET_TEAM_ENEMY"
+		"AbilityUnitTargetType"		    "DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_CREEP"
+        "AbilityTextureName"            "tiny_toss"
+
+        // Casting
+        //-------------------------------------------------------------------------------------------------------------
+        "AbilityCastPoint"              "0.0 0.0 0.0 0.0 0.0"
+
+        // Time        
+        //-------------------------------------------------------------------------------------------------------------
+        "AbilityCooldown"               "0"
+        "AbilityCastRange"				"50"
+
+        // Cost
+        //-------------------------------------------------------------------------------------------------------------
+        "AbilityManaCost"               "0"
+        
+        // Stats
+        //-------------------------------------------------------------------------------------------------------------
+        "MaxLevel"                      "4"
+        
+        "OnSpellStart"
+        {
+            "CreateThinker"
+            {
+                "ModifierName"  "spin_thinker"
+                "Target"        "CASTER"
+            }
+            
+            "RunScript"
+            {
+                "ScriptFile"    "custom_scripted_abilities.lua"
+                "Function"      "FinalAtomicBuster_part_2"
+                "Target"        "CASTER"
+            }
+            
+            "Knockback"
+            {
+                "Height"            "450"
+                "Distance"          "0"
+                "Target"            "CASTER"
+                "Duration"          "1"
+            }
+            
+            "Knockback"
+            {
+                "Height"            "450"
+                "Distance"          "0"
+                "Target"            "TARGET"
+                "Duration"          "1"
+            }
+            
+        }
+        
+        
+        "Modifiers"
+        {
+            "spin_thinker"
+            {
+                "Duration"      "1.0"
+                "ThinkInterval" "0.05"
+                
+                "OnIntervalThink"
+                {
+                    "RunScript"
+                    {
+                        "ScriptFile"    "custom_scripted_abilities.lua"
+                        "Function"      "SpinHero"
+                        "Angle"         "36"
+                    }
+                }
+            }
+        }
+    }
 
     //=================================================================================================================
     // Atomic Buster
@@ -1519,6 +1603,8 @@
         //-------------------------------------------------------------------------------------------------------------
         "BaseClass"                     "ability_datadriven"
         "AbilityBehavior"               "DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IGNORE_BACKSWING"
+        "AbilityUnitTargetTeam"	        "DOTA_UNIT_TARGET_TEAM_ENEMY"
+		"AbilityUnitTargetType"		    "DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_CREEP"
         "AbilityTextureName"            "tiny_toss"
 
         // Casting
@@ -1551,7 +1637,21 @@
         
         "Modifiers"
         {
-            
+            "spin_thinker"
+            {
+                "Duration"      "1.0"
+                "ThinkInterval" "0.05"
+                
+                "OnIntervalThink"
+                {
+                    "RunScript"
+                    {
+                        "ScriptFile"    "custom_scripted_abilities.lua"
+                        "Function"      "SpinHero"
+                        "Angle"         "36"
+                    }
+                }
+            }
         }
     }
     
@@ -1589,7 +1689,7 @@
             {
                 "ScriptFile"    "custom_scripted_abilities.lua"
                 "Function"      "RiflemanRocketJump"
-                "Target"        "TARGET"
+                "Target"        "POINT"
             }
             
         }

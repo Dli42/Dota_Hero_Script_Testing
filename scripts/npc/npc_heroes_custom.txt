@@ -142,8 +142,8 @@
         "AbilityLayout"         "5"        
 
         "Ability1"              "flamethrower_ability"
-        "Ability2"              "custom_hurt_heal"
-        "Ability3"              "atomic_buster"
+        "Ability2"              "spinning_test"
+        "Ability3"              "spinning_pile_driver"
         "Ability4"              "rocket_jump"
         "Ability5"              ""
         "Ability6"              "attribute_bonus"
