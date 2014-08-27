@@ -1758,6 +1758,7 @@
                 "Target"        "CASTER"
                 "Range"         "1400"
                 "ItemName"      "item_greater_clarity"
+                "Color"         "255 0 0"
             }
         }
         
@@ -1775,7 +1776,7 @@
                         "ScriptFile"    "custom_scripted_abilities.lua"
                         "Function"      "WhisperToTarget"
                         "Target"        "CASTER"
-                        "String"        "<b><font color='#FF1100' size = '10'>You are THE THING</font></b>"
+                        "String"        "<b><font color='#FF1100' size = '64'>You are <\n>THE THING</font></b>"
                     }
                 }
             }

@@ -488,21 +488,28 @@ function PingItemInRange(keys)
     local caster = keys.caster
     local range = keys.Range
     local itemName = keys.ItemName
+    local sColor = keys.Color
+    local stringParse = string.gmatch(sColor, "%d+")
+    
+    local redVal = tonumber(stringParse())
+    local greenVal = tonumber(stringParse())
+    local blueVal = tonumber(stringParse())
     
     print("caster info", caster:GetTeam(), caster:GetOrigin(),range)
     --FindInSphere(handle startFrom, Vector origin, float maxRadius)
-    local entitiesInRange = FindInSphere(
-        nil,
-        caster:GetOrigin(),
-        range)
-    print("found", #entitiesInRange, "units in range")
-    for key,entity in pairs(entitiesInRange) do
-        print("loop", key, entity)
-        if entity:GetName() == itemName then
-            print("pinging", entity, "at", entity.GetAbsOrigin().x, entity.GetAbsOrigin().y)
-            ParticleManager:CreateParticle("particles/ui_mouseactions/ping_world.vpcf", entity, caster)
-            entity:EmitSound("sounds/ui/ping.vsnd")
+    local ent = Entities:FindInSphere(nil, caster:GetOrigin(), range)
+
+    while ent ~= nil do
+        if ent:GetName() == itemName then
+            print("pinging", ent, "at", ent:GetAbsOrigin().x, ent:GetAbsOrigin().y, ent:GetAbsOrigin().z)
+            --maybe use CreateParticleForPlayer(string particleName, int particleAttach, handle owningEntity, handle owningPlayer)
+            local thisParticle = ParticleManager:CreateParticle("particles/ui_mouseactions/ping_world.vpcf", PATTACH_ABSORIGIN, ent)
+            ParticleManager:SetParticleControl(thisParticle, 0, ent:GetAbsOrigin())
+            ParticleManager:SetParticleControl(thisParticle, 1, Vector(redVal, greenVal, blueVal))
+            ParticleManager:ReleaseParticleIndex(thisParticle)
+            ent:EmitSound("sounds/ui/ping.vsnd")
         end
+        ent = Entities:FindInSphere(ent, caster:GetOrigin(), range)
     end    
 end
 
