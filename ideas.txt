@@ -20,6 +20,28 @@ Essence of Bees: Special 1, Special 1, Special 2, Special 3 OR Special 1, Specia
 Twin Island Potion: 3x Blue Herb, 3x Yellow Herb or 3x Purple Herb, 3x Orange Herb
 Acid Potion : Special  1, Special 1 , Special 2 , Special 2 , River Stem , River Stem
 
+    local inventory = {"item1", "item2", "item1","gum"}
+
+    local craftTable = {}
+    craftTable["item1"] = 2
+    craftTable["item2"] = 1
+    craftTable["gum"] = 1
+
+    local myCraft = {}
+    for key,value in pairs(inventory ) do
+        if myCraft[value] == nil then
+            myCraft[value] = 0
+        end
+        
+        myCraft[value] = myCraft[value] + 1
+    end
+
+    if table.sort(craftTable) == table.sort(myCraft) then
+        print("Match")
+    else
+        print("No match")
+    end
+
 http://hex6.se/dota/modifier_functions.txt
 
 item:GetCurrentCharges
