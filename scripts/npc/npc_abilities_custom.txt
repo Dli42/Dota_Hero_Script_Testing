@@ -1604,6 +1604,52 @@
     }
     
     //=================================================================================================================
+    // Gatherer Item Radar
+    //=================================================================================================================
+    "gatherer_item_radar"
+    {
+        // General
+        //-------------------------------------------------------------------------------------------------------------
+        "BaseClass"                     "ability_datadriven"
+        "AbilityBehavior"               "DOTA_ABILITY_BEHAVIOR_NO_TARGET"
+        "AbilityTextureName"            "earth_spirit_magnetize"
+        
+
+        "precache"
+        {
+            "soundfile"                  "sounds/ui/ping.vsnd"
+            "particle_folder"            "particles/ui_mouseactions"
+            "particle_folder"            "particles/units/heroes/hero_crystalmaiden"
+            "particle_folder"            "particles/generic_gameplay"
+        }
+        
+        "OnSpellStart"
+        {            
+            "RunScript"
+            {
+                "ScriptFile"    "custom_scripted_abilities.lua"
+                "Function"      "PingItemInRange"
+                "Target"        "CASTER"
+                "Range"         "1400"
+                "ItemName"      "item_greater_clarity"
+                "Color"         "255 0 0"
+                "Items"
+                {
+                    "item_greater_clarity"  "255 0 0"
+                    "item_medpack"          "255 255 255"
+                }
+            }
+        }
+        
+        // Modifiers
+        //-------------------------------------------------------------------------------------------------------------    
+        "Modifiers"
+        {
+        
+        }
+    }
+    
+    //=================================================================================================================
     // Ensnare
     //=================================================================================================================
     "hunter_ensnare"
@@ -1690,7 +1736,7 @@
                     {
                         "Target"            "CASTER"
                         "EffectName"        "particles/units/heroes/hero_crystalmaiden/maiden_frostbite_buff_base.vpcf"
-                        "EffectAttachType"    "follow_origin"
+                        "EffectAttachType"  "follow_origin"
                     }
                 }
                 
@@ -1776,7 +1822,7 @@
                         "ScriptFile"    "custom_scripted_abilities.lua"
                         "Function"      "WhisperToTarget"
                         "Target"        "CASTER"
-                        "String"        "<b><font color='#FF1100' size = '64'>You are <\n>THE THING</font></b>"
+                        "String"        "<b><font color='#FF1100' size = '64'>You are </br>THE THING</font></b>"
                     }
                 }
             }
