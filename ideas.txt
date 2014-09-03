@@ -1,46 +1,9 @@
-Spirit of Wind: River Stem, River Stem
-Spirit of Water: River Root, River Root
-Anabolic Potion: River Stem, River Stem, River Stem, River Stem, River Stem, River Stem,
-Mana Potion I: Butsu, River Stem
-Mana Potion III: Butsu, Butsu, River Stem, River Stem
-Mana Potion IV: Butsu, Butsu, Butsu, River Stem, River Stem, River Stem
-Healing Potion I: Butsu, River Root
-Healing Potion III: Butsu, Butsu, River Root, River Root
-Healing Potion IV: Butsu, Butsu, Butsu, River Root, River Root, River Root
-Dark Rock: River Stem, River Stem, River Root, River Root, Butsu, Butsu
-Fervor Potion: Special 1, Special 1, Special 1, Butsu
-Disease Potion: Special 1, Special 1, Special 2, Special 2, River Root
-Nether Potion: Special 1, River Stem, River Stem, Butsu, Butsu
-Drunk Potion: Special 1, River Root, River Root, River Root, Butsu
-Elemental Shield Potion: Special 1, River Stem, River Stem, River Stem, River Root
-Anti Magic Potion: Any 2 or more Special Herbs that doesn't mix into other recipes.
-Gem Of Knowledge: Blue Herb, Yellow Herb or Purple Herb, Orange Herb
-Cure All: Butsu, Butsu, Butsu, Butsu, Butsu, Butsu
-Essence of Bees: Special 1, Special 1, Special 2, Special 3 OR Special 1, Special 2, Special 3, Special 4
-Twin Island Potion: 3x Blue Herb, 3x Yellow Herb or 3x Purple Herb, 3x Orange Herb
-Acid Potion : Special  1, Special 1 , Special 2 , Special 2 , River Stem , River Stem
+local itemTable
 
-    local inventory = {"item1", "item2", "item1","gum"}
-
-    local craftTable = {}
-    craftTable["item1"] = 2
-    craftTable["item2"] = 1
-    craftTable["gum"] = 1
-
-    local myCraft = {}
-    for key,value in pairs(inventory ) do
-        if myCraft[value] == nil then
-            myCraft[value] = 0
-        end
-        
-        myCraft[value] = myCraft[value] + 1
+for key,value in pairs(itemTable) do
+    if originalItem:GetName() == value then
     end
-
-    if table.sort(craftTable) == table.sort(myCraft) then
-        print("Match")
-    else
-        print("No match")
-    end
+end
 
 http://hex6.se/dota/modifier_functions.txt
 
