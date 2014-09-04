@@ -1680,7 +1680,7 @@
         //-------------------------------------------------------------------------------------------------------------
         "MaxLevel"                      "1"
         
-        "OnProjectileHitUnit"
+        "OnProjectileFinish"
         {            
             "RunScript"
             {
@@ -1692,7 +1692,7 @@
         
         "Modifiers"
         {
-            "modifier_ensnare_troll"
+            "modifier_ensnare_hero"
             {
                 "IsHidden"	"1"
                 "Duration"  "3.5"
@@ -1705,6 +1705,66 @@
             "modifier_ensnare_animal"
             {
                 "IsHidden"	"1"
+                "Duration"  "8.0"
+                "States"
+                {
+                    "MODIFIER_STATE_ROOTED" "MODIFIER_STATE_VALUE_ENABLED"
+                }
+            }
+        }
+    }
+    
+    //=================================================================================================================
+    // Track
+    //=================================================================================================================
+    "ability_hunter_track"
+    {
+        // General
+        //-------------------------------------------------------------------------------------------------------------
+        "BaseClass"                     "ability_datadriven"
+        "AbilityBehavior"               "DOTA_ABILITY_BEHAVIOR_UNIT_TARGET"
+        "AbilityTextureName"            "ability_hunter_ensnare"
+
+        // Casting
+        //-------------------------------------------------------------------------------------------------------------
+        "AbilityCastPoint"              "0.0 0.0 0.0 0.0"
+
+        // Time        
+        //-------------------------------------------------------------------------------------------------------------
+        "AbilityCooldown"               "10"
+        "AbilityCastRange"				"700"
+
+        // Cost
+        //-------------------------------------------------------------------------------------------------------------
+        "AbilityManaCost"               "0"
+        
+        // Stats
+        //-------------------------------------------------------------------------------------------------------------
+        "MaxLevel"                      "4"
+        
+        "OnProjectileHitUnit"
+        {            
+            "RunScript"
+            {
+                "ScriptFile"    "custom_scripted_abilities.lua"
+                "Function"      "EnsnareUnit"
+                "Target"        "TARGET"
+            }            
+        }
+        
+        "Modifiers"
+        {
+            "modifier_track_hero"
+            {
+                "Duration"  "3.5"
+                "States"
+                {
+                    "MODIFIER_STATE_ROOTED" "MODIFIER_STATE_VALUE_ENABLED"
+                }
+            }
+            
+            "modifier_track_animal"
+            {
                 "Duration"  "8.0"
                 "States"
                 {

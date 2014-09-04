@@ -530,6 +530,20 @@ function EnsnareUnit(keys)
         dur = 3.5
     end
     
-    target:AddNewModifier(caster, nil, "modifier_meepo_earthbind", { duration = dur})
+    target:AddNewModifier(caster, nil, "modifier_meepo_earthbind", { duration = dur})    
+end
+
+function TrackUnit(keys)
+    local caster = keys.caster
+    local target = keys.target
+    local targetName = target:GetName()
+    local dur = keys.duration
+    if (string.find(targetName,"hero") == nil) then --if the target's name does not include "hero", ie an animal
+        dur = 30.0
+    end
+    
+    target:AddNewModifier(caster, nil, "modifier_track_hero", { duration = dur})
     
 end
+
+
