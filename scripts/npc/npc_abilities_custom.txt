@@ -1645,20 +1645,23 @@
         //-------------------------------------------------------------------------------------------------------------    
         "Modifiers"
         {
-        
+            "modifier_snare"
+            {
+                
+            }
         }
     }
     
     //=================================================================================================================
     // Ensnare
     //=================================================================================================================
-    "hunter_ensnare"
+    "ability_hunter_ensnare"
     {
         // General
         //-------------------------------------------------------------------------------------------------------------
         "BaseClass"                     "ability_datadriven"
         "AbilityBehavior"               "DOTA_ABILITY_BEHAVIOR_UNIT_TARGET"
-        "AbilityTextureName"            "meepo_earthbind"
+        "AbilityTextureName"            "ability_hunter_ensnare"
 
         // Casting
         //-------------------------------------------------------------------------------------------------------------
@@ -1666,8 +1669,8 @@
 
         // Time        
         //-------------------------------------------------------------------------------------------------------------
-        "AbilityCooldown"               "0"
-        "AbilityCastRange"				"1000"
+        "AbilityCooldown"               "10"
+        "AbilityCastRange"				"700"
 
         // Cost
         //-------------------------------------------------------------------------------------------------------------
@@ -1675,7 +1678,7 @@
         
         // Stats
         //-------------------------------------------------------------------------------------------------------------
-        "MaxLevel"                      "4"
+        "MaxLevel"                      "1"
         
         "OnProjectileHitUnit"
         {            
@@ -1689,7 +1692,25 @@
         
         "Modifiers"
         {
+            "modifier_ensnare_troll"
+            {
+                "IsHidden"	"1"
+                "Duration"  "3.5"
+                "States"
+                {
+                    "MODIFIER_STATE_ROOTED" "MODIFIER_STATE_VALUE_ENABLED"
+                }
+            }
             
+            "modifier_ensnare_animal"
+            {
+                "IsHidden"	"1"
+                "Duration"  "8.0"
+                "States"
+                {
+                    "MODIFIER_STATE_ROOTED" "MODIFIER_STATE_VALUE_ENABLED"
+                }
+            }
         }
     }
     

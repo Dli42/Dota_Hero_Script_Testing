@@ -524,6 +524,12 @@ end
 function EnsnareUnit(keys)
     local caster = keys.caster
     local target = keys.target
-    local duration = keys.Duration
+    local targetName = target:GetName()
+    local dur = 8.0
+    if (string.find(targetName,"hero") ~= nil) then --if the target's name includes "hero"
+        dur = 3.5
+    end
+    
+    target:AddNewModifier(caster, nil, "modifier_meepo_earthbind", { duration = dur})
     
 end
