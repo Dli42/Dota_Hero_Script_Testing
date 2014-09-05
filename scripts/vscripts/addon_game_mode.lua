@@ -2,6 +2,7 @@ require('util')
 require('action_test')
 require('physics')
 require('timers')
+require('custom_scripted_abilities')
 
 -- Generated from template
 
@@ -24,6 +25,9 @@ function Precache( context )
     PrecacheResource( "particle", "particles/units/heroes/hero_venomancer/venomancer_plague_ward_projectile.vpcf", context )
     PrecacheUnitByNameSync('npc_precache_everything', context)
     PrecacheModel("models/heroes/venomancer/venomancer_ward.mdl", context)
+    PrecacheModel("models/props_debris/camp_fire001.vmdl", context)
+    PrecacheResource( "soundfile","soundevents/game_sounds_heroes/game_sounds_gyrocopter.vsndevts",context)
+    PrecacheResource( "particle","particles/dire_fx/fire_barracks_glow_b.vpcf",context)
 end
 
 -- Create the game mode when we activate
@@ -32,9 +36,27 @@ function Activate()
 	GameRules.AddonTemplate:InitGameMode()
 end
 
+if ITT_GameMode == nil then
+    print("Script execution begin")
+    ITT_GameMode = class({})
+    -- LoadKeyValues(filename a) 
+end
+
 function CAddonTemplateGameMode:InitGameMode()
 	print( "Template addon is loaded." )
 	GameRules:GetGameModeEntity():SetThink( "OnThink", self, "GlobalThink", 2 )
+    
+    ListenToGameEvent('dota_item_picked_up', Dynamic_Wrap(ITT_GameMode, 'OnItemPickedUp'), self)
+    
+end
+
+function ITT_GameMode:OnItemPickedUp(event)
+        local hero = EntIndexToHScript( event.HeroEntityIndex )
+        local hasTelegather = hero:HasModifier("modifier_telegather")
+        
+        if hasTelegather then
+            RadarTelegather(event)
+        end
 end
 
 -- Evaluate the state of the game

@@ -536,4 +536,64 @@
         //Inventory
         "HasInventory"                  "0"
     }
+    
+    //=================================================================================
+	// Building: Fire (basic)
+	//=================================================================================
+	"npc_building_fire_basic"
+	{
+		// General
+		"BaseClass"				"npc_dota_venomancer_plagueward"
+		"Model"					"models/props_debris/camp_fire001.vmdl"	// Model.
+		"ModelScale"            "2.0"
+        "SoundSet"				"Creep_Good_Melee"		
+
+		"MinimapIconSize"		"250"
+		"HealthBarOffset"		"100"
+
+		"BoundsHullName"		"DOTA_HULL_SIZE_TOWER"
+		"RingRadius"			"100"	
+
+		// Abilities
+        "Ability1"                    ""            // Ability 1.
+        "Ability2"                    ""            // Ability 2.
+        "Ability3"                    ""            // Ability 3.
+        "Ability4"                    ""            // Ability 4.
+
+		// Armor
+		"ArmorPhysical"			"5"
+		"MagicalResistance"		"0"	
+
+        "GameSoundsFile"	    "soundevents/game_sounds_heroes/game_sounds_gyrocopter.vsndevts"
+        "ParticleFile"			"particles/dire_fx/fire_barracks_glow_b.vpcf"
+
+		// Attack
+		"AttackCapabilities"	"DOTA_UNIT_CAP_NO_ATTACK"
+
+		// Bounty
+		"BountyXP"				"0"	
+		"BountyGoldMin"			"0"	
+		"BountyGoldMax"			"0"	
+		
+		// Movement
+		"MovementCapabilities"	"DOTA_UNIT_CAP_MOVE_NONE"			
+		"MovementSpeed"			"0"			
+		"MovementTurnRate"		"0"			
+
+		// Status
+		"StatusHealth"			"125"	
+		"StatusHealthRegen"		"0"	
+		"StatusMana"			"1"	
+		"StatusManaRegen"		"0"
+
+		// Team
+		"TeamName"				"DOTA_TEAM_GOODGUYS"
+		"CombatClassDefend"		"DOTA_COMBAT_CLASS_DEFEND_WEAK"		
+
+		"UnitRelationshipClass"	"DOTA_NPC_UNIT_RELATIONSHIP_TYPE_BUILDING"
+		
+		// Vision
+		"VisionDaytimeRange"	"0"
+		"VisionNighttimeRange"	"0"
+	}
 }

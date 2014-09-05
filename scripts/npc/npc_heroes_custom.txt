@@ -139,14 +139,19 @@
         
         // Abilities
         //-------------------------------------------------------------------------------------------------------------
-        "AbilityLayout"         "5"        
+        "AbilityLayout"         "6"        
 
-        "Ability1"              "flamethrower_ability"
-        "Ability2"              "spinning_test"
-        "Ability3"              "spinning_pile_driver"
-        "Ability4"              "rocket_jump"
-        "Ability5"              "modifier_infected_blood_applier"
-        "Ability6"              "attribute_bonus"
+        "Ability1"              "ability_gatherer_itemradar"
+        "Ability2"              "ability_gatherer_radarmanipulations"
+        "Ability3"              "ability_gatherer_telegather"
+        "Ability4"              "ability_empty4"
+        "Ability5"              "ability_empty5"
+        "Ability6"              "ability_empty6"
+        "Ability7"              "ability_gatherer_findmushroomstickortinder"
+        "Ability8"              "ability_gatherer_findhide"
+        "Ability9"              "ability_gatherer_findclayballcookedmeatorbone"
+        "Ability10"             "ability_gatherer_findmanacrystalorstone"
+        //ability_gatherer_mixherbs
         
         // Armor
         //-------------------------------------------------------------------------------------------------------------
