@@ -2660,6 +2660,232 @@
 		"BaseClass" 					"ability_datadriven"
 		"AbilityTextureName"            "rubick_empty1"
 	}
+    
+    //=================================================================================================================
+	// Ability: The One Critical Strike
+	//=================================================================================================================
+	"ability_the_one_criticalstike"
+	{
+		// General
+		//-------------------------------------------------------------------------------------------------------------
+		"BaseClass"						"ability_datadriven"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+		"AbilityUnitDamageType"			"DAMAGE_TYPE_PHYSICAL"
+		"AbilityTextureName" 			"slardar_bash"	
+		
+		// Stats
+		//-------------------------------------------------------------------------------------------------------------
+		"Modifiers"
+		{
+			"the_one_criticalstrike_passive"
+			{
+				"Passive" "1"
+				"OnAttackStart"
+				{
+					"Random"
+					{
+						"Chance" "%chance"
+						"PseudoRandom" "DOTA_PSEUDO_RANDOM_PHANTOMASSASSIN_CRIT"    //not necessary, pending balance
+						"OnSuccess"
+						{
+							"ApplyModifier"
+							{
+								"Target"	   "CASTER"
+								"ModifierName" "the_one_critical"
+							}							
+						}
+					}
+				}
+			}
+
+			"the_one_critical"
+			{
+                "Properties"
+				{
+					"MODIFIER_PROPERTY_PREATTACK_CRITICALSTRIKE"   "%crit_bonus"
+				}                
+			}
+		}
+
+		// Special
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"chance"				"20"
+			}
+			"02"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"crit_bonus"		    "200"
+			}
+		}
+	}
+    
+    //=================================================================================================================
+	// Ability: The One Pulverize
+	//=================================================================================================================
+	"ability_the_one_pulverize"
+	{
+		// General
+		//-------------------------------------------------------------------------------------------------------------
+		"BaseClass"						"ability_datadriven"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+		"AbilityUnitDamageType"			"DAMAGE_TYPE_PHYSICAL"
+		"AbilityTextureName" 			"lone_druid_demolish"	
+		
+		// Stats
+		//-------------------------------------------------------------------------------------------------------------
+		"Modifiers"
+		{
+			"the_one_pulverize_passive"
+			{
+				"Passive" "1"
+				"OnAttackLanded"
+				{
+					"Random"
+					{
+						"Chance" "%chance"
+						"PseudoRandom" "DOTA_PSEUDO_RANDOM_PHANTOMASSASSIN_CRIT"    //not necessary, pending balance
+						"OnSuccess"
+						{
+							"ApplyModifier"
+							{
+								"Target"	   "CASTER"
+								"ModifierName" "the_one_cleave"
+							}							
+						}
+					}
+				}
+			}
+
+			"the_one_cleave"
+			{
+                    "CleaveAttack"
+					{
+						"CleavePercent"		"%cleave_damage"
+						"CleaveRadius"      "%cleave_radius"
+					}
+			}
+		}
+
+		// Special
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"chance"				"20"
+			}
+			"02"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"cleave_damage"		    "40"
+			}
+            "03"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"cleave_radius"		    "200"
+			}
+		}
+	}
+    
+    //=================================================================================================================
+	// Ability: The One True Sight
+	//=================================================================================================================
+	"ability_the_one_truesight"
+	{
+		// General
+		//-------------------------------------------------------------------------------------------------------------
+		"BaseClass"						"ability_datadriven"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+		"AbilityTextureName" 			"lifestealer_rage"	
+		
+		// Stats
+		//-------------------------------------------------------------------------------------------------------------
+		"Modifiers"
+		{
+			"the_one_truesight_passive"
+			{
+				"Passive" "1"
+				"ApplyModifier"
+                {
+                    "Target"        "CASTER"
+                    "ModifierName"  "modifier_item_gem_of_true_sight"
+                }
+			}
+		}
+	}
+    
+    //=================================================================================================================
+	// Ability: The One Orb of Lightning
+	//=================================================================================================================
+	"ability_the_one_orboflightning"
+	{
+		// General
+		//-------------------------------------------------------------------------------------------------------------
+		"BaseClass"						"ability_datadriven"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+		"AbilityUnitDamageType"			"DAMAGE_TYPE_MAGICAL"
+		"AbilityTextureName" 			"razor_plasma_field"	
+		
+		// Stats
+		//-------------------------------------------------------------------------------------------------------------
+		"Modifiers"
+		{
+			"the_one_orboflightning_passive"
+			{
+				"Passive" "1"
+                
+                "Properties"
+				{
+					"MODIFIER_PROPERTY_BASEATTACK_BONUSDAMAGE"	"%damage_bonus"
+				}
+                
+				"OnAttackLanded"
+				{
+					"Random"
+					{
+						"Chance" "%chance"
+						"PseudoRandom" "DOTA_PSEUDO_RANDOM_PHANTOMASSASSIN_CRIT"    //not necessary, pending balance
+						"OnSuccess"
+						{
+							"ApplyModifier"
+							{
+                                "Target"        "TARGET"
+                                "Duration"      "purge_duration"
+								"ModifierName"  "modifier_satyr_trickster_purge"
+							}							
+						}
+					}
+				}
+			}
+		}
+
+		// Special
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"chance"				"15"
+			}
+			"02"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"bonus_damage"		    "5"
+			}
+            "03"
+			{
+				"var_type"				"FIELD_FLOAT"
+				"purge_duration"		"3"
+			}
+		}
+	}
 }
 
     
