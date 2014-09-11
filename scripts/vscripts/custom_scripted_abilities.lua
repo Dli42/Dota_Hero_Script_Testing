@@ -542,7 +542,22 @@ function TrackUnit(keys)
         dur = 30.0
     end
     
+    caster:SetThink(SpotterFollowThink(trackSpotter, target))
+    
     target:AddNewModifier(caster, nil, "modifier_track_hero", { duration = dur})
+end
+
+function SpotterFollowThink(trackSpotter, targetToFollow)
+    
+    trackSpotter:SetAbsOrigin() = targetToFollow:GetAbsOrigin()
+    
+    if trackSpotter == nil then
+        return nil
+    else if targetToFollow == nil then
+        return nil
+    end
+    
+    return 0.2
 end
 
 --[[Checks unit inventory for matching recipes. If there's a match, remove all items and add the corresponding potion

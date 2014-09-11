@@ -1,9 +1,4 @@
-local itemTable
-
-for key,value in pairs(itemTable) do
-    if originalItem:GetName() == value then
-    end
-end
+dysentry track, spawn invisible units with a lifetime.
 
 http://hex6.se/dota/modifier_functions.txt
 
