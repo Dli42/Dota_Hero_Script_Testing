@@ -1722,8 +1722,11 @@
         // General
         //-------------------------------------------------------------------------------------------------------------
         "BaseClass"                     "ability_datadriven"
-        "AbilityBehavior"               "DOTA_ABILITY_BEHAVIOR_UNIT_TARGET"
-        "AbilityTextureName"            "ability_hunter_ensnare"
+        "AbilityBehavior"               "DOTA_ABILITY_BEHAVIOR_UNIT_TARGET | DOTA_ABILITY_BEHAVIOR_IGNORE_BACKSWING"
+        "AbilityUnitTargetTeam"         "DOTA_UNIT_TARGET_TEAM_ENEMY"
+        "AbilityUnitTargetType"         "DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
+        "AbilityTextureName"            "ability_hunter_track"
+        "AbilityCastAnimation"			"ACT_DOTA_ATTACK"
 
         // Casting
         //-------------------------------------------------------------------------------------------------------------
@@ -1732,7 +1735,7 @@
         // Time        
         //-------------------------------------------------------------------------------------------------------------
         "AbilityCooldown"               "10"
-        "AbilityCastRange"				"700"
+        "AbilityCastRange"				"3000"
 
         // Cost
         //-------------------------------------------------------------------------------------------------------------
@@ -1742,36 +1745,105 @@
         //-------------------------------------------------------------------------------------------------------------
         "MaxLevel"                      "4"
         
-        "OnProjectileHitUnit"
-        {            
-            "RunScript"
+        "precache"
+		{
+			"particle_folder"			"particles/units/heroes/hero_bounty_hunter"
+            "particle_folder"           "particles/units/heroes/hero_tinker"
+			//"soundfile"					"soundevents/game_sounds_heroes/"
+		}
+        
+        "OnSpellStart"
+        {
+            "TrackingProjectile"
             {
-                "ScriptFile"    "custom_scripted_abilities.lua"
-                "Function"      "EnsnareUnit"
+                "Target"            "TARGET"
+                "EffectName"        "particles/units/heroes/hero_tinker/tinker_missile.vpcf"
+                "Dodgeable"         "false"
+                "ProvidesVision"    "false"
+                "MoveSpeed"         "1000"
+                //"SourceAttachment"
+            }
+        }
+        
+        "OnProjectileHitUnit"
+        {
+            "ApplyModifier"
+            {
+                "ModifierName"  "modifier_track_hero"
                 "Target"        "TARGET"
-            }            
+                "Duration"      "%duration"
+            }
+            
+
         }
         
         "Modifiers"
         {
             "modifier_track_hero"
-            {
-                "Duration"  "3.5"
-                "States"
+            {   
+                "IsDebuff"      "1"
+                "OnCreated"
                 {
-                    "MODIFIER_STATE_ROOTED" "MODIFIER_STATE_VALUE_ENABLED"
+                    "AttachEffect"
+                    {
+                        "Target" "TARGET"
+                        "EffectName" "particles/units/heroes/hero_bounty_hunter/bounty_hunter_track_shield.vpcf"
+                        "EffectAttachType" "follow_overhead"
+                    }
+                    "AttachEffect"
+                    {
+                        "Target" "TARGET"
+                        "EffectName" "particles/units/heroes/hero_bounty_hunter/bounty_hunter_track_trail.vpcf"
+                        "EffectAttachType" "follow_origin"
+                    }
+                }
+                "Properties"
+                {
+                    "MODIFIER_PROPERTY_PHYSICAL_ARMOR_BONUS" "%minus_armor"
                 }
             }
             
-            "modifier_track_animal"
+            "dummy_spotter_modifier"
             {
-                "Duration"  "8.0"
-                "States"
+                "Target"				"TARGET"
+				"IsHidden"              "1"    
+				"States"
+				{
+					"MODIFIER_STATE_UNSELECTABLE"   "MODIFIER_STATE_VALUE_ENABLED"
+					"MODIFIER_STATE_INVULNERABLE"   "MODIFIER_STATE_VALUE_ENABLED"
+					"MODIFIER_STATE_NOT_ON_MINIMAP" "MODIFIER_STATE_VALUE_ENABLED"
+					"MODIFIER_STATE_FLYING"         "MODIFIER_STATE_VALUE_ENABLED"
+				}
+                
+                "Properties"
                 {
-                    "MODIFIER_STATE_ROOTED" "MODIFIER_STATE_VALUE_ENABLED"
+                    //By default the spotter has 600
+                    "MODIFIER_PROPERTY_BONUS_DAY_VISION"        "-400"
+                    "MODIFIER_PROPERTY_BONUS_NIGHT_VISION"      "-400"
                 }
             }
         }
+        
+        // Special
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"				"FIELD_FLOAT"
+				"duration"				"15.0 20.0 25.0"
+			}
+            "02"
+			{
+				"var_type"				"FIELD_FLOAT"
+				"cooldown"				"45.0 40.0 35.0"
+			}
+            "02"
+			{
+				"var_type"				"FIELD_FLOAT"
+				"minus_armor"			"-1 -2 -3"
+			}
+		}
     }
     
     
