@@ -616,7 +616,7 @@
 		"Ability1"						"ability_the_one_criticalstike"			// Ability 1
 		"Ability2"						"ability_the_one_pulverize"			    // Ability 2
 		"Ability3"						"ability_the_one_truesight"				// Ability 3
-		"Ability4"						"ability_hunter_ensare"					// Ability 4
+		"Ability4"						"ability_the_one_ensnare"				// Ability 4
 		"Ability5"						"ability_the_one_orboflightning"		// Ability 5
 
 		// Armor
