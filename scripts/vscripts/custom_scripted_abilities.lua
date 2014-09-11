@@ -543,7 +543,6 @@ function TrackUnit(keys)
     end
     
     target:AddNewModifier(caster, nil, "modifier_track_hero", { duration = dur})
-    
 end
 
 --[[Checks unit inventory for matching recipes. If there's a match, remove all items and add the corresponding potion
@@ -805,7 +804,13 @@ function RadarTelegather (keys)
         
         local originalItem = EntIndexToHScript(keys.ItemEntityIndex)
         local newItem = CreateItem(originalItem:GetName(), nil, nil)
-        print( "Teleporting Item", originalItem:GetName())
-        hero:RemoveItem(originalItem)
-        CreateItemOnPositionSync(targetFire:GetAbsOrigin() + RandomVector(RandomInt(100,150)),newItem)      
+        
+        local itemList = {"item_tinder", "item_flint", "item_stone", "item_stick", "item_bone", "item_meat_raw", "item_crystal_mana", "item_clay_ball", "item_river_root", "item_river_stem", "item_thistles", "item_acorn", "item_acorn_magic", "item_mushroom"}
+        for key,value in pairs(itemList) do
+            if value == originalItem:GetName() then
+                print( "Teleporting Item", originalItem:GetName())
+                hero:RemoveItem(originalItem)
+                CreateItemOnPositionSync(targetFire:GetAbsOrigin() + RandomVector(RandomInt(100,150)),newItem)
+            end
+        end
 end
