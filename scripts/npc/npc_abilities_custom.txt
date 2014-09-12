@@ -301,8 +301,8 @@
             {
                 "var_type"                  "FIELD_INTEGER"
                 "armor_bonus"               "40 60 80 100 120"
-            }
             "02"
+            }
             {
                 "var_type"                  "FIELD_INTEGER"
                 "magic_resist_bonus"        "40 60 80 100 120"
@@ -3047,6 +3047,118 @@
 			{
 				"var_type"				"FIELD_FLOAT"
 				"purge_duration"		"3.5"
+			}
+		}
+	}
+    
+    //=================================================================================================================
+	// Ability: Warrior Giant Swing
+	//=================================================================================================================
+	"ability_hunter_giantswing"
+	{
+		// General
+		//-------------------------------------------------------------------------------------------------------------
+		"BaseClass"						"ability_datadriven"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+        "AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_ENEMY"
+		"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
+		"AbilityUnitDamageType"			"DAMAGE_TYPE_PHYSICAL"
+		"AbilityTextureName" 			"ability_hunter_giantswing"	
+		
+		// Stats
+		//-------------------------------------------------------------------------------------------------------------
+		"MaxLevel"                      "3"
+        
+        "precache"
+		{
+			"particle_folder"			"particles/units/heroes/hero_axe"
+			"soundfile"					"soundevents/game_sounds_heroes/game_sounds_queenofpain.vsndevts"
+		}
+        
+        "Modifiers"
+		{
+			"hunter_giantswing_passive"
+			{
+				"Passive" "1"
+                
+                "Properties"
+				{
+					"MODIFIER_PROPERTY_BASEATTACK_BONUSDAMAGE"	"%bonus_damage"
+				}
+                
+				"OnAttackLanded"
+				{
+					"Random"
+					{
+						"Chance"    "%chance"
+						"OnSuccess"
+						{
+							"Damage"
+                            {
+                                "Type" "DAMAGE_TYPE_PHYSICAL"
+                                "Damage" "%half_damage"
+                                "Target"
+                                {
+                                    "Center" "CASTER"
+                                    "Radius" "%full_damage_range"
+                                    "Teams" "DOTA_UNIT_TARGET_TEAM_ENEMY"
+                                    "Types" "DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_CREEP | DOTA_UNIT_TARGET_MECHANICAL | DOTA_UNIT_TARGET_OTHER | DOTA_UNIT_TARGET_BUILDING"
+                                }
+                            }
+                            
+                            "Damage"
+                            {
+                                "Type" "DAMAGE_TYPE_PHYSICAL"
+                                "Damage" "%half_damage"
+                                "Target"
+                                {
+                                    "Center" "CASTER"
+                                    "Radius" "%half_damage_range"
+                                    "Teams" "DOTA_UNIT_TARGET_TEAM_ENEMY"
+                                    "Types" "DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_CREEP | DOTA_UNIT_TARGET_MECHANICAL | DOTA_UNIT_TARGET_OTHER | DOTA_UNIT_TARGET_BUILDING"
+                                }
+                            }
+                            
+                            "FireEffect"
+                            {
+                                "Target"            "CASTER"
+                                "EffectName"        "particles/units/heroes/hero_disruptor/disruptor_thunder_strike_bolt.vpcf"
+                                "EffectAttachType"  "follow_origin"
+                            }
+						}
+					}
+				}
+			}
+		}
+
+		// Special
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"				"FIELD_FLOAT"
+				"chance"				"20 22.5 25"
+			}
+			"02"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"damage"		        "10 15 20"
+			}
+            "03"
+			{
+				"var_type"				"FIELD_FLOAT"
+				"full_damage_range"		"200 225 250"
+			}
+            "04"
+			{
+				"var_type"				"FIELD_FLOAT"
+				"half_damage_range"		"400 450 500"
+			}
+            "05"
+			{
+				"var_type"				"FIELD_FLOAT"
+				"half_damage"		    "5 12.5 10"
 			}
 		}
 	}
