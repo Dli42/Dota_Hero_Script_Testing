@@ -2756,15 +2756,14 @@
 				{
 					"Random"
 					{
-						"Chance" "%chance"
-						"PseudoRandom" "DOTA_PSEUDO_RANDOM_PHANTOMASSASSIN_CRIT"    //not necessary, pending balance
+						"Chance" "%crit_chance"
 						"OnSuccess"
 						{
 							"ApplyModifier"
 							{
 								"Target"	   "CASTER"
 								"ModifierName" "the_one_critical"
-							}							
+							}		
 						}
 					}
 				}
@@ -2775,7 +2774,22 @@
                 "Properties"
 				{
 					"MODIFIER_PROPERTY_PREATTACK_CRITICALSTRIKE"   "%crit_bonus"
-				}                
+				}
+                
+                "OnAttackLanded"
+				{
+					"FireEffect"
+					{
+						"EffectName"		 "particles/units/heroes/hero_phantom_assassin/phantom_assassin_crit_impact.vpcf"
+						"EffectAttachType"	 "follow_origin"
+						"Target"			 "TARGET"
+					}
+					"RemoveModifier"
+					{
+						"ModifierName"		"the_one_critical"
+						"Target"			"CASTER"	
+					}
+				}
 			}
 		}
 
@@ -2786,7 +2800,7 @@
 			"01"
 			{
 				"var_type"				"FIELD_INTEGER"
-				"chance"				"20"
+				"crit_chance"			"15"
 			}
 			"02"
 			{
@@ -2805,12 +2819,20 @@
 		//-------------------------------------------------------------------------------------------------------------
 		"BaseClass"						"ability_datadriven"
 		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+        "AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_ENEMY"
+		"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
 		"AbilityUnitDamageType"			"DAMAGE_TYPE_PHYSICAL"
-		"AbilityTextureName" 			"lone_druid_demolish"	
+		"AbilityTextureName" 			"lone_druid_rabid"	
 		
 		// Stats
 		//-------------------------------------------------------------------------------------------------------------
-		"Modifiers"
+		"precache"
+		{
+            "particle_folder"           "particles/units/heroes/hero_magnataur"
+			"soundfile"					"soundevents/game_sounds_heroes/game_sounds_queenofpain.vsndevts"
+		}
+        
+        "Modifiers"
 		{
 			"the_one_pulverize_passive"
 			{
@@ -2819,27 +2841,18 @@
 				{
 					"Random"
 					{
-						"Chance" "%chance"
-						"PseudoRandom" "DOTA_PSEUDO_RANDOM_PHANTOMASSASSIN_CRIT"    //not necessary, pending balance
+						"Chance" "%pulverize_chance"
 						"OnSuccess"
 						{
-							"ApplyModifier"
-							{
-								"Target"	   "CASTER"
-								"ModifierName" "the_one_cleave"
-							}							
+							"CleaveAttack"
+                            {
+                                "CleavePercent"		"%cleave_damage"
+                                "CleaveRadius"      "%cleave_radius"                                
+                                "CleaveEffect"      "particles/units/heroes/hero_magnataur/magnataur_empower_cleave_effect.vpcf"
+                            }
 						}
 					}
 				}
-			}
-
-			"the_one_cleave"
-			{
-                    "CleaveAttack"
-					{
-						"CleavePercent"		"%cleave_damage"
-						"CleaveRadius"      "%cleave_radius"
-					}
 			}
 		}
 
@@ -2850,17 +2863,17 @@
 			"01"
 			{
 				"var_type"				"FIELD_INTEGER"
-				"chance"				"20"
+				"pulverize_chance"		"20"
 			}
 			"02"
 			{
 				"var_type"				"FIELD_INTEGER"
-				"cleave_damage"		    "40"
+				"cleave_damage"		    "200"
 			}
             "03"
 			{
 				"var_type"				"FIELD_INTEGER"
-				"cleave_radius"		    "200"
+				"cleave_radius"		    "500"
 			}
 		}
 	}
@@ -2874,7 +2887,7 @@
 		//-------------------------------------------------------------------------------------------------------------
 		"BaseClass"						"ability_datadriven"
 		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
-		"AbilityTextureName" 			"lifestealer_rage"	
+		"AbilityTextureName" 			"life_stealer_rage"	
 		
 		// Stats
 		//-------------------------------------------------------------------------------------------------------------
@@ -2883,10 +2896,13 @@
 			"the_one_truesight_passive"
 			{
 				"Passive" "1"
-				"ApplyModifier"
+                "OnCreated"
                 {
-                    "Target"        "CASTER"
-                    "ModifierName"  "modifier_item_gem_of_true_sight"
+                    "ApplyModifier"
+                    {
+                        "Target"        "CASTER"
+                        "ModifierName"  "modifier_greevil_truesight"
+                    }
                 }
 			}
 		}
@@ -2901,6 +2917,8 @@
         //-------------------------------------------------------------------------------------------------------------
         "BaseClass"                     "ability_datadriven"
         "AbilityBehavior"               "DOTA_ABILITY_BEHAVIOR_UNIT_TARGET"
+        "AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_ENEMY"
+		"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
         "AbilityTextureName"            "ability_hunter_ensnare"
 
         // Casting
@@ -2920,7 +2938,26 @@
         //-------------------------------------------------------------------------------------------------------------
         "MaxLevel"                      "1"
         
-        "OnProjectileFinish"
+        "precache"
+		{
+			"particle_folder"			"particles/units/heroes/hero_meepo"
+			//"soundfile"					"soundevents/game_sounds_heroes/"
+		}
+        
+        "OnSpellStart"
+        {
+            "TrackingProjectile"
+            {
+                "Target"            "TARGET"
+                "EffectName"        "particles/units/heroes/hero_meepo/meepo_earthbind_projectile_fx.vpcf"
+                "Dodgeable"         "false"
+                "ProvidesVision"    "false"
+                "MoveSpeed"         "600"
+                "SourceAttachment"  "DOTA_PROJECTILE_ATTACHMENT_NONE"
+            }
+        }
+        
+        "OnProjectileHitUnit"
         {            
             "RunScript"
             {
@@ -2940,12 +2977,22 @@
 		//-------------------------------------------------------------------------------------------------------------
 		"BaseClass"						"ability_datadriven"
 		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+        "AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_ENEMY"
+		"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
 		"AbilityUnitDamageType"			"DAMAGE_TYPE_MAGICAL"
 		"AbilityTextureName" 			"razor_plasma_field"	
 		
 		// Stats
 		//-------------------------------------------------------------------------------------------------------------
-		"Modifiers"
+		
+        "precache"
+		{
+			"particle_folder"			"particles/units/heroes/hero_razor"
+            "particle_folder"           "particles/units/heroes/hero_disruptor"
+			"soundfile"					"soundevents/game_sounds_heroes/game_sounds_queenofpain.vsndevts"
+		}
+        
+        "Modifiers"
 		{
 			"the_one_orboflightning_passive"
 			{
@@ -2953,23 +3000,29 @@
                 
                 "Properties"
 				{
-					"MODIFIER_PROPERTY_BASEATTACK_BONUSDAMAGE"	"%damage_bonus"
+					"MODIFIER_PROPERTY_BASEATTACK_BONUSDAMAGE"	"%bonus_damage"
 				}
                 
 				"OnAttackLanded"
 				{
 					"Random"
 					{
-						"Chance" "%chance"
-						"PseudoRandom" "DOTA_PSEUDO_RANDOM_PHANTOMASSASSIN_CRIT"    //not necessary, pending balance
+						"Chance"    "%chance"
 						"OnSuccess"
 						{
 							"ApplyModifier"
 							{
                                 "Target"        "TARGET"
-                                "Duration"      "purge_duration"
+                                "Duration"      "%purge_duration"
 								"ModifierName"  "modifier_satyr_trickster_purge"
-							}							
+							}
+                            
+                            "FireEffect"
+                            {
+                                "Target"            "TARGET"
+                                "EffectName"        "particles/units/heroes/hero_disruptor/disruptor_thunder_strike_bolt.vpcf"
+                                "EffectAttachType"  "follow_origin"
+                            }
 						}
 					}
 				}
@@ -2993,7 +3046,7 @@
             "03"
 			{
 				"var_type"				"FIELD_FLOAT"
-				"purge_duration"		"3"
+				"purge_duration"		"3.5"
 			}
 		}
 	}

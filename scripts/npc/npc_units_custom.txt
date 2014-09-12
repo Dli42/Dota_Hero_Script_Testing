@@ -605,7 +605,7 @@
 		// General
 		//-------------------------------------------------------------------------------------------------------------
 		"BaseClass"							"npc_dota_creature"
-		"Model"								"models/creeps/lane_creeps/creep_bad_ranged_diretide/creep_bad_ranged_diretide.vmdl"	// Model
+		"Model"								"models/heroes/juggernaut/juggernaut.vmdl"	// Model
 		"AbilityLayout"         			"5"		
 		//"Portrait"							"vgui/hud/heroportraits/portrait_shadow_shaman"		// Small image for hero selection
 		//"IdleExpression"					"scenes/shadowshaman/shadowshaman_exp_idle_01.vcd"		// custom facial animation idle
@@ -664,30 +664,4 @@
         //----------------------------------------------------------------
         "VisionDaytimeRange"            "1800"           // Range of vision during day light.
         "VisionNighttimeRange"          "1800"           // Range of vision at night time. 
-
-	    // Wearables
-        //----------------------------------------------------------------
-		
-		"Creature"
-		{			
-			"AttachWearables"
-			{
-				"Wearable1"
-				{
-					"ItemDef"			"4412"
-				}
-				"Wearable2"
-				{
-					"ItemDef"			"4416"
-				}
-				"Wearable3"
-				{
-					"ItemDef"			"4417"
-				}				
-				"Wearable4"
-				{
-					"ItemDef"			"4419"
-				}				
-			}
-	}
 }

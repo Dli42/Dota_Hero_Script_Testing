@@ -517,11 +517,12 @@ function PingItemInRange(keys)
                 ent:EmitSound("sounds/ui/ping.vsnd")
             end
             ent = Entities:FindInSphere(ent, caster:GetOrigin(), range)
-        end    
+        end
     end
 end
 
 function EnsnareUnit(keys)
+    print("Ensare!")
     local caster = keys.caster
     local target = keys.target
     local targetName = target:GetName()
@@ -547,7 +548,7 @@ function TrackUnit(keys)
     target:AddNewModifier(caster, nil, "modifier_track_hero", { duration = dur})
 end
 
-function SpotterFollowThink(trackSpotter, targetToFollow)
+--[[function SpotterFollowThink(trackSpotter, targetToFollow)
     
     trackSpotter:SetAbsOrigin() = targetToFollow:GetAbsOrigin()
     
@@ -558,7 +559,7 @@ function SpotterFollowThink(trackSpotter, targetToFollow)
     end
     
     return 0.2
-end
+end--]]
 
 --[[Checks unit inventory for matching recipes. If there's a match, remove all items and add the corresponding potion
     Matches must have the exact number of each ingredient
