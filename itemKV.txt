@@ -4061,7 +4061,7 @@
 				"RunScript"
 				{
 					"ScriptFile"			"scripts/vscripts/custom_functions_item.lua"
-					"Function"			"DropItemOnDeath"
+					"Function"				"DropItemOnDeath"
 				}
 			}
 		// Sound
@@ -4077,15 +4077,42 @@
 			}
 			"OnSpellStart"
 			{
-				"RunScript"
+				"ApplyModifier"
 				{
-					"ScriptFile"			"scripts/vscripts/custom_functions_item.lua"
-					"Function"			"potion_elemental_use"
+					"ModifierName"		"modifier_elemental_shield_damage_aura"
+					"Duration"			"%elemental_duration"
+					"Target"			"CASTER"
 				}
 				"SpendCharge"
 				{
 				}
 			}
+
+			"Modifiers"
+			{
+				"modifier_elemental_shield_damage_aura"
+				{
+					"ThinkInterval"		"elemental_think_time"
+					"OnIntervalThink"
+					{
+						"Damage"
+						{
+							"Damage"	"elemental_damage_per_tick"
+							"Type"		"DAMAGE_TYPE_MAGICAL"
+							"Target"
+							{
+								"Center" "CASTER"
+								"Radius" "%elemental_radius"
+								"Teams" "DOTA_UNIT_TARGET_TEAM_ENEMY"
+								"Types" "DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_CREEP"
+							}
+						}
+					}
+					"EffectName" 		"//insert static shield here"
+					"EffectAttachType" 	"follow_origin"
+				}
+			}
+
 			"AbilitySpecial"
 			{
 				"01"
@@ -4107,12 +4134,22 @@
 				"04"
 				{
 					"var_type"					"FIELD_INTEGER"
-					"elemental_radius"				"160"
+					"elemental_radius"			"160"
 				}
 				"05"
 				{
-					"var_type"					"FIELD_INTEGER"
+					"var_type"					"FIELD_FLOAT"
 					"elemental_duration"		"20"
+				}
+				"06"
+				{
+					"var_type"					"FIELD_FLOAT"
+					"elemental_think_time"		"0.5"
+				}
+				"07"
+				{
+					"var_type"					"FIELD_FLOAT"
+					"elemental_damage_per_tick"	"3.5"
 				}
 			}
 		}
