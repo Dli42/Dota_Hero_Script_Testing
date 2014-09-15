@@ -4442,33 +4442,43 @@
 				{
 					"Target"    "TARGET"
 					"EffectName"   "particles/units/heroes/hero_bristleback/bristleback_viscous_nasal_goo.vpcf"
-					"MoveSpeed"    "500"
-				}
-				"SpendCharge"
-				{
-				}				   
+					"MoveSpeed"    "2000"
+				}		   
 			}
 			"OnProjectileHitUnit"
 			{
-				"RunScript"
+				"ApplyModifier"
 				{
-					"ScriptFile"			"scripts/vscripts/custom_functions_item.lua"
-					"Function"				"potion_acid_use"
+					"Target"				"TARGET"
+					"Duration"				"%acid_duration"
+					"ModifierName"			"modifier_potion_acid_debuff"
 				}
-			}
-			"FireSound"
-			{
-				"EffectName"			"Catapult.Attack"
-				"Target"				"TARGET"
-			}
-			"OnProjectileFinish"
-			{
 				"FireSound"
 				{
 					"EffectName"			"Catapult.Impact"
 					"Target"				"TARGET"
 				}
+				"SpendCharge"
+				{}
 			}
+			"OnProjectileFinish"
+			{
+				"SpendCharge"
+				{}
+			}
+
+			"Modifiers"
+			{
+				"modifier_potion_acid_debuff"
+				{
+					"IsDebuff"		"1"
+					"Properties"
+					{
+						"MODIFIER_PROPERTY_PHYSICAL_ARMOR_BONUS"	"%acid_reduction"
+					}
+				}
+			}
+
 			"AbilitySpecial"
 			{
 				"01"
@@ -4479,11 +4489,11 @@
 				"02"
 				{
 					"var_type"				   "FIELD_INTEGER"
-					"acid_reduction"				"-6"
+					"acid_reduction"			"-6"
 				}
 				"03"
 				{
-					"var_type"				   "FIELD_INTEGER"
+					"var_type"				   "FIELD_FLOAT"
 					"acid_duration"			   "5"
 				}
 			}
