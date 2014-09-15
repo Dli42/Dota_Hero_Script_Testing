@@ -4551,7 +4551,7 @@
 				"RunScript"
 				{
 					"ScriptFile"			"scripts/vscripts/custom_functions_item.lua"
-					"Function"			"DropItemOnDeath"
+					"Function"				"DropItemOnDeath"
 				}
 			}
 		// Sound
@@ -7522,8 +7522,8 @@
 		// General
 		//-------------------------------------------------------------------------------------------------------------
 			"AbilityBehavior"			"DOTA_ABILITY_BEHAVIOR_UNIT_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE | DOTA_ABILITY_BEHAVIOR_DONT_RESUME_ATTACK"
-			"AbilityUnitTargetTeam"		"DOTA_UNIT_TARGET_TEAM_ENEMY | DOTA_UNIT_TARGET_CREEP"
-			"AbilityUnitTargetType"		"DOTA_UNIT_TARGET_HERO"
+			"AbilityUnitTargetTeam"		"DOTA_UNIT_TARGET_TEAM_ENEMY "
+			"AbilityUnitTargetType"		"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_CREEP"
 			"BaseClass"					"item_datadriven"
 			"AbilityTextureName"		"scroll_fireball"
 			"Model"						"models/props_gameplay/recipe.vmdl"
@@ -7595,8 +7595,8 @@
 		// General
 		//-------------------------------------------------------------------------------------------------------------
 			"AbilityBehavior"			"DOTA_ABILITY_BEHAVIOR_UNIT_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE | DOTA_ABILITY_BEHAVIOR_DONT_RESUME_ATTACK"
-			"AbilityUnitTargetTeam"		"DOTA_UNIT_TARGET_TEAM_ENEMY | DOTA_UNIT_TARGET_CREEP"
-			"AbilityUnitTargetType"		"DOTA_UNIT_TARGET_HERO"
+			"AbilityUnitTargetTeam"		"DOTA_UNIT_TARGET_TEAM_ENEMY "
+			"AbilityUnitTargetType"		"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_CREEP"
 			"BaseClass"					"item_datadriven"
 			"AbilityTextureName"		"scroll_entangling"
 			"Model"						"models/props_gameplay/tpscroll01.vmdl"
