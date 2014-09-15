@@ -4394,8 +4394,8 @@
 		// General
 		//-------------------------------------------------------------------------------------------------------------
 			"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_UNIT_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE | DOTA_ABILITY_BEHAVIOR_DONT_RESUME_ATTACK"
-			"AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_ENEMY | DOTA_UNIT_TARGET_CREEP"
-			"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_HERO"
+			"AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_ENEMY "
+			"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_CREEP"
 			"BaseClass"						"item_datadriven"
 			"AbilityTextureName"			"potion_acid"
 			"Model"							"models/items/alchemist/toxic_siege_corrosive_flasks/toxic_siege_corrosive_flasks.vmdl"
@@ -4440,9 +4440,9 @@
 			{
 				"TrackingProjectile"
 				{
-					"Target"    "TARGET"
-					"EffectName"   "particles/units/heroes/hero_bristleback/bristleback_viscous_nasal_goo.vpcf"
-					"MoveSpeed"    "2000"
+					"Target"    	"TARGET"
+					"EffectName"   	"particles/units/heroes/hero_bristleback/bristleback_viscous_nasal_goo.vpcf"
+					"MoveSpeed"    	"2000"
 				}		   
 			}
 			"OnProjectileHitUnit"
@@ -4471,10 +4471,20 @@
 			{
 				"modifier_potion_acid_debuff"
 				{
-					"IsDebuff"		"1"
+					"IsDebuff"			"1"
 					"Properties"
 					{
 						"MODIFIER_PROPERTY_PHYSICAL_ARMOR_BONUS"	"%acid_reduction"
+					}
+					"ThinkInterval"		"%acid_think_time"
+					"OnIntervalThink"
+					{
+						"Damage"
+						{
+							"Damage"	"15"
+							"Target"	"TARGET"
+							"Type"		"DAMAGE_TYPE_PHYSICAL"
+						}
 					}
 				}
 			}
@@ -4483,18 +4493,23 @@
 			{
 				"01"
 				{
-					"var_type"				   "FIELD_INTEGER"
-					"acid_damage"			   "150"
+					"var_type"					"FIELD_INTEGER"
+					"acid_damage"				"150"
 				}
 				"02"
 				{
-					"var_type"				   "FIELD_INTEGER"
+					"var_type"					"FIELD_INTEGER"
 					"acid_reduction"			"-6"
 				}
 				"03"
 				{
-					"var_type"				   "FIELD_FLOAT"
-					"acid_duration"			   "5"
+					"var_type"					"FIELD_FLOAT"
+					"acid_duration"				"5"
+				}
+				"04"
+				{
+					"var_type"					"FIELD_FLOAT"
+					"acid_think_time"			".5"
 				}
 			}
 		}
