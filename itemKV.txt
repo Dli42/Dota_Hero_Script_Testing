@@ -4207,10 +4207,11 @@
 			}
 			"OnSpellStart"
 			{
-				"RunScript"
+				"ApplyModifier"
 				{
-					"ScriptFile"			"scripts/vscripts/custom_functions_item.lua"
-					"Function"				"potion_antimagic_use"
+					"Target"				"CASTER"
+					"ModifierName"			"modifier_omniknight_repel"
+					"Duration"				"anti_magic_duration"
 				}
 				"SpendCharge"
 				{
