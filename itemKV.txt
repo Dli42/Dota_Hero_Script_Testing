@@ -4275,7 +4275,7 @@
 				"RunScript"
 				{
 					"ScriptFile"			"scripts/vscripts/custom_functions_item.lua"
-					"Function"			"DropItemOnDeath"
+					"Function"				"DropItemOnDeath"
 				}
 			}
 		// Sound
@@ -4288,10 +4288,17 @@
 
 			"OnSpellStart"
 			{
-				"RunScript"
+				// "RunScript"
+				// {
+				// 	"ScriptFile"			"scripts/vscripts/custom_functions_item.lua"
+				// 	"Function"				"PotionCureallUse"
+				// }
+				"ApplyModifier"
 				{
-					"ScriptFile"			"scripts/vscripts/custom_functions_item.lua"
-					"Function"				"potion_cureall_use"
+					"IsHidden"		"1"
+					"Target"		"CASTER"
+					"ModifierName"	"satyr_trickster_purge"
+					"Duration"		"0.01"
 				}
 				"SpendCharge"
 				{

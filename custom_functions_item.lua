@@ -163,3 +163,14 @@ function PotionDrunkUse(keys)
     
     target:AddNewModifier(caster, nil, "modifier_brewmaster_drunken_haze", {duration = dur, movement_slow = 10, miss_chance = 50})    
 end
+
+function PotionCureallUse(keys)
+	local caster = keys.caster
+
+	local numModifiers = caster:GetModifierCount()
+
+	for i = 0, numModifiers do
+		local modName = caster:GetModifierNameByIndex()
+		caster:RemoveModifierByName(modName)
+	end
+end
