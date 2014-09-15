@@ -3845,11 +3845,11 @@
 
 		// General
 		//-------------------------------------------------------------------------------------------------------------
-			"AbilityBehavior"       		 "DOTA_ABILITY_BEHAVIOR_IMMEDIATE | DOTA_ABILITY_BEHAVIOR_NO_TARGET"
+			"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_IMMEDIATE | DOTA_ABILITY_BEHAVIOR_NO_TARGET"
 			"BaseClass"						"item_datadriven"
 			"AbilityTextureName"			"item_smoke_of_deceit"
 			"Model"							"models/props_gameplay/smoke.vmdl"
-			"Effect" 						""
+			"Effect"						""
 
 		// Stats
 		//-------------------------------------------------------------------------------------------------------------
@@ -3891,7 +3891,15 @@
 				"RunScript"
 				{
 					"ScriptFile"			"scripts/vscripts/custom_functions_item.lua"
-					"Function"			"potion_nether_use"
+					"Function"				"potion_nether_use"
+				}
+				"ApplyModifier"
+				{
+					"Target"		"CASTER"
+					"Duration"		"%nether_duration"
+					"ModifierName"	"modifier_pugna_decrepify"
+					"bonus_movement_speed"	"0"
+					"bonus_spell_damage_pct_allies"	"-50"
 				}
 				"SpendCharge"
 				{
@@ -3958,7 +3966,7 @@
 				"RunScript"
 				{
 					"ScriptFile"			"scripts/vscripts/custom_functions_item.lua"
-					"Function"			"DropItemOnDeath"
+					"Function"				"DropItemOnDeath"
 				}
 			}
 		// Sound
