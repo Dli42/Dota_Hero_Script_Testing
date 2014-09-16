@@ -8070,50 +8070,50 @@
 		//-------------------------------------------------------------------------------------------------------------
 		"BaseClass"						"invoker_chaos_meteor"
 		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_POINT_TARGET | DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_IMMEDIATE | DOTA_ABILITY_BEHAVIOR_IGNORE_BACKSWING"
-        "AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_BOTH"
+		"AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_BOTH"
 		"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_ALL"
 		"AbilityUnitDamageType"			"DAMAGE_TYPE_COMPOSITE"
 		"AbilityTextureName" 			""
 
-        // Casting
-        //-------------------------------------------------------------------------------------------------------------
-        "AbilityCastPoint"              "0.0"
+		// Casting
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityCastPoint"              "0.0"
 
-        // Time        
-        //-------------------------------------------------------------------------------------------------------------
-        "AbilityCooldown"               "0"
+		// Time        
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityCooldown"               "0"
 
-        // Cost
-        //-------------------------------------------------------------------------------------------------------------
-        "AbilityManaCost"               "0"
-        
-        "OnSpellStart"
-        {
-        	"CreateThinker"
-        	{
-        		"Target"		"CASTER"
-        		"ModifierName"	"meteor_thinker"
-        	}
-        }
+		// Cost
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityManaCost"               "0"
+		
+		"OnSpellStart"
+		{
+			"CreateThinker"
+			{
+				"Target"		"CASTER"
+				"ModifierName"	"meteor_thinker"
+			}
+		}
 
-        "Modifiers"
-        {
-        	"meteor_thinker"
-        	{
-        		"Duration"		"%land_time"
-        		"ThinkInterval"	"%land_time"
-        		"OnIntervalThink"
-        		{
-        			"DestroyTrees"
-		            {
-		                "Target"        "CASTER"
-		                "Radius"        "%area_of_effect"
-		            }
-        		}
-        	}
-        }
+		"Modifiers"
+		{
+			"meteor_thinker"
+			{
+				"Duration"		"%land_time"
+				"ThinkInterval"	"%land_time"
+				"OnIntervalThink"
+				{
+					"DestroyTrees"
+					{
+						"Target"        "CASTER"
+						"Radius"        "%area_of_effect"
+					}
+				}
+			}
+		}
 
-        // Special
+		// Special
 		//-------------------------------------------------------------------------------------------------------------
 		"AbilitySpecial"
 		{
