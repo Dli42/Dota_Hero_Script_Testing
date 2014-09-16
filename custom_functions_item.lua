@@ -186,7 +186,7 @@ function RawMagicUse(keys)
 		victim = caster,
 		attacker = caster,
 		damage = caster:GetHealth()*percentHealth,
-		damage_type = DAMAGE_TYPE_MAGICAL}
+		damage_type = DAMAGE_TYPE_PURE}
 
 		ApplyDamage(damageTable)
 		print("Unlucky! " .. percentHealth .. " health damage")	
