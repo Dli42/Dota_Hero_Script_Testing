@@ -188,7 +188,7 @@ function RawMagicUse(keys)
 		damage = caster:GetHealth()*percentHealth,
 		damage_type = DAMAGE_TYPE_MAGICAL}
 
-		ApplyDamage(damageTable)
+		ApplyDamage(damageTable)		
 	elseif dieRoll <= 40 then -- 10% full heal
 		caster:Heal(caster:GetMaxHealth(), nil)
 	elseif dieRoll <= 50 then -- 10% death
@@ -196,31 +196,14 @@ function RawMagicUse(keys)
 	elseif dieRoll <= 60 then -- 10% time = midnight
 		GameRules:SetTimeOfDay(0.50)
 	elseif dieRoll <= 70 then -- 10% meteor
-		local spawnLocation = caster:GetOrigin()
-		spawnLocation.z = spawnLocation.z + 5000
-		--ability_magic_raw_meteor
-
-		local info = {
-		    EffectName = "particles/units/heroes/hero_invoker/invoker_chaos_meteor.vpcf",
-		    Ability = meteorAbility,
-		    vSpawnOrigin = spawnLocation,
-		    fDistance = 5000,
-		    fStartRadius = 500,
-		    fEndRadius = 500,
-		    Source = caster,
-		    bHasFrontalCone = false,
-		    iUnitTargetTeam = DOTA_UNIT_TARGET_TEAM_BOTH,
-		    iUnitTargetFlags = DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES,
-		    iUnitTargetType = DOTA_UNIT_TARGET_ALL,
-		    --fMaxSpeed = 5200,
-		    fExpireTime = GameRules:GetGameTime() + 8.0}
-
-	    local pos = caster:GetAbsOrigin()
-		local diff = spawnLocation - pos
-		info.vVelocity = diff:Normalized() * 1000
-
-		ProjectileManager:CreateLinearProjectile(info)
-
+		local ability_magic_raw_meteor = caster:FindAbilityByName("ability_magic_raw_meteor")
+		if ability_magic_raw_meteor == nil then
+			caster:AddAbility("ability_magic_raw_meteor")
+			ability_magic_raw_meteor = caster:FindAbilityByName("ability_magic_raw_meteor")
+		end
+		print("trying to cast ability_magic_raw_meteor")
+		caster:CastAbilityOnPosition(caster:GetOrigin(), ability_magic_raw_meteor, -1)
+		caster:RemoveAbility(applier)
 	elseif dieRoll <= 80 then -- 10% mana crystals
 		local item1 = CreateItem("item_crystal_mana", nil, nil)
 		local item2 = CreateItem("item_crystal_mana", nil, nil)
