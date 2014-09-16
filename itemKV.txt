@@ -712,10 +712,8 @@
 					}
 				}
 				"SpendCharge"
-				{
-				}
+				{}
 			}
-
 		}
 //=================================================================================================================
 // Custom: Mana Crystal
@@ -8007,64 +8005,145 @@
 //=================================================================================================================
 // Custom: Raw Magic
 //=================================================================================================================
-		"item_magic_raw"
+	"item_magic_raw"
+	{
+		"ID"							"1092"
+
+	// General
+	//-------------------------------------------------------------------------------------------------------------
+		"AbilityBehavior"		"DOTA_ABILITY_BEHAVIOR_IMMEDIATE | DOTA_ABILITY_BEHAVIOR_NO_TARGET"
+		"BaseClass"				"item_datadriven"
+		"AbilityTextureName"	"magic_raw"
+		"Model"					"models/items/abaddon/alliance_abba_weapon/alliance_abba_weapon_fx.vmdl"
+		"Effect"				"particles/econ/items/faceless_void/faceless_void_weapon_viridus/faceless_void_weapon_glow_viridus.vpcf"
+
+	// Stats
+	//-------------------------------------------------------------------------------------------------------------
+		"AbilityCastPoint"				"0.5"
+
+	// Item Info
+	//-------------------------------------------------------------------------------------------------------------
+		"ItemCost"						"1"
+		"ItemShopTags"					"consumable"
+		"ItemQuality"					"consumable"
+		"ItemShareability"				"ITEM_FULLY_SHAREABLE"
+		"ItemStackable"					"0"
+		"ItemPermanent"					"0"
+		"ItemDroppable"					"1"
+		"ItemInitialCharges"			"1"
+		"ItemAliases"					"quicktype"
+		"ItemDisassembleRule"			"DOTA_ITEM_DISASSEMBLE_NEVER"
+		"ItemKillable"					"1"
+		"ItemSellable"					"0"
+		"OnOwnerDied"
 		{
-			"ID"							"1092"
-
-		// General
-		//-------------------------------------------------------------------------------------------------------------
-			"AbilityBehavior"        "DOTA_ABILITY_BEHAVIOR_IMMEDIATE | DOTA_ABILITY_BEHAVIOR_NO_TARGET"
-			"BaseClass"				"item_datadriven"
-			"AbilityTextureName"	"magic_raw"
-			"Model"					"models/items/abaddon/alliance_abba_weapon/alliance_abba_weapon_fx.vmdl"
-			"Effect"				"particles/econ/items/faceless_void/faceless_void_weapon_viridus/faceless_void_weapon_glow_viridus.vpcf"
-
-		// Stats
-		//-------------------------------------------------------------------------------------------------------------
-			"AbilityCastPoint"				"0.5"
-
-		// Item Info
-		//-------------------------------------------------------------------------------------------------------------
-			"ItemCost"						"1"
-			"ItemShopTags"					"consumable"
-			"ItemQuality"					"consumable"
-			"ItemShareability"				"ITEM_FULLY_SHAREABLE"
-			"ItemStackable"					"0"
-			"ItemPermanent"					"0"
-			"ItemDroppable"               	"1"
-			"ItemInitialCharges"			"1"
-			"ItemAliases"					"quicktype"
-			"ItemDisassembleRule"			"DOTA_ITEM_DISASSEMBLE_NEVER"
-			"ItemKillable"                  "1"
-			"ItemSellable"                  "0"
-			"OnOwnerDied"
+			"RunScript"
 			{
-				"RunScript"
-				{
-					"ScriptFile"			"scripts/vscripts/custom_functions_item.lua"
-					"Function"			"DropItemOnDeath"
-				}
-			}
-		// Sound
-		//-------------------------------------------------------------------------------------------------------------			
-			"UIPickupSound"					"Item.PickUpGemShop"
-			"UIDropSound"					"Item.DropGemShop"
-			"WorldDropSound"				"Item.DropGemWorld"
-		// Special	
-		//-------------------------------------------------------------------------------------------------------------
-
-			"OnSpellStart"
-			{
-				"RunScript"
-				{
-					"ScriptFile"			"scripts/vscripts/custom_functions_item.lua"
-					"Function"				"item_rawmagic_use"
-				}
-				"SpendCharge"
-				{
-				}
+				"ScriptFile"			"scripts/vscripts/custom_functions_item.lua"
+				"Function"				"DropItemOnDeath"
 			}
 		}
+	// Sound
+	//-------------------------------------------------------------------------------------------------------------			
+		"UIPickupSound"					"Item.PickUpGemShop"
+		"UIDropSound"					"Item.DropGemShop"
+		"WorldDropSound"				"Item.DropGemWorld"
+	// Special	
+	//-------------------------------------------------------------------------------------------------------------
+
+		"OnSpellStart"
+		{
+			"RunScript"
+			{
+				"ScriptFile"			"scripts/vscripts/custom_functions_item.lua"
+				"Function"				"RawMagicUse"
+			}
+			"SpendCharge"
+			{}
+		}
+	}
+
+	//raw magic fail meteor
+	"ability_magic_raw_meteor"
+	{
+		// General
+		//-------------------------------------------------------------------------------------------------------------
+		"BaseClass"						"invoker_chaos_meteor"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_POINT_TARGET | DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_IMMEDIATE | DOTA_ABILITY_BEHAVIOR_IGNORE_BACKSWING"
+        "AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_BOTH"
+		"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_ALL"
+		"AbilityUnitDamageType"			"DAMAGE_TYPE_COMPOSITE"
+		"AbilityTextureName" 			""
+
+        // Casting
+        //-------------------------------------------------------------------------------------------------------------
+        "AbilityCastPoint"              "0.0"
+
+        // Time        
+        //-------------------------------------------------------------------------------------------------------------
+        "AbilityCooldown"               "0"
+
+        // Cost
+        //-------------------------------------------------------------------------------------------------------------
+        "AbilityManaCost"               "0"
+        
+        // Special
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"				"FIELD_FLOAT"
+				"land_time"				"0.5"
+			}
+			"02"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"area_of_effect"		"1000"
+			}
+			"03"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"travel_distance"		"0"
+			}
+			"04"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"travel_speed"			"0"
+			}			
+			"05"
+			{
+				"var_type"				"FIELD_FLOAT"
+				"damage_interval"		"0.5"
+			}
+			"06"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"vision_distance"		"0"
+			}
+			"07"
+			{
+				"var_type"				"FIELD_FLOAT"
+				"end_vision_duration"	"0"
+			}
+			"08"
+			{
+				"var_type"				"FIELD_FLOAT"
+				"main_damage"			"0"
+			}
+			"09"
+			{
+				"var_type"				"FIELD_FLOAT"
+				"burn_duration"			"5"
+			}
+			"10"
+			{
+				"var_type"				"FIELD_FLOAT"
+				"burn_dps"				"40"
+			}
+		}
+	}
+
 
 //=================================================================================================================
 // Custom: Magic Seed
@@ -8364,7 +8443,7 @@
 				}
 				"SpawnUnit"
 				{
-					"Target"            "POINT"
+					"Target"            	"POINT"
 					"UnitName"              "npc_beehive_lesser"
 					"UnitCount"             "1"
 				}

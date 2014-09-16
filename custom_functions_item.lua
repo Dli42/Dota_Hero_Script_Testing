@@ -22,22 +22,21 @@ function DropItemOnDeath(keys) -- keys is the information sent by the ability
 	local itemName = tostring(keys.ability:GetAbilityName()) -- In order to drop only the item that ran the ability, the name needs to be grabbed. keys.ability gets the actual ability and then GetAbilityName() gets the configname of that ability such as juggernaut_blade_dance.
 	if killedUnit:IsHero() or killedUnit:HasInventory() then -- In order to make sure that the unit that died actually has items, it checks if it is either a hero or if it has an inventory.
 		for itemSlot = 0, 5, 1 do --a For loop is needed to loop through each slot and check if it is the item that it needs to drop
-				if killedUnit ~= nil then --checks to make sure the killed unit is not nonexistent.
-						local Item = killedUnit:GetItemInSlot( itemSlot ) -- uses a variable which gets the actual item in the slot specified starting at 0, 1st slot, and ending at 5,the 6th slot.
-						if Item ~= nil and Item:GetName() == itemName then -- makes sure that the item exists and making sure it is the correct item
-							local newItem = CreateItem(itemName, nil, nil) -- creates a new variable which recreates the item we want to drop and then sets it to have no owner
-								CreateItemOnPositionSync(killedUnit:GetOrigin() + RandomVector(RandomInt(20,100)), newItem) -- takes the newItem variable and creates the physical item at the killed unit's location
-								killedUnit:RemoveItem(Item) -- finally, the item is removed from the original units inventory.
-							end
-						end
-					end
+			if killedUnit ~= nil then --checks to make sure the killed unit is not nonexistent.
+				local Item = killedUnit:GetItemInSlot( itemSlot ) -- uses a variable which gets the actual item in the slot specified starting at 0, 1st slot, and ending at 5,the 6th slot.
+				if Item ~= nil and Item:GetName() == itemName then -- makes sure that the item exists and making sure it is the correct item
+					local newItem = CreateItem(itemName, nil, nil) -- creates a new variable which recreates the item we want to drop and then sets it to have no owner
+					CreateItemOnPositionSync(killedUnit:GetOrigin() + RandomVector(RandomInt(20,100)), newItem) -- takes the newItem variable and creates the physical item at the killed unit's location
+					killedUnit:RemoveItem(Item) -- finally, the item is removed from the original units inventory.
 				end
 			end
-
-			function StoneStun(keys)
-				local caster = keys.caster
-				local target = keys.target
-				local targetName = target:GetName()
+		end
+	end
+end
+function StoneStun(keys)
+	local caster = keys.caster
+	local target = keys.target
+	local targetName = target:GetName()
 	local dur = 7.0	--default duration for anything besides heros
 	if (target:IsHero()) then --if the target's name includes "hero"
 		dur = 1.0	--then we use the hero only duration
@@ -172,5 +171,61 @@ function PotionCureallUse(keys)
 	for i = 0, numModifiers do
 		local modName = caster:GetModifierNameByIndex()
 		caster:RemoveModifierByName(modName)
+	end
+end
+
+function RawMagicUse(keys)
+	local caster = keys.caster
+	local dieRoll = RandomInt(0, 100)
+
+	print("Test your luck! " .. dieRoll)
+	print("Time of Day " .. GameRules:GetTimeOfDay())
+	if dieRoll <= 30 then -- 30% lose % hp
+		local percentHealth = RandomFloat(0.10, 0.99)
+		local damageTable = {
+		victim = caster,
+		attacker = caster,
+		damage = caster:GetHealth()*percentHealth,
+		damage_type = DAMAGE_TYPE_MAGICAL}
+
+		ApplyDamage(damageTable)
+	elseif dieRoll <= 40 then -- 10% full heal
+		caster:Heal(caster:GetMaxHealth(), nil)
+	elseif dieRoll <= 50 then -- 10% death
+		caster:Kill(nil, caster)
+	elseif dieRoll <= 60 then -- 10% time = midnight
+		GameRules:SetTimeOfDay(0.50)
+	elseif dieRoll <= 70 then -- 10% meteor
+		local spawnLocation = caster:GetOrigin()
+		spawnLocation.z = spawnLocation.z + 5000
+		--ability_magic_raw_meteor
+
+		local info = {
+		    EffectName = "particles/units/heroes/hero_invoker/invoker_chaos_meteor.vpcf",
+		    Ability = meteorAbility,
+		    vSpawnOrigin = spawnLocation,
+		    fDistance = 5000,
+		    fStartRadius = 500,
+		    fEndRadius = 500,
+		    Source = caster,
+		    bHasFrontalCone = false,
+		    iUnitTargetTeam = DOTA_UNIT_TARGET_TEAM_BOTH,
+		    iUnitTargetFlags = DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES,
+		    iUnitTargetType = DOTA_UNIT_TARGET_ALL,
+		    --fMaxSpeed = 5200,
+		    fExpireTime = GameRules:GetGameTime() + 8.0}
+
+	    local pos = caster:GetAbsOrigin()
+		local diff = spawnLocation - pos
+		info.vVelocity = diff:Normalized() * 1000
+
+		ProjectileManager:CreateLinearProjectile(info)
+
+	elseif dieRoll <= 80 then -- 10% mana crystals
+		local item1 = CreateItem("item_crystal_mana", nil, nil)
+		local item2 = CreateItem("item_crystal_mana", nil, nil)
+		CreateItemOnPositionSync(caster:GetOrigin() + RandomVector(RandomInt(20,100)), item1)
+		CreateItemOnPositionSync(caster:GetOrigin() + RandomVector(RandomInt(20,100)), item2)
+	else -- 20% disco duck
 	end
 end
