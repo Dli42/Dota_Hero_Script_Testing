@@ -188,13 +188,17 @@ function RawMagicUse(keys)
 		damage = caster:GetHealth()*percentHealth,
 		damage_type = DAMAGE_TYPE_MAGICAL}
 
-		ApplyDamage(damageTable)		
+		ApplyDamage(damageTable)
+		print("Unlucky! " .. percentHealth .. " health damage")	
 	elseif dieRoll <= 40 then -- 10% full heal
 		caster:Heal(caster:GetMaxHealth(), nil)
+		print("Lucky! Full heal!")
 	elseif dieRoll <= 50 then -- 10% death
 		caster:Kill(nil, caster)
+		print("Unlucky! Death!")
 	elseif dieRoll <= 60 then -- 10% time = midnight
 		GameRules:SetTimeOfDay(0.50)
+		print("Lucky? Midnight")
 	elseif dieRoll <= 70 then -- 10% meteor
 		local ability_magic_raw_meteor = caster:FindAbilityByName("ability_magic_raw_meteor")
 		if ability_magic_raw_meteor == nil then
@@ -204,11 +208,14 @@ function RawMagicUse(keys)
 		print("trying to cast ability_magic_raw_meteor")
 		caster:CastAbilityOnPosition(caster:GetOrigin(), ability_magic_raw_meteor, -1)
 		caster:RemoveAbility(applier)
+		print("BOOM")
 	elseif dieRoll <= 80 then -- 10% mana crystals
 		local item1 = CreateItem("item_crystal_mana", nil, nil)
 		local item2 = CreateItem("item_crystal_mana", nil, nil)
 		CreateItemOnPositionSync(caster:GetOrigin() + RandomVector(RandomInt(20,100)), item1)
 		CreateItemOnPositionSync(caster:GetOrigin() + RandomVector(RandomInt(20,100)), item2)
+		print("Lucky! Crystals!")
 	else -- 20% disco duck
+		print("AN ANCIENT EVIL AWAKENS")
 	end
 end
