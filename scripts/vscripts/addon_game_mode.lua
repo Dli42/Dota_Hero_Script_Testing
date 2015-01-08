@@ -20,8 +20,12 @@ function Precache( context )
 	]]    
 
     PrecacheUnitByNameSync('npc_dota_hero_axe', context)
+    PrecacheUnitByNameSync('npc_dota_hero_crystal_maiden', context)
+    PrecacheUnitByNameSync('npc_orianna_the_ball', context)
     PrecacheResource( "soundfile", "*.vsndevts", context )
     PrecacheResource( "particle_folder", "particles/frostivus_gameplay", context )
+    PrecacheResource( "particle_folder", "particles/units/heroes/hero_omniknight", context )
+    PrecacheResource( "particle_folder", "particles/units/heroes/hero_magnataur", context )
     PrecacheResource( "particle", "particles/units/heroes/hero_venomancer/venomancer_plague_ward_projectile.vpcf", context )
     PrecacheUnitByNameSync('npc_precache_everything', context)
     PrecacheModel("models/heroes/venomancer/venomancer_ward.mdl", context)
@@ -47,6 +51,7 @@ function CAddonTemplateGameMode:InitGameMode()
 	GameRules:GetGameModeEntity():SetThink( "OnThink", self, "GlobalThink", 2 )
     
     ListenToGameEvent('dota_item_picked_up', Dynamic_Wrap(ITT_GameMode, 'OnItemPickedUp'), self)
+    ListenToGameEvent("npc_spawned", Dynamic_Wrap( ITT_GameMode, "OnNPCSpawned" ), self )	
     
 end
 
@@ -56,6 +61,18 @@ function ITT_GameMode:OnItemPickedUp(event)
         
         if hasTelegather then
             RadarTelegather(event)
+        end
+end
+
+function ITT_GameMode:OnNPCSpawned(event)
+        local spawnedUnit = EntIndexToHScript( event.entindex )
+        print("unit that spawned: ".. spawnedUnit:GetUnitName())
+        if spawnedUnit:GetUnitName() == "npc_dota_hero_crystal_maiden" then
+        	print("baaaallll")
+        	local ball = CreateUnitByName("npc_orianna_the_ball", spawnedUnit:GetOrigin(), true, spawnedUnit, spawnedUnit, spawnedUnit:GetTeamNumber())
+        	spawnedUnit.ball = ball
+            local passive = spawnedUnit:FindAbilityByName("orianna_clockwork_windup")
+            passive:SetLevel(1)
         end
 end
 

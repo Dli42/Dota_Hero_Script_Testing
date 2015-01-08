@@ -1,3 +1,3 @@
-*.vpcf_c
-*.vpcf
-*.bin
+\*.vpcf_c
+\*.vpcf
+\*.bin

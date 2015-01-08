@@ -1,3 +1,145 @@
+function OriannaCommandAttack(keys)
+    local target = keys.target_points[1]
+    local caster = keys.caster
+    local ball = caster.ball
+    local damage = keys.Damage
+
+    if ball == nil then
+        print("no ball!")
+        return
+    end
+
+    print(ball.state.." -> attack", ball.target, target, damage)
+    ball.state = "attack"
+    ball.target = target
+    ball.attackDamage = damage
+end
+
+function OriannaCommandDissonance(keys)
+    local caster = keys.caster
+    local ball = caster.ball
+    local damage = keys.Damage
+    local ability = keys.ability
+    if ball == nil then
+        print("no ball!")
+        return
+    end
+
+    local particle = ParticleManager:CreateParticle("particles/units/heroes/hero_omniknight/omniknight_purification.vpcf", PATTACH_ABSORIGIN_FOLLOW, ball)
+    ParticleManager:SetParticleControl(particle, 1, Vector(500,0,0))
+    -- ParticleManager:DestroyParticle(particle, true)
+    -- ParticleManager:ReleaseParticleIndex(particle)
+
+    local enemiesInRange = FindUnitsInRadius(
+    caster:GetTeam(),
+    ball:GetOrigin(),
+    nil, 
+    250,
+    DOTA_UNIT_TARGET_TEAM_ENEMY,
+    DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_CREEP,
+    DOTA_UNIT_TARGET_FLAG_NONE,
+    FIND_CLOSEST,
+    false)
+
+    if #enemiesInRange > 0 then
+        for k,v in pairs(enemiesInRange) do
+            local damageTable = {
+                victim = v,
+                attacker = caster,
+                damage = damage,
+                damage_type = DAMAGE_TYPE_MAGICAL}
+                                
+            ApplyDamage(damageTable)
+            ability:ApplyDataDrivenModifier(caster, v, "modifier_dissonance_debuff", {duration = 2})
+        end
+    end
+
+    local alliesInRange = FindUnitsInRadius(
+    caster:GetTeam(),
+    ball:GetOrigin(),
+    nil, 
+    250,
+    DOTA_UNIT_TARGET_TEAM_FRIENDLY,
+    DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_CREEP,
+    DOTA_UNIT_TARGET_FLAG_NONE,
+    FIND_CLOSEST,
+    false)
+
+    if #alliesInRange > 0 then
+        for k,v in pairs(alliesInRange) do
+            print(v:GetUnitName())
+            ability:ApplyDataDrivenModifier(caster, v, "modifier_dissonance_buff", {duration = 2})
+        end
+    end
+end
+
+function OriannaCommandProtect(keys)
+    local target = keys.target
+    local caster = keys.caster
+    local ball = caster.ball
+    local damage = keys.Damage
+
+    if ball == nil then
+        print("no ball!")
+        return
+    end
+
+    if ball.protectTarget ~= nil then
+        ball.protectTarget:RemoveModifierByName("modifier_protect_shield")
+    end
+
+    print(ball.state.." -> protect", target, damage)
+    ball.state = "protect"
+    ball.protectTarget = target
+    ball.attackDamage = damage
+    ball.abilityProtect = keys.ability
+end
+
+function OriannaCommandShockwave(keys)
+    local caster = keys.caster
+    local ball = caster.ball
+
+    if ball == nil then
+        print("no ball!")
+        return
+    end
+
+    local ballAbility = ball:FindAbilityByName("the_ball_command_shockwave")
+    if ballAbility == nil then
+        ball:AddAbility("the_ball_command_shockwave")
+        ballAbility = ball:FindAbilityByName("the_ball_command_shockwave")
+    end
+
+    local level = keys.ability:GetLevel()
+    ballAbility:SetLevel(level)
+    ball:CastAbilityNoTarget(ballAbility, caster:GetPlayerID())
+    print("Trying to cast shockwave")
+end
+
+function OriannaCommandShockwaveParticle(keys)
+    print("Shockwave!")
+    local caster = keys.caster
+    local effectName = "particles/units/heroes/hero_magnataur/magnataur_reverse_polarity.vpcf"
+    local particle = ParticleManager:CreateParticle(effectName, PATTACH_CUSTOMORIGIN, caster)
+    ParticleManager:SetParticleControl(particle, 0, Vector(1,0,0))
+    ParticleManager:SetParticleControl(particle, 1, Vector(350,0,0))
+    ParticleManager:SetParticleControl(particle, 2, Vector(0.25,0,0))
+    ParticleManager:SetParticleControl(particle, 3, caster:GetOrigin())
+    ParticleManager:SetParticleControl(particle, 4, Vector(90,0,0))
+end
+
+function GlobalCooldown(keys)
+    local caster = keys.caster
+    local cooldownTable = keys.CooldownTable
+
+    for k,v in pairs(cooldownTable) do
+        local ability = caster:FindAbilityByName(v[1])
+        ability:StartCooldown(v[2])
+    end
+end
+
+
+
 --[[Gets an initial value for the armor to damage buff]]
 function RammusSpikedShellInit(keys)
 
@@ -215,6 +357,7 @@ function OldHeimerdingerSpawnTurret(keys)
     local ABILITY_turret = caster:FindAbilityByName("old_heimerdinger_turret")    
     local turretLevel = ABILITY_turret:GetLevel()
     
+    -- Table of turret names, one for each level
     local npcTable = {
     "npc_old_heimerdinger_turret_1",
     "npc_old_heimerdinger_turret_2",
@@ -242,13 +385,12 @@ function OldHeimerdingerSpawnTurret(keys)
         -- For example having builder make a building and that building create units
     table.insert(turretTable, unit)
     
-    local count = 0 
-    for key,value in pairs(turretTable) do 
-        count = count + 1 
-    end
+    -- Get the number of turrets in the table, including hte one just created
+    local count = #turretTable
     
     print(count)
     
+    -- If there are 4 turrets kill the oldest one
     if turretTable[4] ~= nil then
         turretTable[1]:ForceKill(true)
         table.remove(turretTable, 1)
